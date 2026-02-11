@@ -6,25 +6,26 @@ import SmoothScroll from '@/components/SmoothScroll';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sponge Global',
-  description: 'Building stronger leaders and teams for 200+ clients worldwide.',
+  title: 'Sponge Global | Learning & Capability Partner',
+  description: 'Sponge Global is a trusted learning partner building stronger leaders and teams for 200+ clients worldwide through expert facilitation and transformational training.',
+  keywords: ['corporate training', 'leadership development', 'organizational capability', 'Sponge Global', 'transformational learning', 'employee training'],
   icons: {
     icon: '/sponge-favicon.png',
+    shortcut: '/sponge-favicon.png',
+    apple: '/sponge-favicon.png',
   },
   openGraph: {
-    images: [
-      {
-        url: 'https://bolt.new/static/og_default.png',
-      },
-    ],
+    title: 'Sponge Global | Learning & Capability Partner',
+    description: 'Practical learning solutions for organizations across industries and countries.',
+    url: 'https://sponge-global.com',
+    siteName: 'Sponge Global',
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    images: [
-      {
-        url: 'https://bolt.new/static/og_default.png',
-      },
-    ],
+    title: 'Sponge Global | Learning & Capability Partner',
+    description: 'Building stronger leaders and teams for 200+ clients worldwide.',
   },
 };
 

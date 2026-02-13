@@ -18,7 +18,7 @@ export default function Footer() {
                     className="object-cover opacity-90"
                     quality={100}
                 />
-                <div className="absolute inset-0 bg-black/60" /> {/* Dark overlay for text readability */}
+                <div className="absolute inset-0 bg-black/80" /> {/* Dark overlay for text readability */}
             </div>
 
             <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col gap-20">

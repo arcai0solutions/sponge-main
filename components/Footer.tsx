@@ -7,7 +7,7 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="bg-black w-full text-white pt-20 pb-10 px-6 md:px-12 lg:px-24">
+        <footer className="w-full text-white pt-20 pb-10 px-6 md:px-12 lg:px-24 bg-gradient-to-t from-red-950/40 via-black to-black">
             <div className="max-w-[1400px] mx-auto flex flex-col gap-20">
 
                 {/* Top Section: Logo & Tagline + Socials */}

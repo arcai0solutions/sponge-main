@@ -108,7 +108,7 @@ function Card({ step, isMobile = false }: { step: any, isMobile?: boolean }) {
         <div
             className={`
                 relative flex flex-col justify-between shrink-0
-                ${isMobile ? 'w-full min-h-[500px]' : 'w-[50vw] h-[65vh]'}
+                ${isMobile ? 'w-full h-auto' : 'w-[50vw] h-[65vh]'}
                 ${!isMobile && step.isWide ? 'w-[75vw]' : ''}
                 rounded-3xl p-8 md:p-14
                 border border-white/10 ${step.bg}

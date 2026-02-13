@@ -2,8 +2,10 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import SmoothScroll from '@/components/SmoothScroll';
+import Footer from '@/components/Footer';
+import StaggeredMenu from '@/components/StaggeredMenu';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: 'Sponge Global | Learning & Capability Partner',
@@ -36,8 +38,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="no-scrollbar">
-      <body className={inter.className}>
-        <SmoothScroll>{children}</SmoothScroll>
+      <body className={`${inter.className} ${inter.variable}`}>
+        <SmoothScroll>
+          <StaggeredMenu isFixed={true} menuButtonColor="#ffffff" />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

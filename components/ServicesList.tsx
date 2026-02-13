@@ -5,39 +5,39 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const services = [
     {
-        title: "KEYNOTE SESSIONS",
+        title: "Keynote Sessions",
         description: "High-impact sessions to create shared understanding, shift mindsets, and launch capability initiatives with clarity."
     },
     {
-        title: "SHORT-TERM SKILL BUILDING WORKSHOPS",
+        title: "Short-Term Skill Building Workshops",
         description: "Focused learning experiences designed for specific outcomes and immediate application on the job."
     },
     {
-        title: "TRANSFORMATIONAL LEARNING PROGRAMMES",
+        title: "Transformational Learning Programmes",
         description: "Structured journeys that build leadership and functional capability over time through practice, reinforcement, and measurement."
     },
     {
-        title: "OUTBOUND TRAINING",
+        title: "Outbound Training",
         description: "Experiential, team-based learning that strengthens collaboration, trust, accountability, resilience, and execution."
     },
     {
-        title: "TRAINING CONTENT CREATION",
+        title: "Training Content Creation",
         description: "End-to-end content development including programme design, facilitator guides, participant resources, assessments, video learning, and immersive learning assets."
     },
     {
-        title: "TRAINING FACILITIES",
+        title: "Training Facilities",
         description: "Access to training spaces and delivery-ready environments for workshops, simulations, and cohort programmes."
     },
     {
-        title: "LEARNING MANAGEMENT SOLUTIONS",
+        title: "Learning Management Solutions",
         description: "LMS access, structured learning paths, assessments, progress tracking, reinforcement, and reporting to sustain learning beyond sessions."
     },
     {
-        title: "LEADERSHIP DEVELOPMENT & SUCCESSION",
+        title: "Leadership Development & Succession",
         description: "Leadership pipelines built across levels, with role-based capability expectations, development plans, and readiness tracking."
     },
     {
-        title: "COMPETENCY FRAMEWORKS",
+        title: "Competency Frameworks",
         description: "Competency models aligned to strategy, roles, and performance expectations, supported by proficiency definitions and assessment approaches."
     }
 ];
@@ -89,7 +89,7 @@ export default function ServicesList() {
                                 whileInView={{ width: "100%" }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 1, ease: "easeInOut" }}
-                                className="h-[1px] bg-white/20 w-full"
+                                className="h-[1px] bg-[#E31E24] w-full"
                             />
 
                             <div className="flex flex-col lg:flex-row py-10 lg:py-16 gap-8 lg:gap-20 relative">
@@ -150,7 +150,7 @@ export default function ServicesList() {
                         whileInView={{ width: "100%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: "easeInOut" }}
-                        className="h-[1px] bg-white/20 w-full"
+                        className="h-[1px] bg-[#E31E24] w-full"
                     />
                 </div>
 

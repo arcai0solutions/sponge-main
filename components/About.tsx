@@ -1,242 +1,129 @@
 "use client";
 
-import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
-import React, { useRef, useEffect, useState, useMemo } from 'react';
-
-// Build the ACTUAL list of frame numbers that exist in /sponge-hero/
-// Frames 001-018, then 053-160 (no 019-052)
-function getFramePaths(): string[] {
-    const paths: string[] = [];
-    for (let i = 1; i <= 18; i++) {
-        paths.push(`/sponge-hero/ezgif-frame-${String(i).padStart(3, '0')}.jpg`);
-    }
-    for (let i = 53; i <= 160; i++) {
-        paths.push(`/sponge-hero/ezgif-frame-${String(i).padStart(3, '0')}.jpg`);
-    }
-    return paths;
-}
+import { motion } from 'framer-motion';
+import React from 'react';
 
 export default function About() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const imagesRef = useRef<HTMLImageElement[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    const framePaths = useMemo(() => getFramePaths(), []);
-    const frameCount = framePaths.length; // 126 actual frames
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    });
-
-    // Preload all images
-    useEffect(() => {
-        let cancelled = false;
-
-        const load = async () => {
-            const loaded: HTMLImageElement[] = new Array(framePaths.length);
-
-            await Promise.all(
-                framePaths.map(
-                    (src, idx) =>
-                        new Promise<void>((resolve) => {
-                            const img = new Image();
-                            img.src = src;
-                            img.onload = () => {
-                                loaded[idx] = img;
-                                resolve();
-                            };
-                            img.onerror = () => {
-                                console.warn(`Failed: ${src}`);
-                                resolve();
-                            };
-                        })
-                )
-            );
-
-            if (!cancelled) {
-                imagesRef.current = loaded;
-                setIsLoaded(true);
-            }
-        };
-
-        load();
-        return () => { cancelled = true; };
-    }, [framePaths]);
-
-    // Canvas render loop
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas || !isLoaded) return;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-
-        const drawFrame = (index: number) => {
-            const img = imagesRef.current[index];
-            if (!img) return;
-
-            const cw = canvas.width;
-            const ch = canvas.height;
-            const ir = img.width / img.height;
-            const cr = cw / ch;
-
-            let dw: number, dh: number, dx: number, dy: number;
-
-            if (cr > ir) {
-                dw = cw;
-                dh = cw / ir;
-                dx = 0;
-                dy = (ch - dh) / 2;
-            } else {
-                dh = ch;
-                dw = ch * ir;
-                dx = (cw - dw) / 2;
-                dy = 0;
-            }
-
-            ctx.clearRect(0, 0, cw, ch);
-            ctx.drawImage(img, dx, dy, dw, dh);
-        };
-
-        const resize = () => {
-            const parent = canvas.parentElement;
-            if (!parent) return;
-            canvas.width = parent.clientWidth;
-            canvas.height = parent.clientHeight;
-
-            // Redraw after resize
-            const p = scrollYProgress.get();
-            drawFrame(Math.min(frameCount - 1, Math.max(0, Math.floor(p * (frameCount - 1)))));
-        };
-
-        resize();
-        window.addEventListener('resize', resize);
-
-        const unsub = scrollYProgress.on('change', (v) => {
-            const idx = Math.min(frameCount - 1, Math.max(0, Math.floor(v * (frameCount - 1))));
-            requestAnimationFrame(() => drawFrame(idx));
-        });
-
-        return () => {
-            window.removeEventListener('resize', resize);
-            unsub();
-        };
-    }, [isLoaded, scrollYProgress, frameCount]);
-
     return (
-        <section ref={containerRef} className="h-[400vh] relative bg-black">
-            <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-                {/* Canvas Background */}
-                <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 w-full h-full"
-                />
+        <section className="bg-black text-white pt-16 pb-8 md:pt-20 md:pb-12 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+            <div className="max-w-[1400px] mx-auto">
 
-                {/* Black overlay for text readability */}
-                <div className="absolute inset-0 bg-black/60 z-10" />
+                {/* Top Row: Label & Badge */}
+                <div className="flex justify-between items-start mb-12 md:mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="flex items-center gap-2"
+                    >
+                        <span className="text-[#E31E24] text-xl font-bold">//</span>
+                        <span className="text-white/80 text-lg uppercase tracking-widest font-medium">about us</span>
+                    </motion.div>
 
-                {/* Content Container */}
-                <div className="relative z-20 w-full h-full max-w-5xl mx-auto pointer-events-none">
-                    {/* Component handles its own positioning */}
-                    <SequentialParagraph progress={scrollYProgress} />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8, rotate: -20 }}
+                        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="relative w-32 h-32 md:w-40 md:h-40 hidden md:block"
+                    >
+                        {/* Rotating Text Badge */}
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                            className="w-full h-full"
+                        >
+                            <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                                <path
+                                    id="circlePath"
+                                    d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                                    fill="transparent"
+                                />
+                                <text style={{ fontFamily: 'var(--font-inter), sans-serif' }} fill="white" fontSize="11.5" fontWeight="bold" letterSpacing="2px">
+                                    <textPath href="#circlePath" startOffset="0%">
+                                        SPONGE GLOBAL • EST 2011 •
+                                    </textPath>
+                                </text>
+                            </svg>
+                        </motion.div>
+
+                        {/* Center Arrow/Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#E31E24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+
+                    {/* Main Headline */}
+                    <div className="lg:col-span-8">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-3xl md:text-5xl lg:text-7xl font-medium leading-[1.1] tracking-tight"
+                        >
+                            Sponge Global is a learning and capability partner founded in 2011.
+                        </motion.h2>
+                    </div>
+
+                    {/* Secondary Text & Cards */}
+                    <div className="lg:col-span-4 flex flex-col justify-between gap-12">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                            className="space-y-8"
+                        >
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
+                                We design and deliver practical learning solutions for organizations across industries and countries. Our work is supported by a multi-disciplinary team of experts.
+                            </p>
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
+                                We build capability through keynote sessions, short-term workshops, and transformational learning programmes. Everything we do is aligned to business goals.
+                            </p>
+                        </motion.div>
+
+                        {/* Action Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                            <Card href="#services" label="Services" delay={0.4} />
+                            <Card href="#projects" label="Projects" delay={0.5} variant="red" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     );
 }
 
-/* ─── Sequential Line Animation (Strict One-by-One) ─── */
-
-function SequentialParagraph({ progress }: { progress: MotionValue<number> }) {
-    // Exact 5 sentences as requested, max 2 rows each
-    const lines = [
-        "Sponge Global is a learning and capability partner founded in 2011.",
-        "We design and deliver practical learning solutions for organizations\nacross industries and countries.",
-        "Our work is supported by a multi-disciplinary team of experts.",
-        "We build capability through keynote sessions, short-term workshops,\nand transformational learning programmes.",
-        "Everything we do is aligned to business goals, role requirements,\nand measurable performance outcomes.",
-    ];
+function Card({ href, label, delay, variant = "black" }: { href: string, label: string, delay: number, variant?: "black" | "red" }) {
+    const isRed = variant === "red";
 
     return (
-        <div className="absolute bottom-10 md:bottom-20 left-0 right-0 h-40 md:h-56 lg:h-72 flex items-center justify-center overflow-hidden">
-            {lines.map((line, i) => (
-                <StrictSequentialLine
-                    key={i}
-                    index={i}
-                    total={lines.length}
-                    progress={progress}
-                >
-                    {line}
-                </StrictSequentialLine>
-            ))}
-        </div>
-    );
-}
-
-function StrictSequentialLine({
-    children,
-    index,
-    total,
-    progress
-}: {
-    children: string,
-    index: number,
-    total: number,
-    progress: MotionValue<number>
-}) {
-    // Each line owns a slice of the scroll progress
-    const slice = 1 / total;
-    const start = index * slice;
-    const end = start + slice;
-
-    // Sub-timing within the slice:
-    // 0% - 20%: Enter from bottom (Skipped for first line)
-    // 20% - 80%: Hold valid
-    // 80% - 100%: Exit to top
-    const enterEnd = start + (slice * 0.2);
-    const exitStart = end - (slice * 0.2);
-
-    // Dynamic transforms based on index
-    // If it's the first line, we want it visible FROM THE START (0), not animating in.
-    const isFirst = index === 0;
-
-    // Y Position:
-    // Normal: 100% (below) -> 0% (center)
-    // First Line: 0% (center) -> 0% (center) for the entrance phase, bypassing animation
-    const y = useTransform(
-        progress,
-        [start, enterEnd, exitStart, end],
-        [isFirst ? '0%' : '100%', '0%', '0%', '-100%']
-    );
-
-    // Opacity:
-    // Normal: 0 -> 1
-    // First Line: 1 -> 1 for the entrance phase
-    const opacity = useTransform(
-        progress,
-        [start, enterEnd, exitStart, end],
-        [isFirst ? 1 : 0, 1, 1, 0]
-    );
-
-    // Visibility toggle to ensure we don't see things outside their range
-    const display = useTransform(progress, (v) => {
-        if (isFirst) return v <= end ? "block" : "none";
-        return (v >= start && v <= end) ? "block" : "none";
-    });
-
-    return (
-        <motion.div
-            style={{ y, opacity, display }}
-            className="absolute w-full px-6 md:px-12 lg:px-24 will-change-transform"
+        <motion.a
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay }}
+            href={href}
+            className={`
+                group relative overflow-hidden rounded-lg p-6 flex items-center justify-between
+                ${isRed ? 'bg-[#E31E24] text-white' : 'bg-[#111] text-white border border-white/10'}
+                transition-all duration-300 hover:scale-[1.02]
+            `}
         >
-            <p className="text-2xl md:text-3xl lg:text-5xl font-medium leading-relaxed text-white text-center whitespace-pre-line">
-                {children}
-            </p>
-        </motion.div>
+            <span className="text-xl font-medium tracking-wide z-10">{label}</span>
+            <div className={`p-2 rounded-full ${isRed ? 'bg-white/20' : 'bg-white/10'} group-hover:bg-white group-hover:text-black transition-colors duration-300`}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </div>
+        </motion.a>
     );
 }

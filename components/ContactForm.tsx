@@ -86,18 +86,17 @@ export default function ContactForm() {
                     <div className="space-y-8">
                         <div>
                             <span className="block text-sm text-[#E31E24] font-bold uppercase tracking-wider mb-2">Email</span>
-                            <a href="mailto:hello@sponge-global.com" className="text-2xl md:text-3xl hover:text-[#E31E24] transition-colors">hello@sponge-global.com</a>
+                            <a href="mailto:info@spongeglobal.com" className="text-2xl md:text-3xl hover:text-[#E31E24] transition-colors">info@spongeglobal.com</a>
                         </div>
                         <div>
                             <span className="block text-sm text-[#E31E24] font-bold uppercase tracking-wider mb-2">Office</span>
                             <p className="text-xl text-white/80">
-                                123 Business Avenue, <br />
-                                Colombo 03, Sri Lanka
+                                Colombo 5, Sri Lanka
                             </p>
                         </div>
                         <div>
                             <span className="block text-sm text-[#E31E24] font-bold uppercase tracking-wider mb-2">Phone</span>
-                            <a href="tel:+94112345678" className="text-xl text-white/80 hover:text-[#E31E24] transition-colors">+94 11 234 5678</a>
+                            <a href="tel:0112408671" className="text-xl text-white/80 hover:text-[#E31E24] transition-colors">0112408671</a>
                         </div>
                     </div>
                 </motion.div>

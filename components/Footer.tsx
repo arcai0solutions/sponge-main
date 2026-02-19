@@ -3,7 +3,7 @@
 import React from "react";
 import NextImage from "next/image";
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -39,6 +39,7 @@ export default function Footer() {
                             />
                         </div>
 
+
                         {/* Tagline */}
                         <div className="space-y-6">
                             <h2 className="text-3xl md:text-5xl font-medium tracking-tight leading-tight">
@@ -57,9 +58,16 @@ export default function Footer() {
 
                         {/* Social Links column */}
                         <div className="flex flex-col gap-4 min-w-[140px]">
+                            <SocialLink
+                                href="https://www.youtube.com/@sponge_global_training"
+                                icon={Youtube}
+                                label="YouTube"
+                                className="text-red-600 animate-pulse"
+                                iconClassName="w-8 h-8"
+                            />
+                            <SocialLink href="https://www.linkedin.com/company/3069879/" icon={Linkedin} label="LinkedIn" />
+                            <SocialLink href="https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo" icon={Instagram} label="Instagram" />
                             <SocialLink href="https://facebook.com" icon={Facebook} label="Facebook" />
-                            <SocialLink href="https://instagram.com" icon={Instagram} label="Instagram" />
-                            <SocialLink href="https://linkedin.com" icon={Linkedin} label="LinkedIn" />
                         </div>
 
                         {/* Navigation Links column */}
@@ -110,7 +118,7 @@ export default function Footer() {
     );
 }
 
-function SocialLink({ href, icon: Icon, label }: { href: string, icon: any, label: string }) {
+function SocialLink({ href, icon: Icon, label, className = "", iconClassName = "w-5 h-5" }: { href: string, icon: any, label: string, className?: string, iconClassName?: string }) {
     return (
         <a
             href={href}
@@ -118,9 +126,9 @@ function SocialLink({ href, icon: Icon, label }: { href: string, icon: any, labe
             rel="noopener noreferrer"
             className="group flex flex-col gap-3"
         >
-            <div className="flex items-center justify-between">
+            <div className={`flex items-center justify-between ${className}`}>
                 <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5 text-white" />
+                    <Icon className={`${iconClassName} text-white`} />
                     <span className="text-white/75 group-hover:text-white transition-colors">{label}</span>
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity">

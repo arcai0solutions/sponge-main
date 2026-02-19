@@ -41,8 +41,11 @@ export default function RootLayout({
     <html lang="en" className="no-scrollbar">
       <body className={`${inter.className} ${inter.variable}`}>
         <SmoothScroll>
-          <SiteLogo />
-          <StaggeredMenu isFixed={true} menuButtonColor="#ffffff" showLogo={false} />
+          {/* Desktop: separate logo. Mobile: logo is inside StaggeredMenu bar */}
+          <div className="hidden md:block">
+            <SiteLogo />
+          </div>
+          <StaggeredMenu isFixed={true} menuButtonColor="#ffffff" showLogo={true} />
           {children}
           <Footer />
         </SmoothScroll>

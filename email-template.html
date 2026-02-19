@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact Form Submission</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #000000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+    
+    <!-- Main Container -->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000000; padding: 40px 0;">
+        <tr>
+            <td align="center">
+                
+                <!-- Content Wrapper -->
+                <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #111111; border-radius: 8px; overflow: hidden; max-width: 600px; width: 100%; border: 1px solid #333333;">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" style="padding: 40px 0; background-color: #000000; border-bottom: 1px solid #333333;">
+                            <!-- Logo Placeholder - You can replace the src with your actual logo URL if hosted -->
+                            <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 2px; text-transform: uppercase;">SPONGE GLOBAL</h1>
+                        </td>
+                    </tr>
+
+                    <!-- Body Content -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            
+                            <h2 style="color: #ffffff; margin: 0 0 20px 0; font-size: 20px; font-weight: 500;">New Contact Inquiry</h2>
+                            <p style="color: #cccccc; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+                                You have received a new message from the contact form on your website.
+                            </p>
+
+                            <!-- Details Table -->
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 30px;">
+                                <tr>
+                                    <td style="padding: 15px; border-bottom: 1px solid #333333;">
+                                        <strong style="color: #E31E24; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;">Name</strong>
+                                        <span style="color: #ffffff; font-size: 16px;">{{from_name}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px; border-bottom: 1px solid #333333;">
+                                        <strong style="color: #E31E24; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;">Email</strong>
+                                        <span style="color: #ffffff; font-size: 16px;">
+                                            <a href="mailto:{{from_email}}" style="color: #ffffff; text-decoration: none;">{{from_email}}</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px; border-bottom: 1px solid #333333;">
+                                        <strong style="color: #E31E24; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;">Company</strong>
+                                        <span style="color: #ffffff; font-size: 16px;">{{company}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px;">
+                                        <strong style="color: #E31E24; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px;">Message</strong>
+                                        <p style="color: #ffffff; font-size: 16px; line-height: 1.6; margin: 0; white-space: pre-wrap;">{{message}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CTA Button (Reply) -->
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="padding-top: 20px;">
+                                        <a href="mailto:{{from_email}}" style="background-color: #E31E24; color: #ffffff; padding: 14px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; display: inline-block;">Reply to {{from_name}}</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding: 30px; background-color: #0a0a0a; border-top: 1px solid #333333;">
+                            <p style="color: #666666; font-size: 12px; margin: 0;">
+                                &copy; 2024 Sponge Global. All rights reserved.<br>
+                                This email was sent from the contact form on sponge-global.com.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

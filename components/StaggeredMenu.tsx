@@ -47,9 +47,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
     ],
     socialItems = [
-        { label: 'Facebook', link: 'https://facebook.com' },
-        { label: 'Instagram', link: 'https://instagram.com' },
-        { label: 'LinkedIn', link: 'https://linkedin.com' }
+        { label: 'YouTube', link: 'https://www.youtube.com/@sponge_global_training' },
+        { label: 'LinkedIn', link: 'https://www.linkedin.com/company/3069879/' },
+        { label: 'Instagram', link: 'https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo' },
+        { label: 'Facebook', link: 'https://facebook.com' }
     ],
     displaySocials = true,
     displayItemNumbering = true,
@@ -239,7 +240,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const layers = preLayerElsRef.current;
         if (!panel) return;
 
-        const all: HTMLElement[] = [...layers, panel];
+        // Filter out any potential nulls if elements were removed
+        const all: HTMLElement[] = [...layers, panel].filter(el => el !== null);
         closeTweenRef.current?.kill();
 
         const offscreen = position === 'left' ? -100 : 100;
@@ -250,6 +252,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             ease: 'power3.in',
             overwrite: 'auto',
             onComplete: () => {
+                // Check if component is still mounted/ref is valid
+                if (!panelRef.current) return;
+
                 const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel')) as HTMLElement[];
                 if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
 

@@ -5,6 +5,8 @@ import Lenis from "@studio-freight/lenis";
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
     useEffect(() => {
+        if (typeof window === 'undefined' || !document.body) return;
+
         const lenis = new Lenis();
 
         function raf(time: number) {

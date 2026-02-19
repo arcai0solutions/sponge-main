@@ -43,6 +43,13 @@
     user-select: none;
 }
 
+/* Desktop: hide logo inside StaggeredMenu (separate SiteLogo handles it) */
+@media (min-width: 769px) {
+    .sm-scope .sm-logo {
+        display: none !important;
+    }
+}
+
 .sm-scope .sm-toggle {
     position: relative;
     display: inline-flex;
@@ -434,6 +441,83 @@
 .sm-scope .sm-lets-talk-btn.active,
 .sm-scope .sm-toggle.active {
     /* Behavior on active state */
+}
+
+/* ===== MOBILE: Unified floating navbar ===== */
+@media (max-width: 768px) {
+
+    /* Hide Let's Talk on mobile */
+    .sm-scope .sm-lets-talk-btn {
+        display: none !important;
+    }
+
+    /* Header becomes the unified floating bar */
+    .sm-scope .staggered-menu-header {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: auto !important;
+        margin: 0.75rem !important;
+        padding: 0.35rem !important;
+        background: rgba(227, 30, 36, 0.85) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 4px 20px rgba(227, 30, 36, 0.4) !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        overflow: hidden !important;
+        gap: 0 !important;
+    }
+
+    /* Logo container – compact, no separate card look */
+    .sm-scope .sm-logo {
+        display: flex !important;
+        align-items: center !important;
+        flex-shrink: 0 !important;
+        height: 50px !important;
+        width: auto !important;
+        max-width: 120px !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+    }
+
+    /* Override Tailwind w-32 on the image itself */
+    .sm-scope .sm-logo img,
+    .sm-scope .sm-logo a img {
+        width: auto !important;
+        max-width: 110px !important;
+        height: 48px !important;
+        border-radius: 8px !important;
+        object-fit: contain !important;
+    }
+
+    /* Remove glassmorphism from menu controls (parent bar already has it) */
+    .sm-scope .sm-menu-controls {
+        background: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        gap: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .sm-scope .sm-menu-controls:hover {
+        background: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Menu toggle inside the unified bar */
+    .sm-scope .sm-toggle {
+        padding: 0.5rem 0.8rem !important;
+        border-radius: 10px !important;
+    }
 }
 
 @keyframes pulse-vibration-white {

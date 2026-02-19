@@ -456,7 +456,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           */}
                     {/* Logo - Restored to original style */}
                     {showLogo && (
-                        <div className="absolute top-4 left-6 md:top-8 md:left-12 lg:top-10 lg:left-16 z-50 rounded-2xl overflow-hidden sm-logo pointer-events-auto" aria-label="Logo">
+                        <div className="z-50 rounded-2xl overflow-hidden sm-logo pointer-events-auto" aria-label="Logo">
                             <Link href="/" aria-label="Go to homepage">
                                 <NextImage
                                     src={logoUrl || '/new-logo.jpeg'}
@@ -470,44 +470,54 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         </div>
                     )}
 
-                    <button
-                        ref={toggleBtnRef}
-                        className={`sm-toggle ${open ? 'active' : ''}`}
-                        aria-label={open ? 'Close menu' : 'Open menu'}
-                        aria-expanded={open}
-                        aria-controls="staggered-menu-panel"
-                        onClick={toggleMenu}
-                        type="button"
-                    >
-                        <span
-                            ref={textWrapRef}
-                            className="sm-toggle-textWrap relative inline-block h-[1em] overflow-hidden whitespace-nowrap w-[var(--sm-toggle-width,auto)] min-w-[var(--sm-toggle-width,auto)]"
-                            aria-hidden="true"
+                    <div className="sm-menu-controls flex items-center gap-2 pointer-events-auto">
+                        <Link
+                            href="/contact"
+                            className={`sm-lets-talk-btn ${open ? 'active' : ''}`}
+                            aria-label="Let's Talk"
                         >
-                            <span ref={textInnerRef} className="sm-toggle-textInner flex flex-col leading-none">
-                                {textLines.map((l, i) => (
-                                    <span className="sm-toggle-line block h-[1em] leading-none" key={i}>
-                                        {l}
-                                    </span>
-                                ))}
-                            </span>
-                        </span>
+                            Let's Talk
+                        </Link>
 
-                        <span
-                            ref={iconRef}
-                            className="sm-icon relative w-[14px] h-[14px] shrink-0 inline-flex items-center justify-center [will-change:transform]"
-                            aria-hidden="true"
+                        <button
+                            ref={toggleBtnRef}
+                            className={`sm-toggle ${open ? 'active' : ''}`}
+                            aria-label={open ? 'Close menu' : 'Open menu'}
+                            aria-expanded={open}
+                            aria-controls="staggered-menu-panel"
+                            onClick={toggleMenu}
+                            type="button"
                         >
                             <span
-                                ref={plusHRef}
-                                className="sm-icon-line absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
-                            />
+                                ref={textWrapRef}
+                                className="sm-toggle-textWrap relative inline-block h-[1em] overflow-hidden whitespace-nowrap w-[var(--sm-toggle-width,auto)] min-w-[var(--sm-toggle-width,auto)]"
+                                aria-hidden="true"
+                            >
+                                <span ref={textInnerRef} className="sm-toggle-textInner flex flex-col leading-none">
+                                    {textLines.map((l, i) => (
+                                        <span className="sm-toggle-line block h-[1em] leading-none" key={i}>
+                                            {l}
+                                        </span>
+                                    ))}
+                                </span>
+                            </span>
+
                             <span
-                                ref={plusVRef}
-                                className="sm-icon-line sm-icon-line-v absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
-                            />
-                        </span>
-                    </button>
+                                ref={iconRef}
+                                className="sm-icon relative w-[14px] h-[14px] shrink-0 inline-flex items-center justify-center [will-change:transform]"
+                                aria-hidden="true"
+                            >
+                                <span
+                                    ref={plusHRef}
+                                    className="sm-icon-line absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
+                                />
+                                <span
+                                    ref={plusVRef}
+                                    className="sm-icon-line sm-icon-line-v absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
+                                />
+                            </span>
+                        </button>
+                    </div>
                 </header>
 
                 <aside

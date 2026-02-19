@@ -359,3 +359,96 @@
         display: none;
     }
 }
+
+/* Unified Navbar Container - Red Glassmorphism */
+.sm-scope .sm-menu-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    pointer-events: auto;
+    background: rgba(227, 30, 36, 0.85);
+    /* Red Glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.35rem;
+    padding-left: 0.5rem;
+    border-radius: 12px;
+    /* Rounded corners, not pill */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(227, 30, 36, 0.4);
+    transition: all 0.3s ease;
+}
+
+.sm-scope .sm-menu-controls:hover {
+    background: rgba(227, 30, 36, 0.95);
+    box-shadow: 0 8px 30px rgba(227, 30, 36, 0.5);
+}
+
+/* Let's Talk Button - High Emphasis Pill (White on Red) */
+.sm-scope .sm-lets-talk-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #E31E24;
+    padding: 0.6rem 1.4rem;
+    border-radius: 10px;
+    /* Matching rounded feel */
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    animation: pulse-vibration-white 1.5s infinite;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-right: 0;
+}
+
+.sm-scope .sm-lets-talk-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Menu Toggle - Inside Container (White Text) */
+.sm-scope .sm-toggle {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.sm-scope .sm-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: none;
+    border-color: transparent;
+}
+
+.sm-scope .sm-lets-talk-btn.active,
+.sm-scope .sm-toggle.active {
+    /* Behavior on active state */
+}
+
+@keyframes pulse-vibration-white {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.9);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+        transform: scale(1.03);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        transform: scale(1);
+    }
+}

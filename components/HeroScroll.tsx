@@ -36,7 +36,7 @@ export default function HeroScroll() {
                 {/* Hero Content */}
                 <motion.div
                     style={{ opacity: heroOpacity, y: heroY }}
-                    className="absolute inset-0 flex flex-col items-start justify-end text-white z-40 px-6 pb-[25vh] md:pl-12 md:pr-20 md:pb-20 lg:pl-16 lg:pr-32 lg:pb-32"
+                    className="absolute inset-0 flex flex-col items-start justify-end text-white z-40 px-6 pb-[20vh] md:pl-12 md:pr-20 md:pb-20 lg:pl-16 lg:pr-32 lg:pb-32"
                 >
                     <div className="max-w-5xl w-full">
                         <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg text-center md:text-left leading-tight">

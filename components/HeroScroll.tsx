@@ -36,13 +36,13 @@ export default function HeroScroll() {
                 {/* Hero Content */}
                 <motion.div
                     style={{ opacity: heroOpacity, y: heroY }}
-                    className="absolute inset-0 flex flex-col items-start justify-center md:justify-end text-white z-40 px-6 pb-12 md:pl-12 md:pr-20 md:pb-20 lg:pl-16 lg:pr-32 lg:pb-32"
+                    className="absolute inset-0 flex flex-col items-start justify-end text-white z-40 px-6 pb-[25vh] md:pl-12 md:pr-20 md:pb-20 lg:pl-16 lg:pr-32 lg:pb-32"
                 >
                     <div className="max-w-5xl w-full">
                         <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg text-center md:text-left leading-tight">
                             Strengthening Organizations <br /> Shaping Leaders.
                         </h1>
-                        <p className="text-lg md:text-2xl mb-8 md:mb-12 text-white/90 font-light leading-relaxed drop-shadow-md text-left max-w-2xl">
+                        <p className="text-lg md:text-2xl mb-8 md:mb-12 text-white/90 font-light leading-relaxed drop-shadow-md text-justify md:text-left max-w-2xl">
                             Custom learning solutions that build long-term capability <br className="hidden md:block" /> and align with your organizational goals.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">

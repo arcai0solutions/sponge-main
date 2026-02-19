@@ -5,6 +5,8 @@ import ServicesList from '@/components/ServicesList';
 import TalentArchitecture from '@/components/TalentArchitecture';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import Preloader from '@/components/Preloader';
+import LMSSection from '@/components/LMSSection';
+import LearningLounge from '@/components/LearningLounge';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -58,6 +60,8 @@ export default function Home() {
         <ServicesList />
         <WhyChooseUs />
         <TalentArchitecture />
+        <LMSSection />
+        <LearningLounge />
       </div>
 
 

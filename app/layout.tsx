@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import SmoothScroll from '@/components/SmoothScroll';
 import Footer from '@/components/Footer';
 import StaggeredMenu from '@/components/StaggeredMenu';
+import SiteLogo from '@/components/SiteLogo';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -40,7 +41,8 @@ export default function RootLayout({
     <html lang="en" className="no-scrollbar">
       <body className={`${inter.className} ${inter.variable}`}>
         <SmoothScroll>
-          <StaggeredMenu isFixed={true} menuButtonColor="#ffffff" />
+          <SiteLogo />
+          <StaggeredMenu isFixed={true} menuButtonColor="#ffffff" showLogo={false} />
           {children}
           <Footer />
         </SmoothScroll>

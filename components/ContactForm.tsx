@@ -1,9 +1,14 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
+    const form = useRef<HTMLFormElement>(null);
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
     const [formState, setFormState] = useState({
         name: '',
         email: '',
@@ -18,11 +23,45 @@ export default function ContactForm() {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form submitted:', formState);
-        alert('Thank you for your message. We will get back to you shortly.');
+        setLoading(true);
+        setStatus('idle');
+
+        // TODO: Replace with your actual EmailJS credentials
+        // You can find these in your EmailJS dashboard: https://dashboard.emailjs.com/admin
+        const SERVICE_ID = 'service_xikrthn';
+        const TEMPLATE_ID = 'template_en0xkze';
+        const PUBLIC_KEY = 'I3owt6y6776PbjgUy';
+
+        try {
+            // Mapping form state to EmailJS variables
+            // Ensure your EmailJS template uses these variable names:
+            // {{from_name}}, {{from_email}}, {{company}}, {{message}}
+            const templateParams = {
+                from_name: formState.name,
+                from_email: formState.email,
+                company: formState.company,
+                message: formState.message,
+            };
+
+            await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+            setStatus('success');
+            setFormState({
+                name: '',
+                email: '',
+                company: '',
+                message: ''
+            });
+            setTimeout(() => setStatus('idle'), 5000); // Reset success message after 5 seconds
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -70,7 +109,7 @@ export default function ContactForm() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+                    <form ref={form} onSubmit={handleSubmit} className="flex flex-col gap-10">
                         <div className="group relative">
                             <input
                                 type="text"
@@ -143,16 +182,28 @@ export default function ContactForm() {
                             </label>
                         </div>
 
-                        <button
-                            type="submit"
-                            className="group mt-8 self-start px-12 py-5 bg-white text-black rounded-full font-bold text-lg hover:bg-[#E31E24] hover:text-white transition-all duration-300 flex items-center gap-3"
-                        >
-                            <span>Send Message</span>
-                            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </button>
+                        <div className="flex flex-col gap-4">
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="group mt-8 self-start px-12 py-5 bg-white text-black rounded-full font-bold text-lg hover:bg-[#E31E24] hover:text-white transition-all duration-300 flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <span>{loading ? 'Sending...' : 'Send Message'}</span>
+                                {!loading && (
+                                    <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                )}
+                            </button>
+
+                            {status === 'success' && (
+                                <p className="text-green-500 font-medium animate-fade-in">It has been sent, thank you!</p>
+                            )}
+                            {status === 'error' && (
+                                <p className="text-red-500 font-medium animate-fade-in">Something went wrong. Please try again.</p>
+                            )}
+                        </div>
                     </form>
                 </motion.div>
 

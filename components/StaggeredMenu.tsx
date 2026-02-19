@@ -3,6 +3,7 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import NextImage from "next/image";
+import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import "./StaggeredMenu.css";
 
@@ -32,6 +33,7 @@ export interface StaggeredMenuProps {
     closeOnClickAway?: boolean;
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
+    showLogo?: boolean;
 }
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
@@ -60,7 +62,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     isFixed = false,
     closeOnClickAway = true,
     onMenuOpen,
-    onMenuClose
+    onMenuClose,
+    showLogo = true
 }: StaggeredMenuProps) => {
     const router = useRouter();
     const pathname = usePathname();
@@ -452,16 +455,20 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               We want the logo to be visible. 
           */}
                     {/* Logo - Restored to original style */}
-                    <div className="absolute top-4 left-6 md:top-8 md:left-12 lg:top-10 lg:left-16 z-50 rounded-2xl overflow-hidden sm-logo pointer-events-auto" aria-label="Logo">
-                        <NextImage
-                            src={logoUrl || '/new-logo.jpeg'}
-                            alt="Logo"
-                            width={160}
-                            height={160}
-                            className="w-32 md:w-40 h-auto object-contain"
-                            draggable={false}
-                        />
-                    </div>
+                    {showLogo && (
+                        <div className="absolute top-4 left-6 md:top-8 md:left-12 lg:top-10 lg:left-16 z-50 rounded-2xl overflow-hidden sm-logo pointer-events-auto" aria-label="Logo">
+                            <Link href="/" aria-label="Go to homepage">
+                                <NextImage
+                                    src={logoUrl || '/new-logo.jpeg'}
+                                    alt="Logo"
+                                    width={160}
+                                    height={160}
+                                    className="w-32 md:w-40 h-auto object-contain cursor-pointer"
+                                    draggable={false}
+                                />
+                            </Link>
+                        </div>
+                    )}
 
                     <button
                         ref={toggleBtnRef}

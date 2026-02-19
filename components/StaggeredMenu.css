@@ -431,7 +431,10 @@
     border-color: transparent;
 }
 
-
+.sm-scope .sm-lets-talk-btn.active,
+.sm-scope .sm-toggle.active {
+    /* Behavior on active state */
+}
 
 @keyframes pulse-vibration-white {
     0% {

@@ -56,9 +56,9 @@ export default function Home() {
       <HeroScroll />
       <div className="relative z-20">
         <About />
+        <WhyChooseUs />
         <Services />
         <ServicesList />
-        <WhyChooseUs />
         <TalentArchitecture />
         <LMSSection />
         <LearningLounge />

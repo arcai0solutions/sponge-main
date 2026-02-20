@@ -40,10 +40,10 @@ export default function HeroScroll() {
                 >
                     <div className="max-w-5xl w-full">
                         <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg text-center md:text-left leading-tight">
-                            Strengthening Organizations <br /> Shaping Leaders.
+                            Building Capability. Transforming Talent.
                         </h1>
                         <p className="text-lg md:text-2xl mb-8 md:mb-12 text-white/90 font-light leading-relaxed drop-shadow-md text-justify md:text-left max-w-2xl">
-                            Custom learning solutions that build long-term capability <br className="hidden md:block" /> and align with your organizational goals.
+                            Developing Leadership, culture, and capability to accelerate
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                             <button className="w-full sm:w-auto px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-colors text-center">

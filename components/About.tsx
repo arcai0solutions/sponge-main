@@ -67,9 +67,10 @@ export default function About() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="text-3xl md:text-5xl lg:text-7xl font-medium leading-[1.1] tracking-tight"
+                            className="text-xl md:text-3xl lg:text-5xl font-medium leading-[1.2] tracking-tight text-justify hyphens-auto break-words"
+                            lang="en"
                         >
-                            Sponge Global is a learning and capability partner founded in 2011.
+                            We partner with organizations across diverse industries and global geographies to design capability systems that drive measurable business performance.
                         </motion.h2>
                     </div>
 
@@ -82,11 +83,14 @@ export default function About() {
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                             className="space-y-8"
                         >
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
-                                We design and deliver practical learning solutions for organizations across industries and countries. Our work is supported by a multi-disciplinary team of experts.
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-justify">
+                                Backed by a multidisciplinary team of strategists, industry experts, and transformation specialists, we architect integrated talent solutions that strengthen leadership, culture, and organizational effectiveness.
                             </p>
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
-                                We build capability through keynote sessions, short-term workshops, and transformational learning programmes. Everything we do is aligned to business goals.
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-justify">
+                                From executive forums to enterprise-wide transformation journeys, every intervention is built to advance strategic business outcomes.
+                            </p>
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-justify">
+                                Since 2011, Sponge Global has evolved into a strategic partner in talent and capability transformation.
                             </p>
                         </motion.div>
 

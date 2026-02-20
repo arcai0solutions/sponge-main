@@ -6,57 +6,57 @@ import React from "react";
 
 const services = [
     {
-        title: "Keynote Sessions",
+        title: "Mindset-Shaping Sessions",
         number: "01",
-        description: "High-impact sessions to create shared understanding, shift mindsets, and launch capability initiatives with clarity.",
+        description: "High-impact interventions designed to shift perspectives, challenge assumptions, and activate new ways of thinking that drive organizational capability.",
         icon: "/services/keynote.png"
     },
     {
-        title: "Short-Term Skill Building Workshops",
+        title: "Leadership & Capability Accelerators",
         number: "02",
-        description: "Focused learning experiences designed for specific outcomes and immediate application on the job.",
+        description: "Holistic programs that guide leaders and teams through practice-driven learning, mindset evolution, and measurable growth in capability.",
         icon: "/services/workshop.png"
     },
     {
-        title: "Transformational Learning Programmes",
+        title: "Succession Planning",
         number: "03",
-        description: "Structured journeys that build leadership and functional capability over time through practice, reinforcement, and measurement.",
+        description: "Securing the future of your organization by identifying, developing, and transitioning high-potential leaders into critical roles.",
         icon: "/services/transformational.png"
     },
     {
-        title: "Outbound Training",
+        title: "Skill Activation Labs",
         number: "04",
-        description: "Experiential, team-based learning that strengthens collaboration, trust, accountability, resilience, and execution.",
+        description: "Hands-on, immersive sessions that translate learning into action, enabling teams to solve real business problems.",
         icon: "/services/outbound.png"
     },
     {
-        title: "Training Content Creation",
+        title: "Competency Frameworks",
         number: "05",
-        description: "End-to-end content development including programme design, facilitator guides, participant resources, assessments, video learning, and immersive learning assets.",
+        description: "We have a readymade competency framework for behavioral competencies and involved in doing customized things for organisations.",
         icon: "/services/content-creation.png"
     },
     {
-        title: "Training Facilities",
+        title: "Team Impact Simulations",
         number: "06",
-        description: "Access to training spaces and delivery-ready environments for workshops, simulations, and cohort programmes.",
+        description: "Build trust. Strengthen collaboration. Deliver results.",
         icon: "/services/facilities.png"
     },
     {
-        title: "Learning Management Solutions",
+        title: "Training Content Creation",
         number: "07",
-        description: "LMS access, structured learning paths, assessments, progress tracking, reinforcement, and reporting to sustain learning beyond sessions.",
+        description: "End-to-end learning design, including facilitator guides, participant resources, and immersive multimedia assets.",
         icon: "/services/keynote.png"
     },
     {
-        title: "Leadership Development & Succession",
+        title: "Proprietary LMS for Talent Analytics",
         number: "08",
-        description: "Leadership pipelines built across levels, with role-based capability expectations, development plans, and readiness tracking.",
+        description: "Advanced analytics and tracking to measure learning outcomes, track development goals, and prove ROI on capability investments.",
         icon: "/services/workshop.png"
     },
     {
-        title: "Competency Frameworks",
+        title: "Learning Lounges & Locations",
         number: "09",
-        description: "Competency models aligned to strategy, roles, and performance expectations, supported by proficiency definitions and assessment approaches.",
+        description: "Dedicated physical and virtual environments engineered to foster focus, deep learning, and cohort collaboration.",
         icon: "/services/transformational.png"
     }
 ];

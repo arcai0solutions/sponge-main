@@ -70,7 +70,7 @@ export default function About() {
                             className="text-xl md:text-3xl lg:text-5xl font-medium leading-[1.2] tracking-tight text-left"
                             lang="en"
                         >
-                            We partner with organizations across diverse industries and global geographies to design capability systems that drive measurable business performance.
+                            Your Context is Unique to You. We’ll meet where you are - with a strategy and a solution tailored to your requirements and budgets.
                         </motion.h2>
                     </div>
 
@@ -84,13 +84,10 @@ export default function About() {
                             className="space-y-8"
                         >
                             <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
-                                Backed by a multidisciplinary team of strategists, industry experts, and transformation specialists, we architect integrated talent solutions that strengthen leadership, culture, and organizational effectiveness.
+                                We are an end-to-end partner focused on solving your biggest challenges in workforce performance improvements and integration of learning, talent and technology.
                             </p>
                             <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
-                                From executive forums to enterprise-wide transformation journeys, every intervention is built to advance strategic business outcomes.
-                            </p>
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
-                                Since 2011, Sponge Global has evolved into a strategic partner in talent and capability transformation.
+                                Backed by a multidisciplinary team of strategists, industry experts, and transformation specialists, we architect integrated talent solutions that will achieve dramatic return on your investment.
                             </p>
                         </motion.div>
 

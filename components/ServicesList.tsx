@@ -3,42 +3,54 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const services = [
+const programmes = [
     {
-        title: "Keynote Sessions",
-        description: "High-impact sessions to create shared understanding, shift mindsets, and launch capability initiatives with clarity."
+        title: "Strategic Thinking",
+        description: "Develop the ability to anticipate market shifts, connect complex variables, and formulate long-term organizational strategies."
     },
     {
-        title: "Short-Term Skill Building Workshops",
-        description: "Focused learning experiences designed for specific outcomes and immediate application on the job."
+        title: "Customer Centricity",
+        description: "Embed extreme customer focus into your organizational DNA to drive loyalty, satisfaction, and sustainable revenue growth."
     },
     {
-        title: "Transformational Learning Programmes",
-        description: "Structured journeys that build leadership and functional capability over time through practice, reinforcement, and measurement."
+        title: "Data Analytics and Artificial Intelligence",
+        description: "Equip your teams with the fluency to interpret complex data and leverage AI tools for accelerated, intelligent business decisions."
     },
     {
-        title: "Outbound Training",
-        description: "Experiential, team-based learning that strengthens collaboration, trust, accountability, resilience, and execution."
+        title: "Decision Making & Problem Solving",
+        description: "Frameworks and cognitive tools to navigate ambiguity, evaluate risks, and solve sophisticated structural business challenges."
     },
     {
-        title: "Training Content Creation",
-        description: "End-to-end content development including programme design, facilitator guides, participant resources, assessments, video learning, and immersive learning assets."
+        title: "Change Management",
+        description: "Equip leaders with the resilience and strategies required to guide teams through organizational transitions and market disruptions smoothly."
     },
     {
-        title: "Training Facilities",
-        description: "Access to training spaces and delivery-ready environments for workshops, simulations, and cohort programmes."
+        title: "Stakeholder Management",
+        description: "Master the art of mapping, engaging, and influencing internal and external stakeholders to align with strategic business outcomes."
     },
     {
-        title: "Learning Management Solutions",
-        description: "LMS access, structured learning paths, assessments, progress tracking, reinforcement, and reporting to sustain learning beyond sessions."
+        title: "Leading Self & Others",
+        description: "Cultivate high emotional intelligence and foundational leadership capabilities to inspire high performance across decentralized teams."
     },
     {
-        title: "Leadership Development & Succession",
-        description: "Leadership pipelines built across levels, with role-based capability expectations, development plans, and readiness tracking."
+        title: "Impactful Communication",
+        description: "Develop clear, persuasive, and authentic communication skills necessary to articulate vision and drive alignment."
     },
     {
-        title: "Competency Frameworks",
-        description: "Competency models aligned to strategy, roles, and performance expectations, supported by proficiency definitions and assessment approaches."
+        title: "Creativity & Innovation",
+        description: "Foster a culture that encourages divergent thinking and rapid prototyping to continuously develop new solutions."
+    },
+    {
+        title: "Team Work & Collaboration",
+        description: "Break down silos and establish dynamic, cross-functional collaboration protocols that enhance productivity and trust."
+    },
+    {
+        title: "Coaching & Mentoring",
+        description: "Transition managers into capability builders who can identify potential and actively accelerate internal talent development."
+    },
+    {
+        title: "Digital Transformation",
+        description: "Prepare your workforce to adopt, integrate, and maximize emerging digital technologies across all operational workflows."
     }
 ];
 
@@ -56,7 +68,7 @@ export default function ServicesList() {
                 {/* Header Grid - Matching strict design */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 md:mb-32">
                     <div className="flex flex-col">
-                        <h2 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-8">Services</h2>
+                        <h2 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-8">Programmes</h2>
                     </div>
 
                     {/* Animated Cross Icons */}
@@ -75,13 +87,13 @@ export default function ServicesList() {
                     </div>
 
                     <div className="text-4xl md:text-5xl font-medium text-white/90">
-                        (09)
+                        (12)
                     </div>
                 </div>
 
                 {/* Services List */}
                 <div className="flex flex-col">
-                    {services.map((service, index) => (
+                    {programmes.map((programme, index) => (
                         <div key={index} className="group cursor-pointer" onClick={() => toggleService(index)}>
                             {/* Line Separator */}
                             <motion.div
@@ -100,7 +112,7 @@ export default function ServicesList() {
                                         {(index + 1).toString()}
                                     </div>
                                     <h3 className="text-3xl md:text-5xl font-medium leading-tight group-hover:text-gray-300 transition-colors">
-                                        {service.title}
+                                        {programme.title}
                                     </h3>
                                 </div>
 
@@ -116,7 +128,7 @@ export default function ServicesList() {
                                         className="overflow-hidden"
                                     >
                                         <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl pb-4">
-                                            {service.description}
+                                            {programme.description}
                                         </p>
 
                                         {/* Tags (Placeholder style based on design) */}

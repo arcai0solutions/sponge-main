@@ -1,30 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import NextImage from "next/image";
+import Image from "next/image";
 import React from "react";
 
 const features = [
     {
-        title: "Structured Learning Paths",
-        description: "Curated journeys that guide learners through specific skills and roles, ensuring comprehensive development.",
-        icon: "https://cdn.prod.website-files.com/6840876d4d1ed0e8e2a330b9/6848ab85cf257420c02231d5_close-white.svg" // Placeholder, can be replaced
+        title: "Immersive eLearning Content",
+        description: "Engaging, rich multimedia courses designed to deliver real knowledge retention and behavioural change.",
     },
     {
-        title: "Assessments & Quizzes",
+        title: "Assessment & Quizzes",
         description: "Built-in evaluation tools to measure understanding, retention, and application of new knowledge.",
-        icon: "https://cdn.prod.website-files.com/6840876d4d1ed0e8e2a330b9/6848ab85cf257420c02231d5_close-white.svg"
     },
     {
-        title: "Progress Tracking",
-        description: "Real-time analytics and dashboards for learners and admins to monitor growth and completion rates.",
-        icon: "https://cdn.prod.website-files.com/6840876d4d1ed0e8e2a330b9/6848ab85cf257420c02231d5_close-white.svg"
+        title: "Realtime Progress Tracking",
+        description: "Live analytics and dashboards for learners and admins to monitor growth, activity, and completion rates.",
     },
     {
-        title: "Reinforcement & Retention",
-        description: "Post-training nudges and micro-learning modules to combat the forgetting curve and sustain impact.",
-        icon: "https://cdn.prod.website-files.com/6840876d4d1ed0e8e2a330b9/6848ab85cf257420c02231d5_close-white.svg"
-    }
+        title: "AI Enabled",
+        description: "Intelligent recommendations and personalised learning paths powered by AI to maximise each learner's development.",
+    },
+];
+
+const lmsImages = [
+    "/learnig 1.png",
+    "/learnign 2.png",
+    "/learnig 3.png",
+    "/learnig 4.png",
 ];
 
 export default function LMSSection() {
@@ -62,20 +65,12 @@ export default function LMSSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group relative p-8 rounded-2xl bg-zinc-900/40 border border-white/5 hover:bg-zinc-900/60 transition-colors duration-500"
+                            className="group relative p-8 rounded-2xl bg-zinc-900/40 border border-white/5 hover:bg-zinc-900/60 transition-colors duration-500 flex flex-col"
                         >
-                            {/* Hover Border Gradient */}
                             <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-red-500/20 transition-colors duration-500 pointer-events-none" />
-
-                            <div className="w-12 h-12 mb-6 bg-black/50 rounded-lg flex items-center justify-center border border-white/10 group-hover:border-red-500/30 transition-colors">
-                                {/* Use a simple shape or icon if specific ones aren't available yet */}
-                                <div className="w-3 h-3 bg-red-600 rounded-sm transform rotate-45 group-hover:scale-125 transition-transform" />
-                            </div>
-
-                            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">
+                            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors min-h-[3.5rem] flex items-start">
                                 {feature.title}
                             </h3>
-
                             <p className="text-zinc-400 leading-relaxed text-sm">
                                 {feature.description}
                             </p>
@@ -83,14 +78,52 @@ export default function LMSSection() {
                     ))}
                 </div>
 
+                {/* Divider */}
+                <div className="w-full h-px bg-white/5 mt-16" />
+
+                {/* Image Carousel — matching WhyChooseUs style */}
+                <div className="w-full relative mt-12 overflow-hidden">
+                    <motion.div
+                        className="flex gap-6 w-max"
+                        animate={{ x: "-50%" }}
+                        transition={{
+                            duration: 30,
+                            ease: "linear",
+                            repeat: Infinity,
+                        }}
+                    >
+                        {[...lmsImages, ...lmsImages, ...lmsImages, ...lmsImages].map((src, index) => (
+                            <div
+                                key={index}
+                                className="relative w-[280px] md:w-[380px] aspect-video flex-shrink-0 overflow-hidden rounded-xl border border-white/10"
+                            >
+                                <Image
+                                    src={src}
+                                    alt={`LMS screenshot ${index + 1}`}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        ))}
+                    </motion.div>
+                    {/* Fade masks */}
+                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+                </div>
+
                 {/* CTA / Bottom Note */}
-                <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
                     <span className="text-zinc-500 text-sm uppercase tracking-widest">
                         Seamless Integration with Your Workflow
                     </span>
-                    <a href="/contact" className="group flex items-center gap-3 text-white font-medium hover:text-red-500 transition-colors">
-                        Request a Demo
-                        <span className="block w-6 h-px bg-current transition-all group-hover:w-10" />
+                    <a
+                        href="https://sponge.wisdomlms.io/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-3 px-6 py-3 bg-red-600 text-white font-semibold rounded-full hover:bg-red-700 transition-colors"
+                    >
+                        Access our LMS for Free Courses
+                        <span className="block w-4 h-px bg-current transition-all group-hover:w-6" />
                     </a>
                 </div>
 

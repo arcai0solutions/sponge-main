@@ -6,64 +6,58 @@ import React from "react";
 
 const services = [
     {
-        title: "Mindset-Shaping Sessions",
+        title: "Mindset Shaping Sessions",
         number: "01",
         description: "High-impact interventions designed to shift perspectives, challenge assumptions, and activate new ways of thinking that drive organizational capability.",
         icon: "/services/keynote.png"
     },
     {
-        title: "Leadership & Capability Accelerators",
+        title: "Upskilling & Reskilling Workshops",
         number: "02",
-        description: "Holistic programs that guide leaders and teams through practice-driven learning, mindset evolution, and measurable growth in capability.",
+        description: "Targeted programs focused on equipping your workforce with critical new competencies and upgrading existing skills to stay ahead of industry demands.",
         icon: "/services/workshop.png"
     },
     {
-        title: "Succession Planning",
+        title: "Succession Planning Solutions",
         number: "03",
-        description: "Securing the future of your organization by identifying, developing, and transitioning high-potential leaders into critical roles.",
+        description: "Securing the future of your organization by strategically identifying, developing, and transitioning high-potential leaders into critical roles.",
         icon: "/services/transformational.png"
-    },
-    {
-        title: "Skill Activation Labs",
-        number: "04",
-        description: "Hands-on, immersive sessions that translate learning into action, enabling teams to solve real business problems.",
-        icon: "/services/outbound.png"
     },
     {
         title: "Competency Frameworks",
-        number: "05",
-        description: "We have a readymade competency framework for behavioral competencies and involved in doing customized things for organisations.",
-        icon: "/services/content-creation.png"
-    },
-    {
-        title: "Team Impact Simulations",
-        number: "06",
-        description: "Build trust. Strengthen collaboration. Deliver results.",
-        icon: "/services/facilities.png"
-    },
-    {
-        title: "Training Content Creation",
-        number: "07",
-        description: "End-to-end learning design, including facilitator guides, participant resources, and immersive multimedia assets.",
+        number: "04",
+        description: "Customized structures defining the core behaviors, knowledge, and skills required for success across all levels of your organization.",
         icon: "/services/keynote.png"
     },
     {
-        title: "Proprietary LMS for Talent Analytics",
-        number: "08",
-        description: "Advanced analytics and tracking to measure learning outcomes, track development goals, and prove ROI on capability investments.",
+        title: "Inhouse & Outbound Team Building",
+        number: "05",
+        description: "Immersive indoor and outdoor experiences engineered to build trust, strengthen collaboration, and improve cross-functional dynamics for superior results.",
+        icon: "/services/outbound.png"
+    },
+    {
+        title: "eLearning Content Creation",
+        number: "06",
+        description: "End-to-end digital learning design, delivering engaging, accessible, and highly interactive multimedia modules tailored to your operational needs.",
+        icon: "/services/content-creation.png"
+    },
+    {
+        title: "LMS - Learning Management Solutions",
+        number: "07",
+        description: "Robust centralized platforms designed to streamline training delivery, track developmental milestones, and provide deep analytics on learning ROI.",
         icon: "/services/workshop.png"
     },
     {
-        title: "Learning Lounges & Locations",
-        number: "09",
-        description: "Dedicated physical and virtual environments engineered to foster focus, deep learning, and cohort collaboration.",
-        icon: "/services/transformational.png"
+        title: "Training Facilities & Locations",
+        number: "08",
+        description: "Dedicated physical spaces and environments optimized to foster focus, encourage deep learning, and facilitate effective cohort collaboration.",
+        icon: "/services/facilities.png"
     }
 ];
 
 export default function Services() {
     return (
-        <section className="bg-white text-black relative z-30 mt-20 md:mt-32">
+        <section id="services" className="bg-white text-black relative z-30 mt-20 md:mt-32">
             <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row">
 
                 {/* Left Column - Sticky */}
@@ -75,7 +69,7 @@ export default function Services() {
                         </div>
 
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-tight tracking-tight">
-                            COMPREHENSIVE LEARNING & DEVELOPMENT STRATEGIES.
+                            COMPREHENSIVE LEARNING & DEVELOPMENT SOLUTIONS.
                         </h2>
 
                         <div className="w-48 h-48 md:w-64 md:h-64 mt-8 mx-auto lg:mx-0">

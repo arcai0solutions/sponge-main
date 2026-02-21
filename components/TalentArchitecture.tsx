@@ -6,45 +6,45 @@ import React, { useRef } from "react";
 const steps = [
     {
         number: "01",
-        title: "Purpose & Measurement",
-        subtitle: "The Foundation",
-        description: "Governance, KPIs, success metrics, reporting, and analytics to ensure learning drives outcomes.",
+        title: "Discovery Stage",
+        subtitle: "Understanding Your World",
+        description: "We begin by deeply understanding your organisation — its goals, challenges, culture, and people — to define the right capability solution for you.",
         bg: "bg-zinc-900/50"
     },
     {
         number: "02",
-        title: "Pre-Assessment",
-        subtitle: "The Baseline",
-        description: "Baseline proficiency mapping and gap analysis across technical, behavioral, and domain capabilities.",
+        title: "Pre-Assessments",
+        subtitle: "Establishing the Baseline",
+        description: "Baseline proficiency mapping and gap analysis across technical, behavioral, and domain capabilities to determine exactly where to focus.",
         bg: "bg-zinc-800/50"
     },
     {
         number: "03",
-        title: "Capability Pathways",
-        subtitle: "The Core Structure",
-        description: "Role-aligned learning pathways tailored to specific needs.",
+        title: "Development Tools",
+        subtitle: "The Growth Engine",
+        description: "A rich blend of tools and modalities to drive learning in the flow of work.",
         isWide: true,
         bg: "bg-zinc-900/50",
         subItems: [
             {
-                title: "Domain Capability",
-                text: "Functional mastery, business acumen, governance, risk, and compliance."
+                title: "Instructor-Led",
+                text: "Training, Coaching, Simulations, Discussions, and Networking Events."
             },
             {
-                title: "Behavioral Capability",
-                text: "Customer centricity, stakeholder management, change leadership, communication, decision making."
+                title: "Digital Learning",
+                text: "Videos, eLearning Modules, Case Studies, and Learning Forums."
             },
             {
-                title: "Technical Capability",
-                text: "Tools and processes, digital proficiency including AI, privacy, data, and cyber security."
+                title: "Self-Directed",
+                text: "Exercises, Reading Materials, and Reflective Practice assignments."
             }
         ]
     },
     {
         number: "04",
-        title: "Development & Reinforcement",
-        subtitle: "The Growth Engine",
-        description: "Education, experience, and exposure pathways supported by coaching, application assignments, certifications, and talent reviews.",
+        title: "Post-Assessments",
+        subtitle: "Measuring What Matters",
+        description: "Structured evaluation to measure the impact of learning, track behavior change, and ensure the intended outcomes are being achieved.",
         bg: "bg-zinc-800/50"
     }
 ];
@@ -70,11 +70,10 @@ export default function TalentArchitecture() {
                     <div className="absolute top-12 left-12 md:left-24 z-20">
                         <div className="flex items-center gap-3 mb-4">
                             <span className="h-px w-12 bg-red-600"></span>
-                            <span className="text-red-500 font-bold tracking-widest text-sm uppercase">Our Architecture</span>
+                            <span className="text-red-500 font-bold tracking-widest text-sm uppercase">Our Framework</span>
                         </div>
                         <h2 className="text-5xl font-bold text-white uppercase tracking-tighter leading-[0.9]">
-                            Talent <br />
-                            <span className="text-zinc-600">Development</span>
+                            4 Step <span className="text-zinc-600">Process</span>
                         </h2>
                     </div>
 
@@ -89,9 +88,9 @@ export default function TalentArchitecture() {
             {/* MOBILE: Vertical Stack */}
             <div className="lg:hidden flex flex-col gap-8 py-20 px-6 bg-black">
                 <div className="mb-10">
-                    <span className="text-red-500 font-bold tracking-widest text-sm uppercase mb-2 block">Our Architecture</span>
+                    <span className="text-red-500 font-bold tracking-widest text-sm uppercase mb-2 block">Our Framework</span>
                     <h2 className="text-4xl font-bold text-white uppercase tracking-tighter leading-none">
-                        Talent <span className="text-zinc-600">Development</span>
+                        4 Step <span className="text-zinc-600">Process</span>
                     </h2>
                 </div>
                 {steps.map((step, index) => (

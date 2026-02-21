@@ -8,18 +8,18 @@ import Image from 'next/image';
 const features = [
     {
         icon: Search,
-        title: 'PROVEN METHODOLOGY',
-        description: 'Evidence-based learning strategies that drive real behavioral change and measurable business impact.',
+        title: 'PROVEN TRACK RECORD',
+        description: 'We have worked with over 200 clients across Geographies with an immaculate track record.',
     },
     {
         icon: Clock,
-        title: 'GLOBAL EXPERTISE',
-        description: 'Delivering transformative training solutions to 200+ clients worldwide with cultural nuance.',
+        title: 'TAILORED SOLUTIONS',
+        description: 'Whether you are a startup or a multinational company, skilled or unskilled, we can tailor the sessions to your requirements.',
     },
     {
         icon: Headset,
-        title: 'END-TO-END SUPPORT',
-        description: 'From pre-assessment to post-training reinforcement, we partner with you at every stage of growth.',
+        title: 'SUIT YOUR BUDGET',
+        description: 'No matter how good the programme, if it’s not within your budget, we will carefully work with you to devise a solution that will suit your budget and deliver the intended outcomes.',
     },
 ];
 
@@ -44,8 +44,7 @@ export default function WhyChooseUs() {
                         </div>
 
                         <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight uppercase">
-                            Building Capability, <br />
-                            <span className="text-gray-500">Driving Performance.</span>
+                            Trusted by 200+ <span className="text-gray-500">Clients.</span>
                         </h2>
                     </div>
 

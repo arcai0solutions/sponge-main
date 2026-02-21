@@ -67,7 +67,7 @@ export default function About() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="text-xl md:text-3xl lg:text-5xl font-medium leading-[1.2] tracking-tight text-justify hyphens-auto break-words"
+                            className="text-xl md:text-3xl lg:text-5xl font-medium leading-[1.2] tracking-tight text-left"
                             lang="en"
                         >
                             We partner with organizations across diverse industries and global geographies to design capability systems that drive measurable business performance.
@@ -83,13 +83,13 @@ export default function About() {
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                             className="space-y-8"
                         >
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-justify">
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
                                 Backed by a multidisciplinary team of strategists, industry experts, and transformation specialists, we architect integrated talent solutions that strengthen leadership, culture, and organizational effectiveness.
                             </p>
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-justify">
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
                                 From executive forums to enterprise-wide transformation journeys, every intervention is built to advance strategic business outcomes.
                             </p>
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-justify">
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
                                 Since 2011, Sponge Global has evolved into a strategic partner in talent and capability transformation.
                             </p>
                         </motion.div>

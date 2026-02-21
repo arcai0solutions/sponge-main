@@ -36,7 +36,7 @@ const services = [
         icon: "/services/outbound.png"
     },
     {
-        title: "eLearning Content Creation",
+        title: "E-Learning Content Creation",
         number: "06",
         description: "End-to-end digital learning design, delivering engaging, accessible, and highly interactive multimedia modules tailored to your operational needs.",
         icon: "/services/content-creation.png"

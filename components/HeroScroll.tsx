@@ -44,7 +44,7 @@ export default function HeroScroll() {
                             Driving Performance
                         </h1>
                         <p className="text-base md:text-xl mb-8 md:mb-12 text-white/90 font-light leading-relaxed drop-shadow-md text-justify md:text-left max-w-2xl">
-                            We deliver innovative learning and development solutions, including customer eLearning, Immersive training, and talent development strategies.
+                            We deliver innovative learning and development solutions, including custom eLearning, Immersive in-person training, and integrated talent development strategies.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                             <a href="https://wa.me/94713687386" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-colors text-center inline-block">

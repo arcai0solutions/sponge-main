@@ -50,7 +50,18 @@ export default function HeroScroll() {
                             <a href="https://wa.me/94713687386" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-colors text-center inline-block">
                                 Request a Consultation
                             </a>
-                            <a href="#services" className="w-full sm:w-auto px-8 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-colors text-center inline-block">
+                            <a
+                                href="#programmes"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const el = document.getElementById('programmes');
+                                    if (el) {
+                                        const top = el.getBoundingClientRect().top + window.scrollY;
+                                        window.scrollTo({ top, behavior: 'smooth' });
+                                    }
+                                }}
+                                className="w-full sm:w-auto px-8 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-colors text-center inline-block"
+                            >
                                 Explore Programmes
                             </a>
                         </div>

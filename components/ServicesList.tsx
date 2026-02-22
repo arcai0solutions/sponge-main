@@ -62,7 +62,7 @@ export default function ServicesList() {
     };
 
     return (
-        <section className="bg-black text-white relative py-20 px-4 md:px-8 overflow-hidden">
+        <section id="programmes" className="bg-black text-white relative py-20 px-4 md:px-8 overflow-hidden">
             <div className="max-w-[1400px] mx-auto">
 
                 {/* Header Grid - Matching strict design */}

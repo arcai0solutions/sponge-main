@@ -94,14 +94,15 @@ export default function Footer() {
                     <a
                         href="https://www.arcai.agency"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
+                        title="ARC AI - Web Design & Digital Solutions"
                         className="flex items-center gap-2 group"
                     >
-                        <span className="text-white/75 text-sm group-hover:text-white transition-colors">Designed by</span>
+                        <span className="text-white/75 text-sm group-hover:text-white transition-colors">Designed & Developed by</span>
                         <div className="w-24 h-9 relative translate-y-1">
                             <NextImage
                                 src="/arc logo.png"
-                                alt="ARC AI Logo"
+                                alt="ARC AI - Web Design & Digital Solutions"
                                 fill
                                 className="object-contain object-left"
                             />
@@ -109,7 +110,7 @@ export default function Footer() {
                     </a>
 
                     <p className="text-white/75 text-sm">
-                        Powered by Next.js
+                        © {new Date().getFullYear()} Sponge Global. All rights reserved.
                     </p>
                 </div>
             </div>

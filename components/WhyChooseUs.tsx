@@ -2,22 +2,52 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Search, Clock, Headset } from 'lucide-react';
+import { Trophy, Settings, Wallet } from 'lucide-react';
 import Image from 'next/image';
+
+const AnimatedTrophy = ({ className }: { className?: string }) => (
+    <motion.div
+        animate={{ rotate: [-8, 8, -8], y: [0, -4, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className={className}
+    >
+        <Trophy className="w-full h-full stroke-[1.5]" />
+    </motion.div>
+);
+
+const AnimatedSettings = ({ className }: { className?: string }) => (
+    <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        className={className}
+    >
+        <Settings className="w-full h-full stroke-[1.5]" />
+    </motion.div>
+);
+
+const AnimatedWallet = ({ className }: { className?: string }) => (
+    <motion.div
+        animate={{ scale: [1, 1.05, 1], y: [0, -2, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className={className}
+    >
+        <Wallet className="w-full h-full stroke-[1.5]" />
+    </motion.div>
+);
 
 const features = [
     {
-        icon: Search,
+        icon: AnimatedTrophy,
         title: 'PROVEN TRACK RECORD',
         description: 'We have worked with over 200 clients across Geographies with an immaculate track record.',
     },
     {
-        icon: Clock,
+        icon: AnimatedSettings,
         title: 'TAILORED SOLUTIONS',
         description: 'Whether you are a startup or a multinational company, skilled or unskilled, we can tailor the sessions to your requirements.',
     },
     {
-        icon: Headset,
+        icon: AnimatedWallet,
         title: 'SUIT YOUR BUDGET',
         description: 'No matter how good the programme, if it’s not within your budget, we will carefully work with you to devise a solution that will suit your budget and deliver the intended outcomes.',
     },
@@ -57,7 +87,7 @@ export default function WhyChooseUs() {
                                 <div key={index} className="flex flex-col gap-6 group">
                                     {/* Icon Container with Orange Stroke */}
                                     <div className="w-12 h-12 text-[#E31E24]">
-                                        <feature.icon className="w-full h-full stroke-[1.5]" />
+                                        <feature.icon className="w-full h-full" />
                                     </div>
 
                                     <div className="flex flex-col gap-3">

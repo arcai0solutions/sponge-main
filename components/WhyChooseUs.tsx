@@ -40,11 +40,11 @@ export default function WhyChooseUs() {
                     <div className="lg:col-span-4 flex flex-col gap-8">
                         <div className="flex items-center gap-2">
                             <span className="text-[#E31E24] text-lg font-bold">//</span>
-                            <span className="text-lg font-medium text-black">Why Choose Us</span>
+                            <span className="text-lg font-medium text-black tracking-widest">WHY CHOOSE US</span>
                         </div>
 
-                        <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight uppercase">
-                            Trusted by 200+ <span className="text-gray-500">Clients.</span>
+                        <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight">
+                            Trusted by <br /> 200+ <span className="text-gray-500">Clients.</span>
                         </h2>
                     </div>
 

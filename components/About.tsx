@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import NextImage from 'next/image';
 import React from 'react';
 
 export default function About() {
     return (
-        <section className="bg-black text-white pt-16 pb-8 md:pt-20 md:pb-12 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+        <section className="bg-black text-white pt-16 pb-0 md:pt-20 md:pb-0 px-6 md:px-12 lg:px-24 mb-[-2rem] md:mb-[-4rem] relative overflow-hidden">
             <div className="max-w-[1400px] mx-auto">
 
                 {/* Top Row: Label & Badge */}
@@ -72,6 +73,22 @@ export default function About() {
                         >
                             Your Context is Unique to You. We’ll meet where you are - with a strategy and a solution tailored to your requirements and budgets.
                         </motion.h2>
+
+                        {/* Spinning Image */}
+                        <div className="hidden md:flex w-full justify-center lg:justify-start lg:pl-64 mt-12 lg:mt-16">
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                                className="relative w-48 h-48 lg:w-64 lg:h-64 rounded-full overflow-hidden"
+                            >
+                                <NextImage
+                                    src="/about-image.jpeg"
+                                    alt="About Sponge Global"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </motion.div>
+                        </div>
                     </div>
 
                     {/* Secondary Text & Cards */}
@@ -84,10 +101,10 @@ export default function About() {
                             className="space-y-8"
                         >
                             <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
-                                We are an end-to-end partner focused on solving your biggest challenges in workforce performance improvements and integration of learning, talent and technology.
+                                We are an end-to-end partner dedicated to addressing your most critical workforce performance challenges through the seamless integration of learning, talent, and technology.
                             </p>
                             <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
-                                Backed by a multidisciplinary team of strategists, industry experts, and transformation specialists, we architect integrated talent solutions that will achieve dramatic return on your investment.
+                                Supported by a multidisciplinary team of strategists, industry experts, and transformation specialists, we design and deliver integrated talent solutions that drive measurable impact and strong returns on your investment.
                             </p>
                         </motion.div>
 

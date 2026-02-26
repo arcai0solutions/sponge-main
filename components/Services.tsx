@@ -68,8 +68,8 @@ export default function Services() {
                             <span className="text-black font-semibold tracking-wide">WHAT WE DELIVER</span>
                         </div>
 
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-tight tracking-tight">
-                            COMPREHENSIVE LEARNING & DEVELOPMENT SOLUTIONS.
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+                            Comprehensive Learning & Development<br />Solutions.
                         </h2>
 
                         <div className="w-48 h-48 md:w-64 md:h-64 mt-8 mx-auto lg:mx-0">

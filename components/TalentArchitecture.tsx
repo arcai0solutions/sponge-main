@@ -72,7 +72,7 @@ export default function TalentArchitecture() {
                             <span className="h-px w-12 bg-red-600"></span>
                             <span className="text-red-500 font-bold tracking-widest text-sm uppercase">Our Framework</span>
                         </div>
-                        <h2 className="text-5xl font-bold text-white uppercase tracking-tighter leading-[0.9]">
+                        <h2 className="text-5xl font-bold text-white tracking-tighter leading-[0.9]">
                             4 Step <span className="text-zinc-600">Process</span>
                         </h2>
                     </div>
@@ -89,7 +89,7 @@ export default function TalentArchitecture() {
             <div className="lg:hidden flex flex-col gap-8 py-20 px-6 bg-black">
                 <div className="mb-10">
                     <span className="text-red-500 font-bold tracking-widest text-sm uppercase mb-2 block">Our Framework</span>
-                    <h2 className="text-4xl font-bold text-white uppercase tracking-tighter leading-none">
+                    <h2 className="text-4xl font-bold text-white tracking-tighter leading-none">
                         4 Step <span className="text-zinc-600">Process</span>
                     </h2>
                 </div>

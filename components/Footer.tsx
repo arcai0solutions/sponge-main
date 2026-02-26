@@ -43,8 +43,8 @@ export default function Footer() {
                         {/* Tagline */}
                         <div className="space-y-6">
                             <h2 className="text-3xl md:text-5xl font-medium tracking-tight leading-tight">
-                                Strengthening Organizations,<br />
-                                Shaping Leaders.
+                                Transforming Talent,<br />
+                                Driving Performance.
                             </h2>
                             {/* Gradient Line */}
                             <div className="w-full h-px bg-white/20 relative overflow-hidden">
@@ -79,11 +79,10 @@ export default function Footer() {
 
                             <div className="flex flex-col gap-3 text-white/70">
                                 <Link href="/" className="hover:text-white transition-colors">Home</Link>
-                                <Link href="/about" className="hover:text-white transition-colors">About us</Link>
+                                <Link href="/about" className="hover:text-white transition-colors">About</Link>
                                 <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-                                <Link href="/job" className="hover:text-white transition-colors">Opportunity</Link>
-                                <Link href="/contact" className="hover:text-white transition-colors">Contact us</Link>
-                                <Link href="/404" className="hover:text-white transition-colors">404</Link>
+                                <Link href="/projects" className="hover:text-white transition-colors">Projects</Link>
+                                <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
                             </div>
                         </div>
 

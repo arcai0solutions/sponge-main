@@ -2,9 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import SmoothScroll from '@/components/SmoothScroll';
-import Footer from '@/components/Footer';
-import StaggeredMenu from '@/components/StaggeredMenu';
-import SiteLogo from '@/components/SiteLogo';
+import GlobalLayoutWrapper from '@/components/GlobalLayoutWrapper';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -41,13 +39,9 @@ export default function RootLayout({
     <html lang="en" className="no-scrollbar">
       <body className={`${inter.className} ${inter.variable}`}>
         <SmoothScroll>
-          {/* Desktop: separate logo. Mobile: logo is inside StaggeredMenu bar */}
-          <div className="hidden md:block">
-            <SiteLogo />
-          </div>
-          <StaggeredMenu isFixed={true} menuButtonColor="#ffffff" showLogo={true} />
-          {children}
-          <Footer />
+          <GlobalLayoutWrapper>
+            {children}
+          </GlobalLayoutWrapper>
         </SmoothScroll>
       </body>
     </html>

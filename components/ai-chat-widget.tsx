@@ -167,7 +167,7 @@ export function AiChatWidget() {
                                             remarkPlugins={[remarkGfm]}
                                             components={{
                                                 a: ({ node, ...props }) => (
-                                                    <a {...props} target="_blank" rel="noopener noreferrer" className="text-[#E31E24] font-medium hover:underline break-all" />
+                                                    <a {...props} target="_blank" rel="noopener noreferrer" className={`font-medium hover:underline break-all ${msg.role === "user" ? "text-[#FFD700]" : "text-[#E31E24]"}`} />
                                                 ),
                                                 p: ({ node, ...props }) => <p className="mb-2 last:mb-0" {...props} />,
                                                 ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-2 last:mb-0" {...props} />,

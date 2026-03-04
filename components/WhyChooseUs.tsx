@@ -54,7 +54,7 @@ const features = [
 ];
 
 const images = [
-    '/abou1.png',
+    '/about1.png',
     '/about2.png',
     '/about3.png',
     '/about4.png',
@@ -125,7 +125,7 @@ export default function WhyChooseUs() {
                                         >
                                             <Image
                                                 src={src}
-                                                alt={`Portfolio image ${index}`}
+                                                alt={`Sponge Global corporate training and leadership development session — client work photo ${(index % images.length) + 1}`}
                                                 fill
                                                 className="object-cover"
                                             />

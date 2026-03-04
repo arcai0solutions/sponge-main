@@ -8,6 +8,77 @@ import Preloader from '@/components/Preloader';
 import LMSSection from '@/components/LMSSection';
 import LearningLounge from '@/components/LearningLounge';
 import type { Metadata } from "next";
+import JsonLd from '@/components/JsonLd';
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://sponge-global.com/#organization",
+  "name": "Sponge Global",
+  "url": "https://sponge-global.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://sponge-global.com/og-image.png",
+    "width": 1200,
+    "height": 630
+  },
+  "description": "Sponge Global is a learning and capability partner building stronger leaders and teams for 200+ clients worldwide. Founded in 2011, we deliver corporate training, leadership development, eLearning, and talent solutions.",
+  "foundingDate": "2011",
+  "slogan": "Transforming Talent, Driving Performance",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": "https://sponge-global.com/contact",
+    "availableLanguage": "English"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/3069879/",
+    "https://www.youtube.com/@sponge_global_training",
+    "https://www.instagram.com/spongeglobal"
+  ]
+};
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://sponge-global.com/#website",
+  "url": "https://sponge-global.com",
+  "name": "Sponge Global",
+  "description": "Learning & Capability Partner for 200+ clients worldwide.",
+  "publisher": {
+    "@id": "https://sponge-global.com/#organization"
+  }
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://sponge-global.com/#localbusiness",
+  "name": "Sponge Global",
+  "url": "https://sponge-global.com",
+  "image": "https://sponge-global.com/og-image.png",
+  "description": "Corporate training, leadership development, and eLearning solutions provider based in Sri Lanka serving clients globally since 2011.",
+  "foundingDate": "2011",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "LK",
+    "addressRegion": "Western Province"
+  },
+  "priceRange": "$$",
+  "openingHours": "Mo-Fr 09:00-18:00",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "2",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/3069879/",
+    "https://www.youtube.com/@sponge_global_training",
+    "https://www.instagram.com/spongeglobal"
+  ]
+};
 
 export const metadata: Metadata = {
   title: "Sponge Global | Learning & Capability Partner",
@@ -25,6 +96,9 @@ export const metadata: Metadata = {
     "outbound training"
   ],
   authors: [{ name: "Sponge Global" }],
+  alternates: {
+    canonical: "https://sponge-global.com",
+  },
   openGraph: {
     title: "Sponge Global | Learning & Capability Partner",
     description: "Practical learning solutions for organizations across industries and countries.",
@@ -32,10 +106,10 @@ export const metadata: Metadata = {
     siteName: "Sponge Global",
     images: [
       {
-        url: "/sponge-favicon.png", // Using favicon as placeholder if no OG image exists yet
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Sponge Global Learning Solutions",
+        alt: "Sponge Global — Learning & Capability Partner",
       },
     ],
     locale: "en_US",
@@ -45,13 +119,16 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sponge Global | Learning & Capability Partner",
     description: "Building stronger leaders and teams for 200+ clients worldwide.",
-    images: ["/sponge-favicon.png"],
+    images: ["/og-image.png"],
   },
 };
 
 export default function Home() {
   return (
     <main className="bg-black min-h-screen">
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={webSiteSchema} />
+      <JsonLd data={localBusinessSchema} />
       <Preloader />
       <HeroScroll />
       <div className="relative z-20">
@@ -63,8 +140,6 @@ export default function Home() {
         <LMSSection />
         <LearningLounge />
       </div>
-
-
     </main>
   );
 }

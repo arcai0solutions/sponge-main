@@ -32,7 +32,7 @@ export default function Footer() {
                         <div className="w-48 md:w-64">
                             <NextImage
                                 src="/new-logo.jpeg"
-                                alt="Sponge Global Logo"
+                                alt="Sponge Global — Learning & Capability Partner"
                                 width={200}
                                 height={66}
                                 className="w-full h-auto object-contain rounded-2xl"
@@ -67,7 +67,7 @@ export default function Footer() {
                             />
                             <SocialLink href="https://www.linkedin.com/company/3069879/" icon={Linkedin} label="LinkedIn" />
                             <SocialLink href="https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo" icon={Instagram} label="Instagram" />
-                            <SocialLink href="https://facebook.com" icon={Facebook} label="Facebook" />
+                            <SocialLink href="https://www.facebook.com/spongeglobal" icon={Facebook} label="Facebook" />
                         </div>
 
                         {/* Navigation Links column */}
@@ -101,7 +101,7 @@ export default function Footer() {
                         <span className="text-white/75 text-sm group-hover:text-white transition-colors">Designed & Developed by</span>
                         <div className="w-24 h-9 relative translate-y-1">
                             <NextImage
-                                src="/arc logo.png"
+                                src="/arc-logo.png"
                                 alt="ARC AI - Web Design & Digital Solutions"
                                 fill
                                 className="object-contain object-left"

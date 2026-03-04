@@ -24,10 +24,10 @@ const features = [
 ];
 
 const lmsImages = [
-    "/learnig 1.png",
-    "/learnign 2.png",
-    "/learnig 3.png",
-    "/learnig 4.png",
+    "/learning-1.png",
+    "/learning-2.png",
+    "/learning-3.png",
+    "/learning-4.png",
 ];
 
 export default function LMSSection() {
@@ -99,7 +99,12 @@ export default function LMSSection() {
                             >
                                 <Image
                                     src={src}
-                                    alt={`LMS screenshot ${index + 1}`}
+                                    alt={[
+                                        "Sponge Global LMS — immersive eLearning content dashboard",
+                                        "Sponge Global LMS — assessment and quiz interface",
+                                        "Sponge Global LMS — real-time learner progress tracking",
+                                        "Sponge Global LMS — AI-enabled personalised learning paths"
+                                    ][index % 4]}
                                     fill
                                     className="object-cover"
                                 />

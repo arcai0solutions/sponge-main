@@ -116,6 +116,7 @@ function ServiceCard({ service, index }: { service: any, index: number }) {
                         width={64}
                         height={64}
                         className="w-full h-full object-contain"
+                        style={{ filter: 'hue-rotate(-20deg) saturate(0.9)' }}
                     />
                 </div>
 

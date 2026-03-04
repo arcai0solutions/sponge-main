@@ -50,7 +50,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         { label: 'YouTube', link: 'https://www.youtube.com/@sponge_global_training' },
         { label: 'LinkedIn', link: 'https://www.linkedin.com/company/3069879/' },
         { label: 'Instagram', link: 'https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo' },
-        { label: 'Facebook', link: 'https://facebook.com' }
+        { label: 'Facebook', link: 'https://www.facebook.com/spongeglobal' }
     ],
     displaySocials = true,
     displayItemNumbering = true,
@@ -465,7 +465,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                             <Link href="/" aria-label="Go to homepage">
                                 <NextImage
                                     src={logoUrl || '/new-logo.jpeg'}
-                                    alt="Logo"
+                                    alt="Sponge Global — Learning & Capability Partner"
                                     width={160}
                                     height={160}
                                     className="w-32 md:w-40 h-auto object-contain cursor-pointer"

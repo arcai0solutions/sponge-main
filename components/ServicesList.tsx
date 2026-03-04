@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const programmes = [
     {
@@ -76,8 +77,9 @@ export default function ServicesList() {
                         {[1, 2, 3, 4].map((_, i) => (
                             <motion.img
                                 key={i}
-                                src="https://cdn.prod.website-files.com/6840876d4d1ed0e8e2a330b9/6848ab85cf257420c02231d5_close-white.svg"
+                                src="/close-white.svg"
                                 alt=""
+                                aria-hidden="true"
                                 className="w-6 h-6 opacity-80"
                                 initial={{ rotate: 0 }}
                                 animate={{ rotate: 360 }}
@@ -168,10 +170,10 @@ export default function ServicesList() {
 
                 {/* Footer Button */}
                 <div className="mt-20 flex justify-start">
-                    <a href="/contact/3" className="inline-flex items-center gap-2 group">
+                    <Link href="/contact" aria-label="Contact Sponge Global to discuss your training needs" className="inline-flex items-center gap-2 group">
                         <span className="w-3 h-3 bg-red-600 rounded-full group-hover:scale-125 transition-transform duration-300"></span>
                         <span className="text-white text-lg font-medium border-b border-transparent group-hover:border-white transition-colors">Get in touch</span>
-                    </a>
+                    </Link>
                 </div>
 
             </div>

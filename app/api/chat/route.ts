@@ -8,6 +8,13 @@ import { generateProposalEmail } from '@/lib/email-template';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
 
+// ── Rate Limiting ────────────────────────────────────────────────────────────
+// In-memory store: email -> { count, firstSent timestamp }.
+// Resets on cold start but serves as a fast first-line guard.
+const proposalRateLimit = new Map<string, { count: number; firstSent: number }>();
+const RATE_LIMIT_MS = 24 * 60 * 60 * 1000; // 24 hours
+const MAX_PROPOSALS_PER_EMAIL = 3;          // per 24h window
+
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
@@ -73,6 +80,34 @@ export async function POST(req: Request) {
                     execute: async ({ name, email, company, employeeCount, services }) => {
                         console.log(`Executing sendProposal tool for ${email}...`);
 
+                        // ── Layer 1: In-memory rate limit ──────────────────
+                        const key = email.toLowerCase();
+                        const record = proposalRateLimit.get(key);
+                        if (record) {
+                            // Reset window if 24h has passed
+                            if (Date.now() - record.firstSent > RATE_LIMIT_MS) {
+                                proposalRateLimit.delete(key);
+                            } else if (record.count >= MAX_PROPOSALS_PER_EMAIL) {
+                                console.warn(`Rate limit hit for ${key} (${record.count} proposals)`);
+                                return { success: false, rateLimited: true, hoursUntilReset: Math.ceil((RATE_LIMIT_MS - (Date.now() - record.firstSent)) / 3600000) };
+                            }
+                        }
+
+                        // ── Layer 2: Supabase persistent check ────────────
+                        // Counts across all serverless instances / cold starts.
+                        const since = new Date(Date.now() - RATE_LIMIT_MS).toISOString();
+                        const { data: recentProposals } = await supabase
+                            .from('chat_messages')
+                            .select('id')
+                            .eq('role', 'proposal_sent')
+                            .eq('session_id', key)
+                            .gte('created_at', since);
+
+                        if (recentProposals && recentProposals.length >= MAX_PROPOSALS_PER_EMAIL) {
+                            console.warn(`Supabase rate limit hit for ${key}`);
+                            return { success: false, rateLimited: true, hoursUntilReset: 24 };
+                        }
+
                         // Demo Pricing Logic Based on Service Names
                         let totalPrice = 0;
                         const servicesLower = services.map((s: string) => s.toLowerCase());
@@ -117,6 +152,23 @@ export async function POST(req: Request) {
                                     proposalDetails: { name, company, employeeCount, services, totalPrice }
                                 };
                             }
+
+                            // ── Log successful send for rate limiting ─────
+                            const key = email.toLowerCase();
+                            const existing = proposalRateLimit.get(key);
+                            if (existing && Date.now() - existing.firstSent <= RATE_LIMIT_MS) {
+                                proposalRateLimit.set(key, { count: existing.count + 1, firstSent: existing.firstSent });
+                            } else {
+                                proposalRateLimit.set(key, { count: 1, firstSent: Date.now() });
+                            }
+                            // Persist to Supabase for cross-instance protection
+                            supabase.from('chat_messages').insert([{
+                                session_id: email.toLowerCase(),
+                                role: 'proposal_sent',
+                                content: `Proposal sent to ${email} for ${company}`
+                            }]).then(({ error: logErr }) => {
+                                if (logErr) console.error('Failed to log proposal send:', logErr);
+                            });
 
                             return {
                                 success: true,

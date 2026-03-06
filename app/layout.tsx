@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import SmoothScroll from '@/components/SmoothScroll';
 import GlobalLayoutWrapper from '@/components/GlobalLayoutWrapper';
-import NewsletterPopup from '@/components/NewsletterPopup';
+// import NewsletterPopup from '@/components/NewsletterPopup';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -60,10 +60,10 @@ export default function RootLayout({
         <SmoothScroll>
           <GlobalLayoutWrapper>
             {children}
-            <NewsletterPopup />
+            {/* <NewsletterPopup /> */}
           </GlobalLayoutWrapper>
         </SmoothScroll>
       </body>
-    </html>
+    </html >
   );
 }

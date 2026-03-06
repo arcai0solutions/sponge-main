@@ -16,12 +16,20 @@ interface Message {
 
 export function AiChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        // Auto-open on desktop devices after a short delay
+        if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+            const timer = setTimeout(() => setIsOpen(true), 1500);
+            return () => clearTimeout(timer);
+        }
+    }, []);
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<Message[]>([
         {
             id: "welcome",
             role: "assistant",
-            content: "Hello! I'm the Sponge Global AI Assistant. How can I help you transform your workforce today?",
+            content: "Hello! I'm the Sponge Global AI. How can I help you transform your workforce today?",
         }
     ]);
     const [isLoading, setIsLoading] = useState(false);
@@ -129,7 +137,7 @@ export function AiChatWidget() {
                                 </div>
                                 <div>
                                     <h3 className="text-white font-semibold text-sm tracking-wide">Sponge AI</h3>
-                                    <p className="text-white/60 text-xs">Capability Strategy Partner</p>
+                                    <p className="text-white/60 text-xs">Learning Development Partner</p>
                                 </div>
                             </div>
                             <button

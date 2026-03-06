@@ -1,65 +1,144 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const programmes = [
     {
-        title: "Strategic Thinking",
-        description: "Develop the ability to anticipate market shifts, connect complex variables, and formulate long-term organizational strategies."
+        title: "Strategic Thinking and Decision Making",
+        description: "Strengthen strategic judgement, anticipate risks and opportunities, make balanced high-impact decisions, and align execution to strategy.",
+        focusAreas: [
+            "Business strategy foundations",
+            "Internal and external environment analysis",
+            "Opportunities, risks, and trade-offs",
+            "Prioritization and execution choices",
+            "Data-driven decision making"
+        ],
+        tools: "VUCA, Porter’s frameworks, 6Ps, Eisenhower Matrix, Six Thinking Hats, scenario planning, decision trade-off tools.",
+        outcomes: "Strengthen strategic judgement, anticipate risks and opportunities, make balanced high-impact decisions, and align execution to strategy."
     },
     {
-        title: "Customer Centricity",
-        description: "Embed extreme customer focus into your organizational DNA to drive loyalty, satisfaction, and sustainable revenue growth."
+        title: "Leading Self and Others",
+        description: "Lead with clarity and confidence, build trust, develop others, communicate with empathy, and drive sustained performance.",
+        focusAreas: [
+            "Self-awareness, values, strengths, emotional intelligence",
+            "Ownership, resilience, time and energy management",
+            "Trust, motivation, coaching, feedback",
+            "Leadership communication and difficult conversations",
+            "Team effectiveness, delegation, empowerment, collaboration"
+        ],
+        tools: "DISC/MBTI (as appropriate), Situational Leadership, Trust Equation, Tuckman model, resilience frameworks.",
+        outcomes: "Lead with clarity and confidence, build trust, develop others, communicate with empathy, and drive sustained performance."
     },
     {
-        title: "Data Analytics and Artificial Intelligence",
-        description: "Equip your teams with the fluency to interpret complex data and leverage AI tools for accelerated, intelligent business decisions."
-    },
-    {
-        title: "Decision Making & Problem Solving",
-        description: "Frameworks and cognitive tools to navigate ambiguity, evaluate risks, and solve sophisticated structural business challenges."
-    },
-    {
-        title: "Change Management",
-        description: "Equip leaders with the resilience and strategies required to guide teams through organizational transitions and market disruptions smoothly."
-    },
-    {
-        title: "Stakeholder Management",
-        description: "Master the art of mapping, engaging, and influencing internal and external stakeholders to align with strategic business outcomes."
-    },
-    {
-        title: "Leading Self & Others",
-        description: "Cultivate high emotional intelligence and foundational leadership capabilities to inspire high performance across decentralized teams."
+        title: "Creativity and Driving Innovation",
+        description: "Generate practical ideas, improve solutions under uncertainty, and build habits that support continuous improvement.",
+        focusAreas: [
+            "Creativity in business",
+            "Ideation techniques and problem framing",
+            "Converting ideas into viable innovations",
+            "Experimentation and managing innovation risk",
+            "Embedding innovation into everyday work"
+        ],
+        tools: "Design thinking, SCAMPER, agile ways of working, value models, prioritization tools.",
+        outcomes: "Generate practical ideas, improve solutions under uncertainty, and build habits that support continuous improvement."
     },
     {
         title: "Impactful Communication",
-        description: "Develop clear, persuasive, and authentic communication skills necessary to articulate vision and drive alignment."
+        description: "Communicate with structure and confidence, adapt to stakeholders, build trust, and influence outcomes.",
+        focusAreas: [
+            "Clarity, intent, audience alignment",
+            "Leadership presence (verbal and non-verbal)",
+            "Structured messaging and storytelling",
+            "Active listening and questioning",
+            "Influence and difficult conversations"
+        ],
+        tools: "3Vs, STAR storytelling, influence models, active listening techniques.",
+        outcomes: "Communicate with structure and confidence, adapt to stakeholders, build trust, and influence outcomes."
     },
     {
-        title: "Creativity & Innovation",
-        description: "Foster a culture that encourages divergent thinking and rapid prototyping to continuously develop new solutions."
+        title: "Data Analytics and AI for Decision Making",
+        description: "Make better decisions faster, communicate insights clearly, and build sustainable data-driven habits.",
+        focusAreas: [
+            "Decision quality and bias reduction",
+            "Translating data into insights and recommendations",
+            "Visualization and reporting",
+            "Using modern AI productivity tools responsibly",
+            "Data-driven storytelling under pressure"
+        ],
+        tools: "Analytics maturity models, Excel and dashboards, Power BI, DMAIC, Copilot/Gemini use cases, storytelling frameworks.",
+        outcomes: "Make better decisions faster, communicate insights clearly, and build sustainable data-driven habits."
     },
     {
-        title: "Team Work & Collaboration",
-        description: "Break down silos and establish dynamic, cross-functional collaboration protocols that enhance productivity and trust."
+        title: "Stakeholder Management",
+        description: "Strengthen influence, reduce friction, align priorities, and build collaborative stakeholder relationships.",
+        focusAreas: [
+            "Stakeholder identification and prioritization",
+            "Expectations, needs, and communication planning",
+            "Relationship building and trust",
+            "Conflict navigation and alignment",
+            "Influence strategies"
+        ],
+        tools: "Power-interest grid, RACI, stakeholder heatmaps, workshops, interviews, surveys.",
+        outcomes: "Strengthen influence, reduce friction, align priorities, and build collaborative stakeholder relationships."
     },
     {
-        title: "Coaching & Mentoring",
-        description: "Transition managers into capability builders who can identify potential and actively accelerate internal talent development."
+        title: "Change Management",
+        description: "Lead change with structure, increase adoption, reduce resistance, and sustain business outcomes.",
+        focusAreas: [
+            "Change impact on people and performance",
+            "Leadership role in change",
+            "Communication planning and stakeholder alignment",
+            "Managing resistance and building commitment",
+            "Reinforcement, measurement, and feedback loops"
+        ],
+        tools: "ADKAR, VUCA, sources of power, habit and reinforcement frameworks.",
+        outcomes: "Lead change with structure, increase adoption, reduce resistance, and sustain business outcomes."
     },
     {
-        title: "Digital Transformation",
-        description: "Prepare your workforce to adopt, integrate, and maximize emerging digital technologies across all operational workflows."
+        title: "Basic AI Fundamentals",
+        description: "Build AI confidence, identify high-value use cases, guide adoption, and apply AI responsibly.",
+        focusAreas: [
+            "Business value of AI for teams and functions",
+            "AI adoption mindsets and models",
+            "Productivity stacks in Microsoft and Google ecosystems",
+            "Identifying and prioritizing use cases",
+            "Prompting practices and safe usage",
+            "AI for analysis, reporting, and storytelling",
+            "Privacy, ethics, and governance basics"
+        ],
+        tools: "Adoption models, prompt frameworks, enterprise AI use patterns, use case prioritization.",
+        outcomes: "Build AI confidence, identify high-value use cases, guide adoption, and apply AI responsibly."
+    },
+    {
+        title: "Art of Delegation for Leaders",
+        description: "Delegate with clarity, build trust and ownership, develop talent, and strengthen team execution.",
+        focusAreas: [
+            "Delegation as a leadership capability",
+            "What to delegate and what to retain",
+            "Clarity, empowerment, and accountability",
+            "Coaching and mentoring through delegation",
+            "Cadences for review and feedback"
+        ],
+        tools: "Situational Leadership, DISC/MBTI (as appropriate), GROW coaching, STAR/SBA communication models.",
+        outcomes: "Delegate with clarity, build trust and ownership, develop talent, and strengthen team execution."
     }
 ];
 
 export default function ServicesList() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const toggleService = (index: number) => {
-        setActiveIndex(activeIndex === index ? null : index);
+        const isOpening = activeIndex !== index;
+        setActiveIndex(isOpening ? index : null);
+
+        if (isOpening) {
+            setTimeout(() => {
+                itemRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 400); // Wait for the expand animation
+        }
     };
 
     return (
@@ -69,7 +148,7 @@ export default function ServicesList() {
                 {/* Header Grid - Matching strict design */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 md:mb-32">
                     <div className="flex flex-col">
-                        <h2 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-8">Programmes</h2>
+                        <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-white mb-8">Programmes</h2>
                     </div>
 
                     {/* Animated Cross Icons */}
@@ -88,15 +167,20 @@ export default function ServicesList() {
                         ))}
                     </div>
 
-                    <div className="text-4xl md:text-5xl font-medium text-white/90">
-                        (12)
+                    <div className="text-3xl md:text-4xl font-medium text-white/90">
+                        ({programmes.length < 10 ? `0${programmes.length}` : programmes.length})
                     </div>
                 </div>
 
                 {/* Services List */}
                 <div className="flex flex-col">
                     {programmes.map((programme, index) => (
-                        <div key={index} className="group cursor-pointer" onClick={() => toggleService(index)}>
+                        <div
+                            key={index}
+                            ref={(el) => { itemRefs.current[index] = el; }}
+                            className="group cursor-pointer"
+                            onClick={() => toggleService(index)}
+                        >
                             {/* Line Separator */}
                             <motion.div
                                 initial={{ width: "0%" }}
@@ -106,14 +190,14 @@ export default function ServicesList() {
                                 className="h-[1px] bg-[#E31E24] w-full"
                             />
 
-                            <div className="flex flex-col lg:flex-row py-10 lg:py-16 gap-8 lg:gap-20 relative">
+                            <div className="flex flex-col lg:flex-row py-8 lg:py-12 gap-8 lg:gap-16 relative">
 
                                 {/* Left Side: Number + Title */}
                                 <div className="w-full lg:w-1/2 flex items-start gap-8 md:gap-16">
-                                    <div className="text-lg md:text-xl font-medium text-white/60 pt-1">
+                                    <div className="text-base md:text-lg font-medium text-white/60 pt-1">
                                         {(index + 1).toString()}
                                     </div>
-                                    <h3 className="text-3xl md:text-5xl font-medium leading-tight group-hover:text-gray-300 transition-colors">
+                                    <h3 className="text-2xl md:text-4xl font-medium leading-tight group-hover:text-gray-300 transition-colors">
                                         {programme.title}
                                     </h3>
                                 </div>
@@ -129,17 +213,37 @@ export default function ServicesList() {
                                         transition={{ duration: 0.4, ease: "easeInOut" }}
                                         className="overflow-hidden"
                                     >
-                                        <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl pb-4">
-                                            {programme.description}
-                                        </p>
+                                        <div className="flex flex-col gap-6 lg:gap-8 pb-4 mt-2">
+                                            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                                                {programme.description}
+                                            </p>
 
-                                        {/* Tags (Placeholder style based on design) */}
-                                        <div className="flex flex-wrap gap-3 mt-6">
-                                            {["Strategy", "Implementation", "Growth"].map((tag, tIndex) => (
-                                                <span key={tIndex} className="px-4 py-2 border border-white/20 rounded-full text-sm text-gray-400">
-                                                    {tag}
-                                                </span>
-                                            ))}
+                                            <div className="grid md:grid-cols-2 gap-8 text-gray-300">
+                                                <div>
+                                                    <h4 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+                                                        <span className="w-2 h-2 rounded-full bg-[#E31E24]"></span> Focus Areas
+                                                    </h4>
+                                                    <ul className="space-y-2">
+                                                        {programme.focusAreas.map((area, i) => (
+                                                            <li key={i} className="flex items-start gap-2 text-sm leading-relaxed">
+                                                                <span className="text-gray-500 mt-1">•</span>
+                                                                {area}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+
+                                                <div className="space-y-6">
+                                                    <div>
+                                                        <h4 className="text-white font-semibold text-lg mb-2">Tools & Frameworks</h4>
+                                                        <p className="text-sm leading-relaxed text-gray-400">{programme.tools}</p>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-white font-semibold text-lg mb-2">Outcomes</h4>
+                                                        <p className="text-sm leading-relaxed text-gray-400">{programme.outcomes}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </motion.div>
 

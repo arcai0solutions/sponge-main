@@ -59,6 +59,7 @@ const images = [
     '/about3.png',
     '/about4.png',
     '/about5.png',
+    '/WhatsApp Image 2026-03-05 at 11.57.35 AM.jpeg',
 ];
 
 export default function WhyChooseUs() {

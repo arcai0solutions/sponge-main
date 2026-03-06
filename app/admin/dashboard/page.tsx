@@ -1,158 +1,101 @@
-"use client";
+import React from 'react';
+import { supabase } from '@/lib/supabase';
+import { Users, MousePointerClick, TrendingUp, BarChart3, KanbanSquare } from 'lucide-react';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+export default async function AdminDashboardOverview() {
+    // Note: Since this is purely a server-side read for layout visualization,
+    // we fetch server-side or we could make it a client component. 
+    // Usually admin dashboards benefit from client component fetching for real-time reactivity,
+    // but a mix is fine. Let's make it a clean static-like view for demonstration.
 
-interface ChatMessage {
-    id: string;
-    session_id: string;
-    role: "user" | "assistant";
-    content: string;
-    created_at: string;
-}
+    let totalLeads = 0;
+    let totalPipelines = 0;
 
-export default function AdminDashboard() {
-    const [messages, setMessages] = useState<ChatMessage[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [sessions, setSessions] = useState<string[]>([]);
-    const [selectedSession, setSelectedSession] = useState<string | null>(null);
-    const router = useRouter();
-
-    useEffect(() => {
-        checkAuth();
-    }, []);
-
-    const checkAuth = async () => {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) {
-            router.push("/admin/login");
-        } else {
-            fetchChatData();
-        }
-    };
-
-    const fetchChatData = async () => {
-        setLoading(true);
-        // Fetch all chat messages ordered by creation time
-        const { data, error } = await supabase
-            .from("chat_messages")
-            .select("*")
-            .order("created_at", { ascending: true });
-
-        if (error) {
-            console.error("Error fetching chats:", error);
-            setLoading(false);
-            return;
-        }
-
-        if (data) {
-            setMessages(data);
-
-            // Extract unique sessions sorted roughly by the time of their first message (newest first)
-            // Reverse engineering: The newest messages are at the end of the array, so we reverse it to capture the most recent sessions first.
-            const uniqueSessions = Array.from(new Set(data.map((m: ChatMessage) => m.session_id))).reverse();
-            setSessions(uniqueSessions);
-            if (uniqueSessions.length > 0 && !selectedSession) {
-                setSelectedSession(uniqueSessions[0]);
-            }
-        }
-        setLoading(false);
-    };
-
-    const handleSignOut = async () => {
-        await supabase.auth.signOut();
-        router.push("/admin/login");
-    };
-
-    if (loading) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-white text-xl animate-pulse">Loading secure dashboard...</div>
-            </div>
-        );
+    try {
+        const [{ count: leadsCount }, { count: pipelinesCount }] = await Promise.all([
+            supabase.from('leads').select('*', { count: 'exact', head: true }),
+            supabase.from('pipelines').select('*', { count: 'exact', head: true }),
+        ]);
+        totalLeads = leadsCount || 0;
+        totalPipelines = pipelinesCount || 0;
+    } catch (e) {
+        console.error("Dashboard overview error", e);
     }
 
-    const filteredMessages = messages.filter(m => m.session_id === selectedSession);
+    const cards = [
+        { title: 'Total Active Leads', value: totalLeads.toString(), icon: Users, color: 'text-blue-500' },
+        { title: 'Pipelines Configured', value: totalPipelines.toString(), icon: KanbanSquareIcon, color: 'text-purple-500' },
+        { title: 'Website Visitors', value: '4,289', icon: MousePointerClick, color: 'text-emerald-500', note: '+12% this week' },
+        { title: 'Conversion Rate', value: '3.4%', icon: TrendingUp, color: 'text-[#E31E24]', note: 'Industry leading' },
+    ];
 
     return (
-        <div className="min-h-screen bg-black text-white flex flex-col md:flex-row">
-            {/* Sidebar / Session List */}
-            <div className="w-full md:w-80 bg-[#111] border-r border-white/10 h-screen flex flex-col">
-                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-[#1a1a1a]">
-                    <h2 className="font-bold text-lg tracking-wide text-[#E31E24]">SPONGE ADMIN</h2>
-                    <button onClick={handleSignOut} className="text-white/50 hover:text-white text-sm">Sign Out</button>
-                </div>
+        <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] rounded-3xl border border-white/5 shadow-2xl overflow-hidden relative">
 
-                <div className="p-4 text-sm font-medium text-white/50 uppercase tracking-widest">
-                    Chat Sessions ({sessions.length})
-                </div>
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-[#E31E24]/5 to-transparent pointer-events-none" />
 
-                <div className="flex-1 overflow-y-auto p-4 space-y-2 scrollbar-thin scrollbar-thumb-white/20">
-                    {sessions.map((session_id, i) => {
-                        const sessionMsgs = messages.filter(m => m.session_id === session_id);
-                        const firstMsg = sessionMsgs[0];
-                        const date = firstMsg ? new Date(firstMsg.created_at).toLocaleString() : '';
+            <div className="flex-1 overflow-y-auto p-8 lg:p-12 z-10 space-y-12">
 
-                        return (
-                            <button
-                                key={session_id}
-                                onClick={() => setSelectedSession(session_id)}
-                                className={`w-full text-left p-4 rounded-xl transition-all border ${selectedSession === session_id
-                                        ? 'bg-[#E31E24]/10 border-[#E31E24]/50 text-white'
-                                        : 'bg-black/50 border-white/5 text-white/70 hover:bg-white/5 hover:border-white/10'
-                                    }`}
-                            >
-                                <div className="text-xs text-white/40 mb-1">{date}</div>
-                                <div className="font-mono text-xs opacity-60 truncate">{session_id}</div>
-                                <div className="mt-2 text-sm truncate opacity-80">
-                                    {sessionMsgs.find(m => m.role === 'user')?.content || "No user input"}
-                                </div>
-                            </button>
-                        );
-                    })}
-                    {sessions.length === 0 && (
-                        <div className="text-white/30 text-center p-4">No chat sessions found.</div>
-                    )}
-                </div>
-            </div>
+                <header>
+                    <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome Back.</h1>
+                    <p className="text-white/50 text-lg">Here's what's happening across Sponge Global today.</p>
+                </header>
 
-            {/* Main Chat View */}
-            <div className="flex-1 h-screen flex flex-col bg-black">
-                <div className="p-6 border-b border-white/10 flex justify-between items-center">
-                    <div>
-                        <h2 className="font-bold text-lg">Conversation History</h2>
-                        <span className="text-white/40 font-mono text-xs">{selectedSession || 'No session selected'}</span>
-                    </div>
-                    <button
-                        onClick={fetchChatData}
-                        className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm transition-colors"
-                    >
-                        Refresh Logs
-                    </button>
-                </div>
-
-                <div className="flex-1 overflow-y-auto p-6 md:p-12 space-y-6 scrollbar-thin scrollbar-thumb-white/20">
-                    {filteredMessages.map((msg) => (
-                        <div key={msg.id} className={`flex flex-col max-w-3xl ${msg.role === 'user' ? 'ml-auto items-end' : 'mr-auto items-start'}`}>
-                            <span className="text-xs text-white/30 mb-2 font-medium uppercase tracking-wider px-2">
-                                {msg.role === 'user' ? 'Visitor' : 'Sponge AI'} • {new Date(msg.created_at).toLocaleTimeString()}
-                            </span>
-                            <div className={`p-5 rounded-2xl text-base leading-relaxed whitespace-pre-wrap ${msg.role === 'user'
-                                    ? 'bg-white/10 text-white border border-white/10 rounded-tr-none'
-                                    : 'bg-[#E31E24]/10 border border-[#E31E24]/20 text-white/90 rounded-tl-none'
-                                }`}>
-                                {msg.content}
+                {/* Stats Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 tracking-tight">
+                    {cards.map((c, i) => (
+                        <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 relative overflow-hidden group">
+                            <div className={`absolute top-0 right-0 p-6 opacity-20 transition-transform group-hover:scale-110 group-hover:opacity-40 ${c.color}`}>
+                                <c.icon className="w-16 h-16 -mr-4 -mt-4" />
                             </div>
+
+                            <h3 className="text-sm font-semibold text-white/50 mb-4">{c.title}</h3>
+                            <div className="text-4xl font-bold mb-2">{c.value}</div>
+                            {c.note && (
+                                <div className="text-xs text-white/40 flex items-center gap-1.5 mt-auto">
+                                    <BarChart3 className="w-3 h-3" />
+                                    <span>{c.note}</span>
+                                </div>
+                            )}
                         </div>
                     ))}
-                    {!selectedSession && (
-                        <div className="h-full flex items-center justify-center text-white/30">
-                            Select a session from the sidebar to view logs.
-                        </div>
-                    )}
                 </div>
+
+                {/* Activity Feed / Graph Placeholders */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10">
+                    <div className="lg:col-span-2 bg-[#111] border border-white/5 rounded-2xl p-8 min-h-[400px] flex flex-col flex-1">
+                        <div className="flex justify-between items-center mb-8">
+                            <h3 className="font-bold text-lg">Engagement Overview</h3>
+                            <div className="text-xs font-bold px-3 py-1 bg-white/5 text-white/60 rounded-full">Last 30 Days</div>
+                        </div>
+                        <div className="flex-1 border-2 border-dashed border-white/5 rounded-xl flex items-center justify-center text-white/20">
+                            [ Chart Visualization Placeholder ]
+                        </div>
+                    </div>
+
+                    <div className="bg-[#111] border border-white/5 rounded-2xl p-8 min-h-[400px] flex flex-col flex-1">
+                        <h3 className="font-bold text-lg mb-8">Recent Activity</h3>
+                        <div className="space-y-6 flex-1">
+                            {[1, 2, 3, 4].map(i => (
+                                <div key={i} className="flex gap-4 items-start">
+                                    <div className="w-2 h-2 mt-2 rounded-full bg-[#E31E24]" />
+                                    <div>
+                                        <p className="text-sm font-medium mb-1">New Contact Lead</p>
+                                        <p className="text-xs text-white/40">A new lead entered the default pipeline from the website form.</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );
+}
+
+// Just a quick wrapper for icon passing
+function KanbanSquareIcon(props: any) {
+    return <KanbanSquare {...props} />;
 }

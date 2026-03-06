@@ -32,7 +32,7 @@ export default function ServicesHero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                        className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed mx-auto lg:mx-0"
+                        className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed mx-auto lg:mx-0 text-left md:text-center lg:text-left"
                     >
                         Our services are designed around business priorities, role expectations, and capability gaps. We tailor every engagement to your context, audience, and success measures.
                     </motion.p>

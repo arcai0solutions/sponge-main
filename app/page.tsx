@@ -7,6 +7,7 @@ import WhyChooseUs from '@/components/WhyChooseUs';
 import Preloader from '@/components/Preloader';
 import LMSSection from '@/components/LMSSection';
 import LearningLounge from '@/components/LearningLounge';
+import ContactForm from '@/components/ContactForm';
 import type { Metadata } from "next";
 import JsonLd from '@/components/JsonLd';
 
@@ -33,7 +34,7 @@ const organizationSchema = {
   },
   "sameAs": [
     "https://www.linkedin.com/company/3069879/",
-    "https://www.youtube.com/@sponge_global_training",
+    "https://www.youtube.com/@sponge_global_training/shorts",
     "https://www.instagram.com/spongeglobal"
   ]
 };
@@ -75,7 +76,7 @@ const localBusinessSchema = {
   },
   "sameAs": [
     "https://www.linkedin.com/company/3069879/",
-    "https://www.youtube.com/@sponge_global_training",
+    "https://www.youtube.com/@sponge_global_training/shorts",
     "https://www.instagram.com/spongeglobal"
   ]
 };
@@ -139,6 +140,18 @@ export default function Home() {
         <TalentArchitecture />
         <LMSSection />
         <LearningLounge />
+        <div className="bg-black pt-24 pb-12">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-12 h-[1px] bg-[#E31E24]"></span>
+              <span className="text-[#E31E24] font-bold tracking-widest text-sm uppercase">Get In Touch</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white">
+              LET'S CONNECT.
+            </h2>
+          </div>
+          <ContactForm />
+        </div>
       </div>
     </main>
   );

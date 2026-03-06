@@ -47,7 +47,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
     ],
     socialItems = [
-        { label: 'YouTube', link: 'https://www.youtube.com/@sponge_global_training' },
+        { label: 'YouTube', link: 'https://www.youtube.com/@sponge_global_training/shorts' },
         { label: 'LinkedIn', link: 'https://www.linkedin.com/company/3069879/' },
         { label: 'Instagram', link: 'https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo' },
         { label: 'Facebook', link: 'https://www.facebook.com/spongeglobal' }

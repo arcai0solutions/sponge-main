@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { supabase } from '../lib/supabase';
 
 export default function ContactForm() {
     const form = useRef<HTMLFormElement>(null);
@@ -46,6 +47,24 @@ export default function ContactForm() {
             };
 
             await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+            // Adding to Supabase CRM Backend
+            try {
+                const { error: supabaseError } = await supabase.rpc('submit_contact_form', {
+                    p_full_name: formState.name,
+                    p_email: formState.email,
+                    p_company: formState.company || null,
+                    p_message: formState.message,
+                    p_source: 'website contact form'
+                });
+
+                if (supabaseError) {
+                    console.error('Supabase CRM Error:', supabaseError);
+                    // We log the error, but we don't block the user's success feeling if emailjs succeeded.
+                }
+            } catch (err) {
+                console.error('Supabase CRM Exception:', err);
+            }
 
             setStatus('success');
             setFormState({
@@ -96,7 +115,10 @@ export default function ContactForm() {
                         </div>
                         <div>
                             <span className="block text-sm text-[#E31E24] font-bold uppercase tracking-wider mb-2">Phone</span>
-                            <a href="tel:0112408671" className="text-xl text-white/80 hover:text-[#E31E24] transition-colors">0112408671</a>
+                            <div className="flex flex-col gap-2">
+                                <a href="tel:0713876936" className="text-xl text-white/80 hover:text-[#E31E24] transition-colors">0713-876-936</a>
+                                <a href="tel:0713687386" className="text-xl text-white/80 hover:text-[#E31E24] transition-colors">0713-687-386</a>
+                            </div>
                         </div>
                     </div>
                 </motion.div>

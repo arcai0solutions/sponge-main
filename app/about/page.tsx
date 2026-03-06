@@ -1,8 +1,11 @@
 import React from 'react';
 import type { Metadata } from "next";
-import AboutHero from '@/components/AboutPage/AboutHero';
-import SustainLearning from '@/components/AboutPage/SustainLearning';
-import WhySponge from '@/components/AboutPage/WhySponge';
+import PremiumAboutHero from '@/components/AboutPage/PremiumAboutHero';
+import CompanyVision from '@/components/AboutPage/CompanyVision';
+import AboutStats from '@/components/AboutPage/AboutStats';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import TalentArchitecture from '@/components/TalentArchitecture';
+import ContactForm from '@/components/ContactForm';
 import JsonLd from '@/components/JsonLd';
 
 const breadcrumbSchema = {
@@ -73,12 +76,30 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
     return (
-        <main className="bg-black min-h-screen text-white pt-48">
+        <main className="bg-black min-h-screen text-white">
             <JsonLd data={breadcrumbSchema} />
             <JsonLd data={aboutPageSchema} />
-            <AboutHero />
-            <SustainLearning />
-            <WhySponge />
+
+            <PremiumAboutHero />
+            <CompanyVision />
+            <AboutStats />
+            <WhyChooseUs />
+            <TalentArchitecture />
+
+            {/* Contact Form Section matching the user's request to add contact details */}
+            <div className="bg-black pt-24 pb-12">
+                <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 mb-12">
+                    <div className="flex items-center gap-3 mb-6">
+                        <span className="w-12 h-[1px] bg-[#E31E24]"></span>
+                        <span className="text-[#E31E24] font-bold tracking-widest text-sm uppercase">Get In Touch</span>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white">
+                        LET'S CONNECT.
+                    </h2>
+                </div>
+                <ContactForm />
+            </div>
+
         </main>
     );
 }

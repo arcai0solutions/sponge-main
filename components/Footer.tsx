@@ -59,7 +59,7 @@ export default function Footer() {
                         {/* Social Links column */}
                         <div className="flex flex-col gap-4 min-w-[140px]">
                             <SocialLink
-                                href="https://www.youtube.com/@sponge_global_training"
+                                href="https://www.youtube.com/@sponge_global_training/shorts"
                                 icon={Youtube}
                                 label="YouTube"
                                 className="text-red-600 animate-pulse"

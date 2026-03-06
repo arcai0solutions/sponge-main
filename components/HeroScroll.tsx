@@ -43,7 +43,7 @@ export default function HeroScroll() {
                             Transforming Talent <br className="hidden sm:block" />
                             Driving Performance
                         </h1>
-                        <p className="text-base md:text-xl mb-8 md:mb-12 text-white/90 font-light leading-relaxed drop-shadow-md text-justify md:text-left max-w-2xl">
+                        <p className="text-base md:text-xl mb-8 md:mb-12 text-white/90 font-light leading-relaxed drop-shadow-md text-center md:text-left max-w-2xl">
                             We deliver innovative learning and development solutions, including custom eLearning, Immersive in-person training, and integrated talent development strategies.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">

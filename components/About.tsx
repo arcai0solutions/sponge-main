@@ -71,7 +71,7 @@ export default function About() {
                             className="text-xl md:text-3xl lg:text-5xl font-medium leading-[1.2] tracking-tight text-left"
                             lang="en"
                         >
-                            Your Context is Unique to You. We’ll meet where you are - with a strategy and a solution tailored to your requirements and budgets.
+                            Your context is unique to you. We’ll meet where you are - with a strategy and a solution tailored to your requirements and budgets.
                         </motion.h2>
 
                         {/* Spinning Image */}

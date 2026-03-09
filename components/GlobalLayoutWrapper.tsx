@@ -32,7 +32,7 @@ export default function GlobalLayoutWrapper({
             {children}
 
             <Footer />
-            <AiChatWidget />
+            {/* <AiChatWidget /> */}
         </>
     );
 }

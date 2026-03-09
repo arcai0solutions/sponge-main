@@ -1,9 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+
+const loungeImages = [
+    "/lounge1 (1).jpg",
+    "/lounge2.jpg",
+    "/lounge3.jpg"
+];
 
 export default function LearningLounge() {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % loungeImages.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
     return (
         <section className="bg-black relative py-24 md:py-32 overflow-hidden border-t border-white/5">
 
@@ -44,33 +59,28 @@ export default function LearningLounge() {
                         </div>
                     </motion.div>
 
-                    {/* Right — Coming Soon */}
+                    {/* Right — Image Carousel */}
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-zinc-900/50 flex flex-col items-center justify-center gap-6"
+                        className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-zinc-900/50"
                     >
-                        {/* Glow */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-transparent to-transparent pointer-events-none" />
+                        {loungeImages.map((src, index) => (
+                            <Image
+                                key={src}
+                                src={src}
+                                alt={`Lounge ${index + 1}`}
+                                fill
+                                className={`object-cover transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"
+                                    }`}
+                                priority={index === 0}
+                            />
+                        ))}
 
-                        {/* Animated pulse ring */}
-                        <div className="relative flex items-center justify-center">
-                            <div className="absolute w-32 h-32 rounded-full bg-red-600/10 animate-ping" />
-                            <div className="absolute w-20 h-20 rounded-full bg-red-600/20" />
-                            <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center z-10">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <polyline points="12 6 12 12 16 14" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div className="text-center z-10">
-                            <p className="text-white text-3xl font-bold uppercase tracking-widest">Coming Soon</p>
-                            <p className="text-zinc-500 text-sm mt-2 tracking-wide">Our lounge is opening soon. Stay tuned.</p>
-                        </div>
+                        {/* Subtle overlay gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                     </motion.div>
 
                 </div>

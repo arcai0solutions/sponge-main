@@ -5,6 +5,7 @@ import SiteLogo from "@/components/SiteLogo";
 import StaggeredMenu from "@/components/StaggeredMenu";
 import Footer from "@/components/Footer";
 import { AiChatWidget } from "@/components/ai-chat-widget";
+import PageTracker from "@/components/PageTracker";
 
 export default function GlobalLayoutWrapper({
     children,
@@ -32,7 +33,8 @@ export default function GlobalLayoutWrapper({
             {children}
 
             <Footer />
-            {/* <AiChatWidget /> */}
+            <AiChatWidget />
+            <PageTracker />
         </>
     );
 }

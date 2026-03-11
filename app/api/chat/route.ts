@@ -2,11 +2,18 @@ import { openai } from '@ai-sdk/openai';
 import { generateText, tool, stepCountIs } from 'ai';
 import { SYSTEM_PROMPT } from '@/lib/ai-context';
 import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { Resend } from 'resend';
 import { generateProposalEmail } from '@/lib/email-template';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
+
+// Service-role client for server-side operations that bypass RLS
+const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || '',
+);
 
 // ── Rate Limiting ────────────────────────────────────────────────────────────
 // In-memory store: email -> { count, firstSent timestamp }.
@@ -66,7 +73,7 @@ export async function POST(req: Request) {
             model: openai('gpt-4o-mini'),
             system: SYSTEM_PROMPT,
             messages: formattedMessages,
-            stopWhen: stepCountIs(3),
+            stopWhen: stepCountIs(5),
             tools: {
                 sendProposal: tool({
                     description: 'Generate and email a custom pricing proposal to a prospect.',
@@ -185,7 +192,79 @@ export async function POST(req: Request) {
                             };
                         }
                     }
-                })
+                }),
+                saveLead: tool({
+                description: 'Save a customer as a new lead in the CRM. Use this when you have gathered enough info about a prospect during the conversation. Generate notes summarizing what the customer is interested in based on the conversation.',
+                inputSchema: z.object({
+                    name: z.string().describe("The prospect's full name"),
+                    phone: z.string().optional().describe("The prospect's phone number"),
+                    email: z.string().optional().describe("The prospect's email address (use a placeholder if not provided)"),
+                    company: z.string().optional().describe("The prospect's company name"),
+                    notes: z.string().describe("AI-generated summary of the conversation: what the customer seemed interested in, key topics discussed, and any specific needs or requirements mentioned."),
+                }),
+                execute: async ({ name, phone, email, company, notes }) => {
+                    console.log(`Executing saveLead tool for ${name}...`);
+                    try {
+                        const { data, error } = await supabaseAdmin.rpc('submit_contact_form', {
+                            p_full_name: name,
+                            p_email: email || 'no-email-provided@pending.com',
+                            p_phone: phone || null,
+                            p_company: company || null,
+                            p_subject: 'AI Agent Lead',
+                            p_message: null,
+                            p_notes: notes,
+                            p_source: 'ai_agent',
+                        });
+
+                        if (error) {
+                            console.error('Supabase saveLead error:', error);
+                            return { success: false, error: error.message };
+                        }
+
+                        return {
+                            success: true,
+                            leadId: data,
+                            message: `Lead saved successfully for ${name}`,
+                        };
+                    } catch (e: unknown) {
+                        const err = e as Error;
+                        console.error('saveLead caught error:', err);
+                        return { success: false, error: err.message };
+                    }
+                }
+            }),
+                subscribeNewsletter: tool({
+                    description: 'Subscribe a user to the Sponge Global newsletter. Use this when a user agrees to receive updates and provides their email address.',
+                    inputSchema: z.object({
+                        email: z.string().email().describe("The user's email address for the newsletter subscription"),
+                        topic_interest: z.string().describe("The specific service or topic the user is interested in based on the conversation (e.g., 'E-Learning Content Creation', 'LMS Solutions'), or 'general' if no specific interest was detected"),
+                    }),
+                    execute: async ({ email, topic_interest }) => {
+                        console.log(`Executing subscribeNewsletter tool for ${email} (topic: ${topic_interest})...`);
+                        try {
+                            const { data, error } = await supabaseAdmin.rpc('subscribe_email_list', {
+                                p_email: email,
+                                p_topic_interest: topic_interest,
+                                p_source: 'ai_agent',
+                                p_source_page: null,
+                            });
+
+                            if (error) {
+                                console.error('Supabase subscribeNewsletter error:', error);
+                                return { success: false, error: error.message };
+                            }
+
+                            return {
+                                success: true,
+                                message: `Successfully subscribed ${email} to newsletter updates on ${topic_interest}`,
+                            };
+                        } catch (e: unknown) {
+                            const err = e as Error;
+                            console.error('subscribeNewsletter caught error:', err);
+                            return { success: false, error: err.message };
+                        }
+                    }
+                }),
             }
         });
 

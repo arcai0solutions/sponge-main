@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Trash2, GripVertical, Mail, Phone, Building2, Plus, X, Settings2, MoreHorizontal } from 'lucide-react';
+import { Trash2, GripVertical, Mail, Phone, Building2, Plus, X, Settings2, MoreHorizontal, StickyNote, Eye, Calendar, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Types exactly matching our database
@@ -27,6 +27,7 @@ interface Lead {
     company: string;
     subject: string;
     message: string;
+    notes: string;
     source: string;
     stage_id: string;
     pipeline_id: string;
@@ -45,6 +46,7 @@ export default function KanbanBoard() {
     const [isAddingPipeline, setIsAddingPipeline] = useState(false);
     const [isAddingStage, setIsAddingStage] = useState(false);
     const [isAddingLead, setIsAddingLead] = useState<string | null>(null); // holds stage_id
+    const [viewingLead, setViewingLead] = useState<Lead | null>(null);
 
     // Form states
     const [newPipelineName, setNewPipelineName] = useState('');
@@ -107,6 +109,12 @@ export default function KanbanBoard() {
     };
 
     const handleDeletePipeline = async (id: string) => {
+        // Prevent deleting the default (first) pipeline
+        const sorted = [...pipelines].sort((a, b) => a.sort_order - b.sort_order);
+        if (sorted.length > 0 && sorted[0].id === id) {
+            alert('The default pipeline cannot be deleted.');
+            return;
+        }
         if (!confirm("Delete this entire pipeline? All stages and leads within it will be deleted. (Leads will still exist in contacts archive).")) return;
 
         const { error } = await supabase.from('pipelines').delete().eq('id', id);
@@ -223,6 +231,7 @@ export default function KanbanBoard() {
     const activeStages = stages.filter(s => s.pipeline_id === activePipeline);
 
     return (
+        <>
         <div className="w-full h-full flex flex-col relative">
 
             {/* Top Header: Pipelines Menu */}
@@ -239,7 +248,7 @@ export default function KanbanBoard() {
                             >
                                 {p.name}
                             </button>
-                            {activePipeline === p.id && (
+                            {activePipeline === p.id && p.sort_order !== [...pipelines].sort((a, b) => a.sort_order - b.sort_order)[0]?.sort_order && (
                                 <button onClick={() => handleDeletePipeline(p.id)} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity transform scale-75">
                                     <X className="w-4 h-4" />
                                 </button>
@@ -318,6 +327,13 @@ export default function KanbanBoard() {
                                             >
                                                 <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2 z-10">
                                                     <button
+                                                        onClick={() => setViewingLead(lead)}
+                                                        className="bg-white/10 text-white p-1.5 rounded-md hover:bg-white/20 transition-colors shadow-lg backdrop-blur-sm"
+                                                        title="View Lead"
+                                                    >
+                                                        <Eye className="w-3.5 h-3.5" />
+                                                    </button>
+                                                    <button
                                                         onClick={() => handleDeleteLead(lead.id)}
                                                         className="bg-red-500 text-white p-1.5 rounded-md hover:bg-red-600 transition-colors shadow-lg"
                                                         title="Delete Lead"
@@ -358,6 +374,13 @@ export default function KanbanBoard() {
                                                     <div className="text-[13px] text-white/50 line-clamp-2 bg-black/20 p-3 rounded-lg flex gap-2">
                                                         <span className="opacity-50 font-serif">"</span>
                                                         {lead.message}
+                                                    </div>
+                                                )}
+
+                                                {lead.notes && (
+                                                    <div className="text-[13px] text-white/50 line-clamp-3 bg-amber-500/5 border border-amber-500/10 p-3 rounded-lg flex gap-2 mt-2">
+                                                        <StickyNote className="w-3.5 h-3.5 text-amber-500/60 shrink-0 mt-0.5" />
+                                                        <span>{lead.notes}</span>
                                                     </div>
                                                 )}
 
@@ -418,5 +441,124 @@ export default function KanbanBoard() {
                 </div>
             )}
         </div>
+
+            {/* ── Lead Detail Modal ── */}
+            <AnimatePresence>
+                {viewingLead && ((): React.ReactNode => {
+                    const lead = viewingLead;
+                    return (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+                        onClick={() => setViewingLead(null)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-[#161616] border border-white/10 rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Modal Header */}
+                            <div className="flex items-center justify-between p-6 border-b border-white/10">
+                                <div>
+                                    <h2 className="text-xl font-bold text-white">{lead.full_name || 'Anonymous'}</h2>
+                                    {lead.company && (
+                                        <div className="flex items-center gap-1.5 text-white/50 text-sm mt-1">
+                                            <Building2 className="w-4 h-4" />
+                                            <span>{lead.company}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <button onClick={() => setViewingLead(null)} className="text-white/40 hover:text-white p-2 hover:bg-white/10 rounded-lg transition-colors">
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+
+                            {/* Modal Body */}
+                            <div className="p-6 space-y-4">
+                                {/* Contact Info */}
+                                <div className="space-y-3">
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-white/30">Contact Info</h3>
+                                    <div className="flex items-center gap-3 text-white/70 text-sm bg-white/5 px-4 py-3 rounded-xl border border-white/5">
+                                        <Mail className="w-4 h-4 text-[#E31E24]" />
+                                        <span>{lead.email}</span>
+                                    </div>
+                                    {lead.phone && (
+                                        <div className="flex items-center gap-3 text-white/70 text-sm bg-white/5 px-4 py-3 rounded-xl border border-white/5">
+                                            <Phone className="w-4 h-4 text-[#E31E24]" />
+                                            <span>{lead.phone}</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Message */}
+                                {lead.message && (
+                                    <div className="space-y-3">
+                                        <h3 className="text-xs font-bold uppercase tracking-wider text-white/30">Message</h3>
+                                        <div className="text-sm text-white/60 bg-white/5 px-4 py-3 rounded-xl border border-white/5 leading-relaxed">
+                                            {lead.message}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* AI Notes */}
+                                {lead.notes && (
+                                    <div className="space-y-3">
+                                        <h3 className="text-xs font-bold uppercase tracking-wider text-amber-500/60">AI Notes</h3>
+                                        <div className="text-sm text-white/60 bg-amber-500/5 px-4 py-3 rounded-xl border border-amber-500/10 leading-relaxed flex gap-2">
+                                            <StickyNote className="w-4 h-4 text-amber-500/60 shrink-0 mt-0.5" />
+                                            <span>{lead.notes}</span>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Meta Info */}
+                                <div className="space-y-3">
+                                    <h3 className="text-xs font-bold uppercase tracking-wider text-white/30">Details</h3>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="bg-white/5 px-4 py-3 rounded-xl border border-white/5">
+                                            <div className="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-1">Source</div>
+                                            <div className="flex items-center gap-2 text-white/70 text-sm">
+                                                <Globe className="w-3.5 h-3.5" />
+                                                <span>{lead.source}</span>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white/5 px-4 py-3 rounded-xl border border-white/5">
+                                            <div className="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-1">Date Added</div>
+                                            <div className="flex items-center gap-2 text-white/70 text-sm">
+                                                <Calendar className="w-3.5 h-3.5" />
+                                                <span>{new Date(lead.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="p-6 border-t border-white/10 flex justify-between">
+                                <button
+                                    onClick={() => { handleDeleteLead(lead.id); setViewingLead(null); }}
+                                    className="flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                    Delete Lead
+                                </button>
+                                <button
+                                    onClick={() => setViewingLead(null)}
+                                    className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-lg transition-colors"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                    );
+                })()}
+            </AnimatePresence>
+        </>
     );
 }

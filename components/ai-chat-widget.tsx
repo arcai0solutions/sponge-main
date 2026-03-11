@@ -133,7 +133,7 @@ export function AiChatWidget() {
                         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5">
                             <div className="flex items-center gap-3">
                                 <div className="relative w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden border border-white/20 p-1">
-                                    <NextImage src="/sponge-favicon.png" alt="Sponge AI" width={32} height={32} className="object-contain" />
+                                    <NextImage src="/ai-widget-compressed.webp" alt="Sponge AI" width={32} height={32} quality={75} className="object-contain" />
                                 </div>
                                 <div>
                                     <h3 className="text-white font-semibold text-sm tracking-wide">Sponge AI</h3>
@@ -266,18 +266,13 @@ export function AiChatWidget() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center overflow-hidden
+                    className={`relative w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center overflow-hidden
                        transition-all duration-300 z-10
                        ${isOpen
                             ? 'bg-[#111] rotate-90 scale-90 border border-white/20 shadow-[0_10px_20px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.4)]'
-                            : 'bg-[radial-gradient(circle_at_center,_#000000_25%,_#E31E24_90%)] shadow-[0_10px_25px_rgba(227,30,36,0.6),inset_0_2px_10px_rgba(255,255,255,0.2),inset_0_-6px_12px_rgba(255,0,0,0.5)] border border-[#ff474d]/30 hover:shadow-[0_15px_30px_rgba(227,30,36,0.7),inset_0_2px_10px_rgba(255,255,255,0.3),inset_0_-6px_12px_rgba(255,0,0,0.6)]'
+                            : 'bg-black shadow-[0_10px_25px_rgba(227,30,36,0.6)] border-none hover:shadow-[0_15px_30px_rgba(227,30,36,0.8)]'
                         }`}
                 >
-                    {/* Inner highlight for 3D glassy effect on the red button */}
-                    {!isOpen && (
-                        <div className="absolute top-0 left-[15%] right-[15%] h-[35%] bg-gradient-to-b from-white/40 to-transparent rounded-[100%] pointer-events-none opacity-60" />
-                    )}
-
                     <AnimatePresence mode="wait">
                         {isOpen ? (
                             <motion.svg
@@ -295,16 +290,15 @@ export function AiChatWidget() {
                                 initial={{ rotate: 90, opacity: 0 }}
                                 animate={{ rotate: 0, opacity: 1 }}
                                 exit={{ rotate: -90, opacity: 0 }}
-                                className="w-8 h-8 flex items-center justify-center p-1 relative z-10"
+                                className="w-full h-full flex items-center justify-center relative z-10"
                             >
-                                <NextImage src="/sponge-favicon.png" alt="Chat" width={28} height={28} className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
-                                {/* Red notification dot on the icon itself */}
-                                <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-[#ff474d] border-2 border-[#b31419] rounded-full shadow-[0_0_5px_rgba(255,0,0,0.5)]" />
+                                <NextImage src="/ai-widget-compressed.webp" alt="Chat" fill sizes="(max-width: 768px) 64px, 96px" quality={100} className="object-cover" />
+                                <div className="absolute top-0.5 right-0.5 w-3 h-3 bg-[#ff474d] border-2 border-[#b31419] rounded-full shadow-[0_0_5px_rgba(255,0,0,0.5)] z-20" />
                             </motion.div>
                         )}
                     </AnimatePresence>
                 </motion.button>
             </div>
-        </div>
+        </div >
     );
 }

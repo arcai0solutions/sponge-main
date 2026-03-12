@@ -242,8 +242,8 @@ export default function KanbanBoard() {
                             <button
                                 onClick={() => setActivePipeline(p.id)}
                                 className={`px-6 py-2 rounded-full font-medium transition-colors ${activePipeline === p.id
-                                    ? 'bg-[#E31E24] text-white'
-                                    : 'bg-white/5 text-white/60 hover:bg-white/10'
+                                    ? 'bg-[#E31E24] text-white shadow-[0_5px_15px_rgba(227,30,36,0.3)]'
+                                    : 'bg-white/5 text-white/60 hover:bg-white/10 border border-white/5'
                                     }`}
                             >
                                 {p.name}
@@ -289,12 +289,12 @@ export default function KanbanBoard() {
                         return (
                             <div
                                 key={stage.id}
-                                className="w-[350px] shrink-0 bg-[#161616] border border-white/10 rounded-2xl flex flex-col max-h-full"
+                                className="w-[350px] shrink-0 bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)] flex flex-col max-h-full overflow-hidden"
                                 onDragOver={handleDragOver}
                                 onDrop={(e) => handleDrop(e, stage.id)}
                             >
                                 {/* Stage Header */}
-                                <div className="p-4 border-b border-white/10 flex items-center justify-between bg-black/40 rounded-t-2xl group">
+                                <div className="p-5 border-b border-white/10 flex items-center justify-between bg-white/[0.02] group">
                                     <div className="flex items-center gap-3">
                                         <h3 className="font-bold text-white text-base">{stage.name}</h3>
                                         <span className="bg-white/10 text-white/60 text-xs py-0.5 px-2 rounded-full font-bold">
@@ -323,7 +323,7 @@ export default function KanbanBoard() {
                                                 key={lead.id}
                                                 draggable
                                                 onDragStart={(e: any) => handleDragStart(e, lead.id)}
-                                                className="bg-[#202020] border border-white/5 rounded-xl p-5 cursor-grab active:cursor-grabbing hover:border-white/20 hover:shadow-xl transition-all group relative overflow-hidden"
+                                                className="bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-3xl p-5 cursor-grab active:cursor-grabbing hover:border-white/20 hover:bg-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_5px_15px_rgba(0,0,0,0.2)] transition-all group relative overflow-hidden"
                                             >
                                                 <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2 z-10">
                                                     <button
@@ -422,15 +422,15 @@ export default function KanbanBoard() {
                     {/* Add Stage Column Placeholder */}
                     <div className="w-[300px] shrink-0 h-full flex items-start">
                         {isAddingStage ? (
-                            <form onSubmit={handleAddStage} className="bg-[#161616] border border-white/10 rounded-2xl p-4 w-full shadow-xl">
-                                <input autoFocus required value={newStageName} onChange={e => setNewStageName(e.target.value)} placeholder="Stage Name" className="w-full bg-black border border-white/10 rounded-lg px-3 py-3 mb-3 text-sm outline-none focus:border-white/30" />
+                            <form onSubmit={handleAddStage} className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 w-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
+                                <input autoFocus required value={newStageName} onChange={e => setNewStageName(e.target.value)} placeholder="Stage Name" className="w-full bg-black/40 border border-white/10 rounded-2xl px-4 py-3 mb-3 text-sm outline-none focus:border-white/30 backdrop-blur-sm" />
                                 <div className="flex gap-2">
-                                    <button type="submit" className="bg-white text-black font-bold text-xs py-2 px-4 rounded-lg transition-colors">Create</button>
-                                    <button type="button" onClick={() => setIsAddingStage(false)} className="bg-white/5 hover:bg-white/10 text-white font-bold text-xs py-2 px-4 rounded-lg transition-colors">Cancel</button>
+                                    <button type="submit" className="bg-white text-black font-bold text-xs py-2 px-4 rounded-xl transition-colors">Create</button>
+                                    <button type="button" onClick={() => setIsAddingStage(false)} className="bg-white/5 hover:bg-white/10 text-white font-bold text-xs py-2 px-4 rounded-xl transition-colors">Cancel</button>
                                 </div>
                             </form>
                         ) : (
-                            <button onClick={() => setIsAddingStage(true)} className="flex items-center gap-3 w-full p-4 rounded-2xl bg-white/5 border border-dashed border-white/10 text-white/40 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all group">
+                            <button onClick={() => setIsAddingStage(true)} className="flex items-center gap-3 w-full p-4 rounded-[2rem] bg-white/[0.02] backdrop-blur-xl border border-dashed border-white/10 text-white/40 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all group">
                                 <div className="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center group-hover:bg-[#E31E24] group-hover:text-white transition-colors">
                                     <Plus className="w-4 h-4" />
                                 </div>
@@ -459,7 +459,7 @@ export default function KanbanBoard() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ duration: 0.2 }}
-                            className="bg-[#161616] border border-white/10 rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl"
+                            className="bg-[#111]/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_20px_40px_rgba(0,0,0,0.5)]"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header */}

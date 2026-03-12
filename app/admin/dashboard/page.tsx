@@ -154,10 +154,10 @@ export default function AdminDashboardOverview() {
     }
 
     return (
-        <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] rounded-3xl border border-white/5 shadow-2xl overflow-hidden relative">
+        <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a]/40 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden relative">
 
             {/* Ambient Background Glow */}
-            <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-[#E31E24]/5 to-transparent pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-[#E31E24]/10 to-transparent pointer-events-none" />
 
             <div className="flex-1 overflow-y-auto p-8 lg:p-12 z-10 space-y-12">
 
@@ -169,7 +169,7 @@ export default function AdminDashboardOverview() {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 tracking-tight">
                     {cards.map((c, i) => (
-                        <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 relative overflow-hidden group">
+                        <div key={i} className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-6 relative overflow-hidden group shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)] hover:bg-white/[0.05] transition-colors">
                             <div className={`absolute top-0 right-0 p-6 opacity-20 transition-transform group-hover:scale-110 group-hover:opacity-40 ${c.color}`}>
                                 <c.icon className="w-16 h-16 -mr-4 -mt-4" />
                             </div>
@@ -187,7 +187,7 @@ export default function AdminDashboardOverview() {
                 </div>
 
                 {/* Page Views — Unique Visitors Per Page */}
-                <div className="bg-[#111] border border-white/5 rounded-2xl p-8">
+                <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
                     <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
                         <FileText className="w-5 h-5 text-[#E31E24]" />
                         Page Views
@@ -225,7 +225,7 @@ export default function AdminDashboardOverview() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10">
 
                     {/* Engagement Overview Chart */}
-                    <div className="lg:col-span-2 bg-[#111] border border-white/5 rounded-2xl p-8 min-h-[400px] flex flex-col flex-1">
+                    <div className="lg:col-span-2 bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 min-h-[400px] flex flex-col flex-1 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
                         <div className="flex justify-between items-center mb-8">
                             <h3 className="font-bold text-lg">Engagement Overview</h3>
                             <div className="text-xs font-bold px-3 py-1 bg-white/5 text-white/60 rounded-full">Last 30 Days</div>
@@ -259,7 +259,7 @@ export default function AdminDashboardOverview() {
                     </div>
 
                     {/* Quick Notes */}
-                    <div className="bg-[#111] border border-white/5 rounded-2xl p-8 min-h-[400px] flex flex-col flex-1">
+                    <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 min-h-[400px] flex flex-col flex-1 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
                         <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
                             <StickyNote className="w-5 h-5 text-amber-500" />
                             Quick Notes

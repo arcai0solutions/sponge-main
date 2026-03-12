@@ -71,13 +71,15 @@ export default function AdminSidebarLayout({
             {/* Desktop Sidebar */}
             <aside className="hidden md:flex flex-col w-72 bg-[#0a0a0a] border-r border-white/5 fixed inset-y-0 left-0 z-50">
                 {/* Logo Area */}
-                <div className="h-24 flex items-center px-8 shrink-0 border-b border-white/5">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-[#E31E24] rounded-lg shadow-[0_0_20px_rgba(227,30,36,0.3)] flex items-center justify-center">
-                            <span className="font-bold text-white text-lg">S</span>
-                        </div>
-                        <span className="font-bold text-xl tracking-tight text-white">SPONGE<span className="text-white/40 font-medium">ADMIN</span></span>
-                    </div>
+                <div className="h-24 flex items-center gap-3 px-8 shrink-0 border-b border-white/5">
+                    <img 
+                        src="/new-logo.jpeg" 
+                        alt="Sponge Global Logo" 
+                        className="h-10 w-auto rounded-xl object-contain"
+                    />
+                    <span className="font-bold text-lg tracking-tight text-white mb-0.5">
+                        Admin <span className="text-white/40 font-medium tracking-normal">Panel</span>
+                    </span>
                 </div>
 
                 {/* Nav Links */}
@@ -99,7 +101,7 @@ export default function AdminSidebarLayout({
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-nav"
-                                        className="absolute inset-0 bg-[#E31E24]/10 border border-[#E31E24]/20 rounded-xl"
+                                        className="absolute inset-0 bg-[#E31E24]/10 border border-[#E31E24]/20 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
                                         initial={false}
                                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
                                     />
@@ -115,7 +117,7 @@ export default function AdminSidebarLayout({
                 <div className="p-4 shrink-0 border-t border-white/5">
                     <button
                         onClick={handleSignOut}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white/50 hover:bg-white/5 hover:text-white transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-white/50 hover:bg-white/5 hover:text-white transition-colors"
                     >
                         <LogOut className="w-5 h-5" />
                         <span>Sign Out</span>
@@ -136,11 +138,15 @@ export default function AdminSidebarLayout({
 
             {/* Mobile Header */}
             <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50 flex items-center justify-between px-4">
-                <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-[#E31E24] rounded flex items-center justify-center">
-                        <span className="font-bold text-white text-xs">S</span>
-                    </div>
-                    <span className="font-bold text-sm tracking-tight">SPONGE</span>
+                <div className="flex items-center gap-3">
+                    <img 
+                        src="/new-logo.jpeg" 
+                        alt="Sponge Global Logo" 
+                        className="h-8 w-auto rounded-lg object-contain"
+                    />
+                    <span className="font-bold text-sm tracking-tight text-white">
+                        Admin <span className="text-white/40 font-medium">Panel</span>
+                    </span>
                 </div>
                 <button
                     onClick={() => setMobileMenuOpen(true)}

@@ -6,69 +6,70 @@ import Link from "next/link";
 
 const programmes = [
     {
-        title: "Strategic Thinking and Decision Making",
-        description: "Strengthen strategic judgement, anticipate risks and opportunities, make balanced high-impact decisions, and align execution to strategy.",
+        title: "Strategic Thinking",
+        description: "Develop the ability to see the bigger picture, anticipate market shifts, and align organizational resources to long-term goals.",
         focusAreas: [
-            "Business strategy foundations",
-            "Internal and external environment analysis",
-            "Opportunities, risks, and trade-offs",
-            "Prioritization and execution choices",
-            "Data-driven decision making"
+            "Business environment scanning and foresight",
+            "Vision setting and strategic alignment",
+            "Opportunity identification and risk assessment",
+            "Portfolio thinking and resource allocation",
+            "Translating strategy into actionable plans"
         ],
-        tools: "VUCA, Porter’s frameworks, 6Ps, Eisenhower Matrix, Six Thinking Hats, scenario planning, decision trade-off tools.",
-        outcomes: "Strengthen strategic judgement, anticipate risks and opportunities, make balanced high-impact decisions, and align execution to strategy."
+        tools: "PESTLE, SWOT, Porter's Five Forces, Balanced Scorecard, Blue Ocean Strategy, scenario planning.",
+        outcomes: "Think strategically at every level, connect daily decisions to long-term objectives, and drive sustainable competitive advantage."
     },
     {
-        title: "Leading Self and Others",
-        description: "Lead with clarity and confidence, build trust, develop others, communicate with empathy, and drive sustained performance.",
+        title: "Customer Centricity",
+        description: "Build a culture that places the customer at the heart of every decision, process, and innovation.",
         focusAreas: [
-            "Self-awareness, values, strengths, emotional intelligence",
-            "Ownership, resilience, time and energy management",
-            "Trust, motivation, coaching, feedback",
-            "Leadership communication and difficult conversations",
-            "Team effectiveness, delegation, empowerment, collaboration"
+            "Understanding customer needs and expectations",
+            "Customer journey mapping and experience design",
+            "Voice of the customer (VoC) analysis",
+            "Service excellence and recovery strategies",
+            "Building customer loyalty and advocacy"
         ],
-        tools: "DISC/MBTI (as appropriate), Situational Leadership, Trust Equation, Tuckman model, resilience frameworks.",
-        outcomes: "Lead with clarity and confidence, build trust, develop others, communicate with empathy, and drive sustained performance."
+        tools: "Customer journey maps, NPS frameworks, empathy mapping, service blueprints, CX maturity models.",
+        outcomes: "Deliver exceptional customer experiences, increase retention and loyalty, and embed customer-first thinking across the organization."
     },
     {
-        title: "Creativity and Driving Innovation",
-        description: "Generate practical ideas, improve solutions under uncertainty, and build habits that support continuous improvement.",
+        title: "Data Analytics and Artificial Intelligence",
+        description: "Leverage data and AI to make smarter decisions, uncover insights, and drive innovation across the business.",
         focusAreas: [
-            "Creativity in business",
-            "Ideation techniques and problem framing",
-            "Converting ideas into viable innovations",
-            "Experimentation and managing innovation risk",
-            "Embedding innovation into everyday work"
+            "Data literacy and analytical thinking",
+            "Translating data into actionable insights",
+            "AI fundamentals and responsible adoption",
+            "Productivity tools powered by AI (Copilot, Gemini)",
+            "Data visualization and storytelling",
+            "Privacy, ethics, and governance basics"
         ],
-        tools: "Design thinking, SCAMPER, agile ways of working, value models, prioritization tools.",
-        outcomes: "Generate practical ideas, improve solutions under uncertainty, and build habits that support continuous improvement."
+        tools: "Analytics maturity models, Power BI, Excel dashboards, DMAIC, prompt engineering frameworks, AI use case prioritization.",
+        outcomes: "Make better decisions faster, communicate insights clearly, adopt AI responsibly, and build sustainable data-driven habits."
     },
     {
-        title: "Impactful Communication",
-        description: "Communicate with structure and confidence, adapt to stakeholders, build trust, and influence outcomes.",
+        title: "Decision Making & Problem Solving",
+        description: "Strengthen the ability to analyze complex situations, evaluate options, and make sound decisions under pressure.",
         focusAreas: [
-            "Clarity, intent, audience alignment",
-            "Leadership presence (verbal and non-verbal)",
-            "Structured messaging and storytelling",
-            "Active listening and questioning",
-            "Influence and difficult conversations"
+            "Structured problem-solving methodologies",
+            "Root cause analysis and critical thinking",
+            "Cognitive biases and decision traps",
+            "Evaluating trade-offs and managing ambiguity",
+            "Collaborative decision-making techniques"
         ],
-        tools: "3Vs, STAR storytelling, influence models, active listening techniques.",
-        outcomes: "Communicate with structure and confidence, adapt to stakeholders, build trust, and influence outcomes."
+        tools: "Six Thinking Hats, Ishikawa diagrams, 5 Whys, Eisenhower Matrix, decision matrices, Kepner-Tregoe analysis.",
+        outcomes: "Solve problems systematically, reduce bias in decision-making, and build confidence in navigating high-stakes situations."
     },
     {
-        title: "Data Analytics and AI for Decision Making",
-        description: "Make better decisions faster, communicate insights clearly, and build sustainable data-driven habits.",
+        title: "Change Management",
+        description: "Lead change with structure, increase adoption, reduce resistance, and sustain business outcomes.",
         focusAreas: [
-            "Decision quality and bias reduction",
-            "Translating data into insights and recommendations",
-            "Visualization and reporting",
-            "Using modern AI productivity tools responsibly",
-            "Data-driven storytelling under pressure"
+            "Change impact on people and performance",
+            "Leadership role in driving and sustaining change",
+            "Communication planning and stakeholder alignment",
+            "Managing resistance and building commitment",
+            "Reinforcement, measurement, and feedback loops"
         ],
-        tools: "Analytics maturity models, Excel and dashboards, Power BI, DMAIC, Copilot/Gemini use cases, storytelling frameworks.",
-        outcomes: "Make better decisions faster, communicate insights clearly, and build sustainable data-driven habits."
+        tools: "ADKAR, Kotter's 8-Step Model, VUCA frameworks, sources of power, habit and reinforcement frameworks.",
+        outcomes: "Lead change initiatives with confidence, increase adoption rates, minimize disruption, and sustain long-term business outcomes."
     },
     {
         title: "Stakeholder Management",
@@ -76,53 +77,90 @@ const programmes = [
         focusAreas: [
             "Stakeholder identification and prioritization",
             "Expectations, needs, and communication planning",
-            "Relationship building and trust",
-            "Conflict navigation and alignment",
-            "Influence strategies"
+            "Relationship building and trust development",
+            "Conflict navigation and alignment techniques",
+            "Influence strategies across organizational levels"
         ],
-        tools: "Power-interest grid, RACI, stakeholder heatmaps, workshops, interviews, surveys.",
-        outcomes: "Strengthen influence, reduce friction, align priorities, and build collaborative stakeholder relationships."
+        tools: "Power-interest grid, RACI matrix, stakeholder heatmaps, influence mapping, engagement planning workshops.",
+        outcomes: "Strengthen influence, reduce friction, align priorities, and build productive collaborative stakeholder relationships."
     },
     {
-        title: "Change Management",
-        description: "Lead change with structure, increase adoption, reduce resistance, and sustain business outcomes.",
+        title: "Leading Self & Others",
+        description: "Lead with clarity and confidence, build trust, develop others, communicate with empathy, and drive sustained performance.",
         focusAreas: [
-            "Change impact on people and performance",
-            "Leadership role in change",
-            "Communication planning and stakeholder alignment",
-            "Managing resistance and building commitment",
-            "Reinforcement, measurement, and feedback loops"
+            "Self-awareness, values, strengths, and emotional intelligence",
+            "Ownership, resilience, time and energy management",
+            "Trust building, motivation, coaching, and feedback",
+            "Leadership communication and difficult conversations",
+            "Team effectiveness, delegation, empowerment, and collaboration"
         ],
-        tools: "ADKAR, VUCA, sources of power, habit and reinforcement frameworks.",
-        outcomes: "Lead change with structure, increase adoption, reduce resistance, and sustain business outcomes."
+        tools: "DISC/MBTI profiling, Situational Leadership, Trust Equation, Tuckman model, resilience and mindfulness frameworks.",
+        outcomes: "Lead with clarity and confidence, build trust, develop others, communicate with empathy, and drive sustained team performance."
     },
     {
-        title: "Basic AI Fundamentals",
-        description: "Build AI confidence, identify high-value use cases, guide adoption, and apply AI responsibly.",
+        title: "Impactful Communication",
+        description: "Communicate with structure and confidence, adapt to stakeholders, build trust, and influence outcomes.",
         focusAreas: [
-            "Business value of AI for teams and functions",
-            "AI adoption mindsets and models",
-            "Productivity stacks in Microsoft and Google ecosystems",
-            "Identifying and prioritizing use cases",
-            "Prompting practices and safe usage",
-            "AI for analysis, reporting, and storytelling",
-            "Privacy, ethics, and governance basics"
+            "Clarity, intent, and audience alignment",
+            "Leadership presence — verbal and non-verbal",
+            "Structured messaging and storytelling",
+            "Active listening and powerful questioning",
+            "Influence, persuasion, and difficult conversations"
         ],
-        tools: "Adoption models, prompt frameworks, enterprise AI use patterns, use case prioritization.",
-        outcomes: "Build AI confidence, identify high-value use cases, guide adoption, and apply AI responsibly."
+        tools: "3Vs framework, STAR storytelling, influence models, active listening techniques, presentation frameworks.",
+        outcomes: "Communicate with structure and confidence, adapt messaging to any audience, build trust, and influence outcomes effectively."
     },
     {
-        title: "Art of Delegation for Leaders",
-        description: "Delegate with clarity, build trust and ownership, develop talent, and strengthen team execution.",
+        title: "Creativity & Innovation",
+        description: "Generate practical ideas, improve solutions under uncertainty, and build habits that support continuous improvement.",
         focusAreas: [
-            "Delegation as a leadership capability",
-            "What to delegate and what to retain",
-            "Clarity, empowerment, and accountability",
-            "Coaching and mentoring through delegation",
-            "Cadences for review and feedback"
+            "Creativity as a business capability",
+            "Ideation techniques and problem reframing",
+            "Converting ideas into viable innovations",
+            "Experimentation and managing innovation risk",
+            "Embedding innovation into everyday work"
         ],
-        tools: "Situational Leadership, DISC/MBTI (as appropriate), GROW coaching, STAR/SBA communication models.",
-        outcomes: "Delegate with clarity, build trust and ownership, develop talent, and strengthen team execution."
+        tools: "Design thinking, SCAMPER, lateral thinking, agile ways of working, value models, innovation canvas.",
+        outcomes: "Generate practical ideas, improve solutions under uncertainty, and build habits that support continuous improvement and innovation."
+    },
+    {
+        title: "Team Work & Collaboration",
+        description: "Build high-performing teams that communicate openly, leverage diverse strengths, and deliver results together.",
+        focusAreas: [
+            "Team dynamics and stages of development",
+            "Building psychological safety and trust",
+            "Leveraging diversity and complementary strengths",
+            "Cross-functional collaboration and alignment",
+            "Conflict resolution and constructive feedback"
+        ],
+        tools: "Tuckman's model, Lencioni's Five Dysfunctions, Belbin Team Roles, DISC profiling, team charter frameworks.",
+        outcomes: "Build cohesive teams, foster a culture of collaboration, resolve conflict constructively, and consistently deliver collective results."
+    },
+    {
+        title: "Coaching & Mentoring",
+        description: "Develop the skills to coach and mentor others effectively, unlocking potential and accelerating growth.",
+        focusAreas: [
+            "Coaching vs. mentoring — when and how to apply each",
+            "Building a coaching mindset and culture",
+            "Powerful questioning and active listening",
+            "Goal setting, accountability, and progress tracking",
+            "Giving and receiving developmental feedback"
+        ],
+        tools: "GROW model, OSCAR framework, Situational Leadership, feedback models (SBI, STAR), mentoring best practices.",
+        outcomes: "Develop coaching capabilities, unlock team potential, accelerate individual growth, and build a sustainable coaching culture."
+    },
+    {
+        title: "Digital Transformation",
+        description: "Equip leaders and teams to navigate and drive digital change, from mindset shifts to technology adoption.",
+        focusAreas: [
+            "Digital mindset and organizational readiness",
+            "Understanding emerging technologies and their business impact",
+            "Leading digital change and managing disruption",
+            "Agile and lean approaches to transformation",
+            "Building digital capabilities across the workforce"
+        ],
+        tools: "Digital maturity assessments, agile frameworks, change management for digital, technology adoption models, digital roadmapping.",
+        outcomes: "Navigate digital disruption confidently, lead technology-driven change, and build organizational capabilities for a digitally transformed future."
     }
 ];
 

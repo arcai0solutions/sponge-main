@@ -63,10 +63,10 @@ export default function AdminDashboard() {
     const filteredMessages = messages.filter(m => m.session_id === selectedSession);
 
     return (
-        <div className="flex-1 flex flex-col md:flex-row h-full bg-[#0a0a0a] rounded-3xl border border-white/5 shadow-2xl overflow-hidden relative">
+        <div className="flex-1 flex flex-col md:flex-row h-full bg-[#0a0a0a]/40 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden relative">
             {/* Sidebar / Session List */}
-            <div className="w-full md:w-80 bg-[#0c0c0c]/50 border-r border-white/5 h-full flex flex-col shrink-0">
-                <div className="p-6 border-b border-white/5 flex justify-between items-center bg-[#0a0a0a]">
+            <div className="w-full md:w-80 bg-white/[0.02] border-r border-white/10 h-full flex flex-col shrink-0">
+                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/[0.01]">
                     <span className="text-sm font-bold text-white/50 uppercase tracking-widest">
                         Sessions ({sessions.length})
                     </span>
@@ -82,9 +82,9 @@ export default function AdminDashboard() {
                             <button
                                 key={session_id}
                                 onClick={() => setSelectedSession(session_id)}
-                                className={`w-full text-left p-4 rounded-xl transition-all border ${selectedSession === session_id
-                                    ? 'bg-[#E31E24]/10 border-[#E31E24]/50 text-white'
-                                    : 'bg-black/50 border-white/5 text-white/70 hover:bg-white/5 hover:border-white/10'
+                                className={`w-full text-left p-4 rounded-2xl transition-all border ${selectedSession === session_id
+                                    ? 'bg-[#E31E24]/10 border-[#E31E24]/30 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]'
+                                    : 'bg-white/[0.02] border-white/5 text-white/70 hover:bg-white/[0.04] hover:border-white/10'
                                     }`}
                             >
                                 <div className="text-xs text-white/40 mb-1">{date}</div>
@@ -119,12 +119,12 @@ export default function AdminDashboard() {
                 <div className="flex-1 overflow-y-auto p-6 md:p-12 space-y-6 scrollbar-thin scrollbar-thumb-white/20">
                     {filteredMessages.map((msg) => (
                         <div key={msg.id} className={`flex flex-col max-w-3xl ${msg.role === 'user' ? 'ml-auto items-end' : 'mr-auto items-start'}`}>
-                            <span className="text-xs text-white/30 mb-2 font-medium uppercase tracking-wider px-2">
+                            <span className="text-xs text-white/30 mb-2 font-medium uppercase tracking-wider px-3">
                                 {msg.role === 'user' ? 'Visitor' : 'Sponge AI'} • {new Date(msg.created_at).toLocaleTimeString()}
                             </span>
-                            <div className={`p-5 rounded-2xl text-base leading-relaxed whitespace-pre-wrap ${msg.role === 'user'
+                            <div className={`p-6 rounded-[2rem] text-base leading-relaxed whitespace-pre-wrap shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] ${msg.role === 'user'
                                 ? 'bg-white/10 text-white border border-white/10 rounded-tr-none'
-                                : 'bg-[#E31E24]/10 border border-[#E31E24]/20 text-white/90 rounded-tl-none'
+                                : 'bg-[#E31E24]/10 border border-[#E31E24]/20 text-white/90 rounded-tl-none backdrop-blur-sm'
                                 }`}>
                                 {msg.content}
                             </div>

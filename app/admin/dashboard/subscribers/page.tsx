@@ -63,9 +63,9 @@ export default function SubscribersArchivePage() {
     };
 
     return (
-        <div className="flex-1 flex flex-col h-full bg-[#0a0a0a] rounded-3xl border border-white/5 shadow-2xl overflow-hidden relative">
+        <div className="flex-1 flex flex-col h-full bg-[#0a0a0a]/40 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_20px_40px_rgba(0,0,0,0.5)] overflow-hidden relative">
             {/* Header section */}
-            <div className="px-8 py-8 md:px-12 md:py-10 border-b border-white/5 shrink-0 bg-[#0c0c0c]/50 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="px-8 py-8 md:px-12 md:py-10 border-b border-white/10 shrink-0 bg-white/[0.02] flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <div className="flex items-center gap-3 mb-2">
                         <Mail className="w-8 h-8 text-[#E31E24]" />
@@ -97,17 +97,17 @@ export default function SubscribersArchivePage() {
                 {loading ? (
                     <div className="h-full flex items-center justify-center text-white/50 animate-pulse">Loading subscriber list...</div>
                 ) : subscribers.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-white/5 rounded-3xl">
+                    <div className="h-full flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-white/10 rounded-[2rem] bg-white/[0.02] backdrop-blur-md">
                         <Users className="w-16 h-16 text-white/20 mb-4" />
                         <h3 className="text-lg font-bold text-white mb-2">No subscribers yet</h3>
-                        <p className="text-white/40 max-w-sm">When visitors opt-in via the 10-second site popup, their emails will safely drop in here.</p>
+                        <p className="text-white/40 max-w-sm">When users subscribe via the frontend newsletter popup, they will appear here.</p>
                     </div>
                 ) : (
-                    <div className="bg-[#111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="bg-[#1a1a1a] border-b border-white/10 uppercase text-[11px] font-bold tracking-wider text-white/40">
+                                    <tr className="bg-white/[0.04] border-b border-white/10 uppercase text-xs font-bold tracking-wider text-white/40">
                                         <th className="p-5">Subscriber Email</th>
                                         <th className="p-5">Selected Interest</th>
                                         <th className="p-5">Acquisition Source</th>

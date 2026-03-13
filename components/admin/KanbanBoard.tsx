@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Trash2, GripVertical, Mail, Phone, Building2, Plus, X, Settings2, MoreHorizontal, StickyNote, Eye, Calendar, Globe } from 'lucide-react';
+import { Trash2, GripVertical, Mail, Phone, Building2, Plus, X, Settings2, MoreHorizontal, StickyNote, Eye, Calendar, Globe, UserPlus, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Types exactly matching our database
@@ -46,6 +46,7 @@ export default function KanbanBoard() {
     const [isAddingPipeline, setIsAddingPipeline] = useState(false);
     const [isAddingStage, setIsAddingStage] = useState(false);
     const [isAddingLead, setIsAddingLead] = useState<string | null>(null); // holds stage_id
+    const [isAddingLeadModal, setIsAddingLeadModal] = useState(false); // top-level Add Lead modal
     const [viewingLead, setViewingLead] = useState<Lead | null>(null);
 
     // Form states
@@ -54,6 +55,10 @@ export default function KanbanBoard() {
     const [newLeadForm, setNewLeadForm] = useState({
         full_name: '', email: '', phone: '', company: '', message: ''
     });
+    const [modalLeadForm, setModalLeadForm] = useState({
+        full_name: '', email: '', phone: '', company: '', message: ''
+    });
+    const [modalSubmitting, setModalSubmitting] = useState(false);
 
     useEffect(() => {
         fetchBoardData();
@@ -174,6 +179,44 @@ export default function KanbanBoard() {
         }
     };
 
+    // --- Add Lead via top-level modal (goes to first stage of active pipeline) ---
+    const handleModalAddLead = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!modalLeadForm.full_name || !modalLeadForm.email || !activePipeline) return;
+
+        // Find the first stage (by sort_order) in the active pipeline
+        const pipelineStages = stages
+            .filter(s => s.pipeline_id === activePipeline)
+            .sort((a, b) => a.sort_order - b.sort_order);
+
+        if (pipelineStages.length === 0) {
+            alert('Please create at least one stage in this pipeline before adding leads.');
+            return;
+        }
+
+        const firstStage = pipelineStages[0];
+        const stageLeads = leads.filter(l => l.stage_id === firstStage.id);
+        const maxSort = stageLeads.length > 0 ? Math.max(...stageLeads.map(l => l.sort_order)) + 10 : 0;
+
+        setModalSubmitting(true);
+        const { data, error } = await supabase.from('leads').insert({
+            ...modalLeadForm,
+            pipeline_id: activePipeline,
+            stage_id: firstStage.id,
+            sort_order: maxSort,
+            source: 'manual_entry'
+        }).select().single();
+
+        setModalSubmitting(false);
+        if (!error && data) {
+            setLeads([...leads, data]);
+            setIsAddingLeadModal(false);
+            setModalLeadForm({ full_name: '', email: '', phone: '', company: '', message: '' });
+        } else {
+            console.error('Error adding lead:', error);
+        }
+    };
+
     const handleDeleteLead = async (leadId: string) => {
         if (!confirm('Are you sure you want to delete this lead? It will still be preserved in the Contacts Archive.')) return;
 
@@ -269,6 +312,17 @@ export default function KanbanBoard() {
                         </button>
                     )}
                 </div>
+
+                {/* Prominent Add Lead Button */}
+                {activePipeline && (
+                    <button
+                        onClick={() => setIsAddingLeadModal(true)}
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E31E24] text-white font-semibold text-sm hover:bg-red-600 transition-all shadow-[0_5px_15px_rgba(227,30,36,0.3)] hover:shadow-[0_5px_20px_rgba(227,30,36,0.5)] shrink-0"
+                    >
+                        <UserPlus className="w-4 h-4" />
+                        <span>Add Lead</span>
+                    </button>
+                )}
             </div>
 
             {pipelines.length === 0 && (
@@ -558,6 +612,143 @@ export default function KanbanBoard() {
                     </motion.div>
                     );
                 })()}
+            </AnimatePresence>
+
+            {/* ── Add Lead Modal ── */}
+            <AnimatePresence>
+                {isAddingLeadModal && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+                        onClick={() => setIsAddingLeadModal(false)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-[#111]/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_20px_40px_rgba(0,0,0,0.5)]"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Modal Header */}
+                            <div className="flex items-center justify-between p-6 border-b border-white/10">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-[#E31E24]/10 flex items-center justify-center">
+                                        <UserPlus className="w-5 h-5 text-[#E31E24]" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-xl font-bold text-white">Add New Lead</h2>
+                                        <p className="text-sm text-white/40 mt-0.5">
+                                            Adding to <span className="text-white/70 font-medium">{pipelines.find(p => p.id === activePipeline)?.name}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <button onClick={() => setIsAddingLeadModal(false)} className="text-white/40 hover:text-white p-2 hover:bg-white/10 rounded-lg transition-colors">
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+
+                            {/* Modal Body - Form */}
+                            <form onSubmit={handleModalAddLead} className="p-6 space-y-4">
+                                {/* Full Name */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-white/30">Full Name *</label>
+                                    <div className="flex items-center gap-3 bg-white/5 px-4 py-3 rounded-xl border border-white/5 focus-within:border-[#E31E24]/50 transition-colors">
+                                        <UserPlus className="w-4 h-4 text-white/30" />
+                                        <input
+                                            autoFocus
+                                            required
+                                            value={modalLeadForm.full_name}
+                                            onChange={e => setModalLeadForm({ ...modalLeadForm, full_name: e.target.value })}
+                                            placeholder="John Doe"
+                                            className="bg-transparent text-white text-sm outline-none w-full placeholder:text-white/20"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Email */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-white/30">Email *</label>
+                                    <div className="flex items-center gap-3 bg-white/5 px-4 py-3 rounded-xl border border-white/5 focus-within:border-[#E31E24]/50 transition-colors">
+                                        <Mail className="w-4 h-4 text-white/30" />
+                                        <input
+                                            required
+                                            type="email"
+                                            value={modalLeadForm.email}
+                                            onChange={e => setModalLeadForm({ ...modalLeadForm, email: e.target.value })}
+                                            placeholder="john@example.com"
+                                            className="bg-transparent text-white text-sm outline-none w-full placeholder:text-white/20"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Phone */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-white/30">Phone</label>
+                                    <div className="flex items-center gap-3 bg-white/5 px-4 py-3 rounded-xl border border-white/5 focus-within:border-[#E31E24]/50 transition-colors">
+                                        <Phone className="w-4 h-4 text-white/30" />
+                                        <input
+                                            value={modalLeadForm.phone}
+                                            onChange={e => setModalLeadForm({ ...modalLeadForm, phone: e.target.value })}
+                                            placeholder="+1 (555) 000-0000"
+                                            className="bg-transparent text-white text-sm outline-none w-full placeholder:text-white/20"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Company */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-white/30">Company</label>
+                                    <div className="flex items-center gap-3 bg-white/5 px-4 py-3 rounded-xl border border-white/5 focus-within:border-[#E31E24]/50 transition-colors">
+                                        <Building2 className="w-4 h-4 text-white/30" />
+                                        <input
+                                            value={modalLeadForm.company}
+                                            onChange={e => setModalLeadForm({ ...modalLeadForm, company: e.target.value })}
+                                            placeholder="Acme Inc."
+                                            className="bg-transparent text-white text-sm outline-none w-full placeholder:text-white/20"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Message / Notes */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-white/30">Message / Notes</label>
+                                    <div className="flex items-start gap-3 bg-white/5 px-4 py-3 rounded-xl border border-white/5 focus-within:border-[#E31E24]/50 transition-colors">
+                                        <MessageSquare className="w-4 h-4 text-white/30 mt-0.5" />
+                                        <textarea
+                                            value={modalLeadForm.message}
+                                            onChange={e => setModalLeadForm({ ...modalLeadForm, message: e.target.value })}
+                                            placeholder="Any additional context about this lead..."
+                                            rows={3}
+                                            className="bg-transparent text-white text-sm outline-none w-full placeholder:text-white/20 resize-none"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Footer Buttons */}
+                                <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsAddingLeadModal(false)}
+                                        className="px-6 py-2.5 bg-white/5 hover:bg-white/10 text-white text-sm font-medium rounded-xl transition-colors"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        disabled={modalSubmitting}
+                                        className="px-6 py-2.5 bg-[#E31E24] hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-colors shadow-[0_5px_15px_rgba(227,30,36,0.3)] flex items-center gap-2"
+                                    >
+                                        <UserPlus className="w-4 h-4" />
+                                        {modalSubmitting ? 'Adding...' : 'Add Lead'}
+                                    </button>
+                                </div>
+                            </form>
+                        </motion.div>
+                    </motion.div>
+                )}
             </AnimatePresence>
         </>
     );

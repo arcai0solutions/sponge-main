@@ -221,20 +221,8 @@ export default function AdminSidebarLayout({
 
             {/* Main Content wrapper */}
             <main className="flex-1 flex flex-col md:pl-72 min-w-0 pt-16 md:pt-0">
-                {/* Topbar inside main area (optional, for contextual actions/branding spacing) */}
-                <header className="hidden md:flex h-24 items-center justify-end px-10 shrink-0 border-b border-white/5 bg-[#050505]/80 backdrop-blur-md sticky top-0 z-40">
-                    <div className="flex items-center gap-4">
-                        <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all">
-                            <Bell className="w-4 h-4" />
-                        </button>
-                        <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all">
-                            <Settings className="w-4 h-4" />
-                        </button>
-                    </div>
-                </header>
-
                 {/* Content itself */}
-                <div className="flex-1 p-4 md:p-10 flex flex-col h-[calc(100vh-64px)] md:h-[calc(100vh-96px)] overflow-hidden">
+                <div className="flex-1 p-4 md:p-10 flex flex-col h-[calc(100vh-64px)] md:h-screen overflow-hidden">
                     {children}
                 </div>
             </main>

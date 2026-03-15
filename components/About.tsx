@@ -100,10 +100,10 @@ export default function About() {
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                             className="space-y-8"
                         >
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left">
                                 We are an end-to-end partner dedicated to addressing your most critical workforce performance challenges through the seamless integration of learning, talent, and technology.
                             </p>
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left md:text-justify">
+                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed text-left">
                                 Supported by a multidisciplinary team of strategists, industry experts, and transformation specialists, we design and deliver integrated talent solutions that drive measurable impact and strong returns on your investment.
                             </p>
                         </motion.div>

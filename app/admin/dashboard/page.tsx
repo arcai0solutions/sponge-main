@@ -2,21 +2,17 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Users, MousePointerClick, KanbanSquare, BarChart3, Plus, Trash2, StickyNote, FileText, Mail } from 'lucide-react';
+import { Users, MousePointerClick, KanbanSquare, BarChart3, Plus, Trash2, StickyNote, FileText, Mail, DollarSign, Briefcase, UserCheck } from 'lucide-react';
 
 interface TopPage {
     page_path: string;
     visit_count: number;
 }
 
-interface DailyVisit {
-    date: string;
-    count: number;
-}
-
 interface Note {
     id: string;
     content: string;
+    category: string;
     created_at: string;
 }
 
@@ -26,9 +22,8 @@ export default function AdminDashboardOverview() {
     const [uniqueVisitors, setUniqueVisitors] = useState(0);
     const [totalSubscribers, setTotalSubscribers] = useState(0);
     const [topPages, setTopPages] = useState<TopPage[]>([]);
-    const [dailyVisits, setDailyVisits] = useState<DailyVisit[]>([]);
     const [notes, setNotes] = useState<Note[]>([]);
-    const [newNote, setNewNote] = useState('');
+    const [newNotes, setNewNotes] = useState<Record<string, string>>({ finance: '', general: '', client: '' });
     const [loading, setLoading] = useState(true);
 
     const fetchDashboardData = useCallback(async () => {
@@ -61,7 +56,6 @@ export default function AdminDashboardOverview() {
                 .from('page_visits')
                 .select('page_path, visitor_id');
             if (pagesData) {
-                // Count unique visitors per page (distinct visitor_id per page_path)
                 const pageVisitors: Record<string, Set<string>> = {};
                 pagesData.forEach((p: { page_path: string; visitor_id: string }) => {
                     if (!pageVisitors[p.page_path]) pageVisitors[p.page_path] = new Set();
@@ -73,37 +67,11 @@ export default function AdminDashboardOverview() {
                 setTopPages(sorted);
             }
 
-            // Fetch daily visits for last 30 days
-            const thirtyDaysAgo = new Date();
-            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            const { data: dailyData } = await supabase
-                .from('page_visits')
-                .select('created_at')
-                .gte('created_at', thirtyDaysAgo.toISOString());
-            if (dailyData) {
-                const dayCounts: Record<string, number> = {};
-                // Initialize all 30 days
-                for (let i = 29; i >= 0; i--) {
-                    const d = new Date();
-                    d.setDate(d.getDate() - i);
-                    const key = d.toISOString().split('T')[0];
-                    dayCounts[key] = 0;
-                }
-                dailyData.forEach((v: { created_at: string }) => {
-                    const key = v.created_at.split('T')[0];
-                    if (dayCounts[key] !== undefined) {
-                        dayCounts[key]++;
-                    }
-                });
-                setDailyVisits(Object.entries(dayCounts).map(([date, count]) => ({ date, count })));
-            }
-
-            // Fetch admin notes
+            // Fetch admin notes (all categories)
             const { data: notesData } = await supabase
                 .from('admin_notes')
                 .select('*')
-                .order('created_at', { ascending: false })
-                .limit(20);
+                .order('created_at', { ascending: false });
             setNotes(notesData || []);
 
         } catch (e) {
@@ -117,17 +85,18 @@ export default function AdminDashboardOverview() {
         fetchDashboardData();
     }, [fetchDashboardData]);
 
-    const handleAddNote = async (e: React.FormEvent) => {
+    const handleAddNote = async (category: string, e: React.FormEvent) => {
         e.preventDefault();
-        if (!newNote.trim()) return;
+        const content = newNotes[category]?.trim();
+        if (!content) return;
         const { data, error } = await supabase
             .from('admin_notes')
-            .insert({ content: newNote.trim() })
+            .insert({ content, category })
             .select()
             .single();
         if (!error && data) {
             setNotes([data, ...notes]);
-            setNewNote('');
+            setNewNotes(prev => ({ ...prev, [category]: '' }));
         }
     };
 
@@ -136,13 +105,17 @@ export default function AdminDashboardOverview() {
         await supabase.from('admin_notes').delete().eq('id', id);
     };
 
-    const maxDailyCount = Math.max(...dailyVisits.map(d => d.count), 1);
-
     const cards = [
         { title: 'Total Active Leads', value: totalLeads.toString(), icon: Users, color: 'text-blue-500' },
         { title: 'Pipelines Configured', value: totalPipelines.toString(), icon: KanbanSquare, color: 'text-purple-500' },
         { title: 'Unique Visitors', value: uniqueVisitors.toLocaleString(), icon: MousePointerClick, color: 'text-emerald-500', note: 'All time' },
         { title: 'Email Subscribers', value: totalSubscribers.toLocaleString(), icon: Mail, color: 'text-[#E31E24]', note: 'Newsletter signups' },
+    ];
+
+    const noteColumns = [
+        { key: 'finance', label: 'Finance', icon: DollarSign, color: 'text-emerald-400', dotColor: 'bg-emerald-400', borderColor: 'border-emerald-500/20' },
+        { key: 'general', label: 'General', icon: StickyNote, color: 'text-amber-400', dotColor: 'bg-amber-400', borderColor: 'border-amber-500/20' },
+        { key: 'client', label: 'Client', icon: UserCheck, color: 'text-blue-400', dotColor: 'bg-blue-400', borderColor: 'border-blue-500/20' },
     ];
 
     if (loading) {
@@ -221,94 +194,69 @@ export default function AdminDashboardOverview() {
                     </div>
                 </div>
 
-                {/* Main Content Grid: Chart + Notes */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10">
-
-                    {/* Engagement Overview Chart */}
-                    <div className="lg:col-span-2 bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 min-h-[400px] flex flex-col flex-1 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
-                        <div className="flex justify-between items-center mb-8">
-                            <h3 className="font-bold text-lg">Engagement Overview</h3>
-                            <div className="text-xs font-bold px-3 py-1 bg-white/5 text-white/60 rounded-full">Last 30 Days</div>
-                        </div>
-                        <div className="flex-1 flex items-end gap-[3px] min-h-[250px]">
-                            {dailyVisits.map((day, i) => {
-                                const height = maxDailyCount > 0 ? (day.count / maxDailyCount) * 100 : 0;
-                                const dateObj = new Date(day.date + 'T00:00:00');
-                                const label = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                                return (
-                                    <div
-                                        key={i}
-                                        className="flex-1 flex flex-col items-center justify-end group relative"
-                                    >
-                                        {/* Tooltip */}
-                                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 border border-white/10 text-white text-[10px] px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">
-                                            {label}: {day.count}
-                                        </div>
-                                        <div
-                                            className="w-full bg-gradient-to-t from-[#E31E24] to-[#E31E24]/40 rounded-t-sm transition-all duration-300 hover:from-[#E31E24] hover:to-[#E31E24]/70 cursor-pointer"
-                                            style={{ height: `${Math.max(height, 2)}%` }}
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        <div className="flex justify-between mt-3 text-[10px] text-white/30">
-                            <span>{dailyVisits.length > 0 ? new Date(dailyVisits[0].date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''}</span>
-                            <span>Today</span>
-                        </div>
-                    </div>
-
-                    {/* Quick Notes */}
-                    <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 min-h-[400px] flex flex-col flex-1 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]">
-                        <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
-                            <StickyNote className="w-5 h-5 text-amber-500" />
-                            Quick Notes
-                        </h3>
-
-                        {/* Add Note Form */}
-                        <form onSubmit={handleAddNote} className="flex gap-2 mb-6">
-                            <input
-                                value={newNote}
-                                onChange={(e) => setNewNote(e.target.value)}
-                                placeholder="Add a note..."
-                                className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-[#E31E24] placeholder:text-white/30 transition-colors"
-                            />
-                            <button
-                                type="submit"
-                                className="bg-[#E31E24] hover:bg-red-600 text-white p-2.5 rounded-lg transition-colors shrink-0"
+                {/* Notes — 3 Columns: Finance, General, Client */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-10">
+                    {noteColumns.map((col) => {
+                        const colNotes = notes.filter(n => n.category === col.key);
+                        const Icon = col.icon;
+                        return (
+                            <div
+                                key={col.key}
+                                className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-6 flex flex-col shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]"
+                                style={{ maxHeight: '500px' }}
                             >
-                                <Plus className="w-4 h-4" />
-                            </button>
-                        </form>
+                                <h3 className="font-bold text-base mb-4 flex items-center gap-2 shrink-0">
+                                    <Icon className={`w-5 h-5 ${col.color}`} />
+                                    {col.label}
+                                    <span className="ml-auto text-xs font-medium text-white/30 bg-white/5 px-2 py-0.5 rounded-full">{colNotes.length}</span>
+                                </h3>
 
-                        {/* Notes List */}
-                        <div className="flex-1 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-white/10">
-                            {notes.length === 0 && (
-                                <div className="flex-1 flex items-center justify-center text-white/20 text-sm py-10">
-                                    No notes yet. Add one above!
-                                </div>
-                            )}
-                            {notes.map(note => (
-                                <div key={note.id} className="flex gap-3 items-start group bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                                    <div className="w-1.5 h-1.5 mt-2 rounded-full bg-amber-500 shrink-0" />
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm text-white/70 leading-relaxed">{note.content}</p>
-                                        <p className="text-[11px] text-white/30 mt-1.5">
-                                            {new Date(note.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                                        </p>
-                                    </div>
+                                {/* Add Note Form */}
+                                <form onSubmit={(e) => handleAddNote(col.key, e)} className="flex gap-2 mb-4 shrink-0">
+                                    <input
+                                        value={newNotes[col.key] || ''}
+                                        onChange={(e) => setNewNotes(prev => ({ ...prev, [col.key]: e.target.value }))}
+                                        placeholder={`Add ${col.label.toLowerCase()} note...`}
+                                        className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#E31E24] placeholder:text-white/30 transition-colors min-w-0"
+                                    />
                                     <button
-                                        onClick={() => handleDeleteNote(note.id)}
-                                        className="p-1 text-white/20 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all shrink-0"
+                                        type="submit"
+                                        className="bg-[#E31E24] hover:bg-red-600 text-white p-2 rounded-lg transition-colors shrink-0"
                                     >
-                                        <Trash2 className="w-3.5 h-3.5" />
+                                        <Plus className="w-4 h-4" />
                                     </button>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                                </form>
 
+                                {/* Notes List — Scrollable */}
+                                <div className="flex-1 overflow-y-auto space-y-2 min-h-0 pr-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.1) transparent' }}>
+                                    {colNotes.length === 0 && (
+                                        <div className="flex items-center justify-center text-white/20 text-sm py-8">
+                                            No {col.label.toLowerCase()} notes yet
+                                        </div>
+                                    )}
+                                    {colNotes.map(note => (
+                                        <div key={note.id} className="flex gap-2.5 items-start group bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                                            <div className={`w-1.5 h-1.5 mt-2 rounded-full ${col.dotColor} shrink-0`} />
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-sm text-white/70 leading-relaxed break-words">{note.content}</p>
+                                                <p className="text-[10px] text-white/30 mt-1">
+                                                    {new Date(note.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                                </p>
+                                            </div>
+                                            <button
+                                                onClick={() => handleDeleteNote(note.id)}
+                                                className="p-1 text-white/20 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all shrink-0"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
+
             </div>
         </div>
     );

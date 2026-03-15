@@ -14,7 +14,8 @@ import {
     X,
     Settings,
     Bell,
-    Mail
+    Mail,
+    Star
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -62,6 +63,7 @@ export default function AdminSidebarLayout({
         { name: 'CRM Pipeline', path: '/admin/dashboard/crm', icon: KanbanSquare },
         { name: 'Contacts Archive', path: '/admin/dashboard/contacts', icon: Users },
         { name: 'Email Newsletter', path: '/admin/dashboard/subscribers', icon: Mail },
+        { name: 'Client Feedback', path: '/admin/dashboard/feedbacks', icon: Star },
         { name: 'AI Chat History', path: '/admin/dashboard/chat', icon: MessageSquare },
     ];
 

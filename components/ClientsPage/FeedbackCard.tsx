@@ -5,12 +5,11 @@ import { ChevronDown, ChevronUp, Quote } from 'lucide-react';
 
 interface FeedbackCardProps {
     author: string;
-    designation: string;
     company: string;
     content: React.ReactNode;
 }
 
-export default function FeedbackCard({ author, designation, company, content }: FeedbackCardProps) {
+export default function FeedbackCard({ author, company, content }: FeedbackCardProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -44,7 +43,6 @@ export default function FeedbackCard({ author, designation, company, content }: 
 
             <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-1 relative z-10">
                 <h4 className="text-white font-bold text-lg">{author}</h4>
-                <p className="text-white/60 text-sm">{designation}</p>
                 <p className="text-[#E31E24] text-sm font-medium">{company}</p>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Users, MousePointerClick, KanbanSquare, BarChart3, Plus, Trash2, StickyNote, FileText, Mail, DollarSign, Briefcase, UserCheck } from 'lucide-react';
+import { Users, MousePointerClick, KanbanSquare, BarChart3, Plus, Trash2, StickyNote, FileText, Mail, DollarSign, Briefcase, UserCheck, Pencil, Check, X } from 'lucide-react';
 
 interface TopPage {
     page_path: string;
@@ -24,6 +24,7 @@ export default function AdminDashboardOverview() {
     const [topPages, setTopPages] = useState<TopPage[]>([]);
     const [notes, setNotes] = useState<Note[]>([]);
     const [newNotes, setNewNotes] = useState<Record<string, string>>({ finance: '', general: '', client: '' });
+    const [editingNote, setEditingNote] = useState<{ id: string; content: string } | null>(null);
     const [loading, setLoading] = useState(true);
 
     const fetchDashboardData = useCallback(async () => {
@@ -103,6 +104,15 @@ export default function AdminDashboardOverview() {
     const handleDeleteNote = async (id: string) => {
         setNotes(notes.filter(n => n.id !== id));
         await supabase.from('admin_notes').delete().eq('id', id);
+    };
+
+    const handleEditNote = async (id: string) => {
+        if (!editingNote || editingNote.id !== id) return;
+        const content = editingNote.content.trim();
+        if (!content) return;
+        setNotes(notes.map(n => n.id === id ? { ...n, content } : n));
+        setEditingNote(null);
+        await supabase.from('admin_notes').update({ content }).eq('id', id);
     };
 
     const cards = [
@@ -202,8 +212,7 @@ export default function AdminDashboardOverview() {
                         return (
                             <div
                                 key={col.key}
-                                className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-6 flex flex-col shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)]"
-                                style={{ maxHeight: '500px' }}
+                                className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl p-6 flex flex-col overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_10px_30px_rgba(0,0,0,0.2)] h-[500px]"
                             >
                                 <h3 className="font-bold text-base mb-4 flex items-center gap-2 shrink-0">
                                     <Icon className={`w-5 h-5 ${col.color}`} />
@@ -228,7 +237,14 @@ export default function AdminDashboardOverview() {
                                 </form>
 
                                 {/* Notes List — Scrollable */}
-                                <div className="flex-1 overflow-y-auto space-y-2 min-h-0 pr-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.1) transparent' }}>
+                                <div 
+                                    className="flex-1 overflow-y-auto space-y-2 min-h-0 pr-1 overscroll-contain" 
+                                    style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.15) transparent' }}
+                                    onWheel={(e) => {
+                                        // Stop the event from bubbling up to the main page scroller
+                                        e.stopPropagation();
+                                    }}
+                                >
                                     {colNotes.length === 0 && (
                                         <div className="flex items-center justify-center text-white/20 text-sm py-8">
                                             No {col.label.toLowerCase()} notes yet
@@ -238,17 +254,62 @@ export default function AdminDashboardOverview() {
                                         <div key={note.id} className="flex gap-2.5 items-start group bg-white/5 p-3 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
                                             <div className={`w-1.5 h-1.5 mt-2 rounded-full ${col.dotColor} shrink-0`} />
                                             <div className="flex-1 min-w-0">
-                                                <p className="text-sm text-white/70 leading-relaxed break-words">{note.content}</p>
+                                                {editingNote?.id === note.id ? (
+                                                    <textarea
+                                                        autoFocus
+                                                        value={editingNote.content}
+                                                        onChange={(e) => setEditingNote({ ...editingNote, content: e.target.value })}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleEditNote(note.id); }
+                                                            if (e.key === 'Escape') setEditingNote(null);
+                                                        }}
+                                                        className="w-full bg-black/60 border border-[#E31E24]/40 rounded-lg px-2.5 py-1.5 text-sm text-white/90 outline-none resize-none leading-relaxed focus:border-[#E31E24] transition-colors"
+                                                        rows={Math.max(2, editingNote.content.split('\n').length)}
+                                                    />
+                                                ) : (
+                                                    <p className="text-sm text-white/70 leading-relaxed break-words">{note.content}</p>
+                                                )}
                                                 <p className="text-[10px] text-white/30 mt-1">
                                                     {new Date(note.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                                 </p>
                                             </div>
-                                            <button
-                                                onClick={() => handleDeleteNote(note.id)}
-                                                className="p-1 text-white/20 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all shrink-0"
-                                            >
-                                                <Trash2 className="w-3.5 h-3.5" />
-                                            </button>
+                                            <div className="flex flex-col gap-1 shrink-0">
+                                                {editingNote?.id === note.id ? (
+                                                    <>
+                                                        <button
+                                                            onClick={() => handleEditNote(note.id)}
+                                                            className="p-1 text-emerald-400 hover:text-emerald-300 transition-all"
+                                                            title="Save"
+                                                        >
+                                                            <Check className="w-3.5 h-3.5" />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => setEditingNote(null)}
+                                                            className="p-1 text-white/30 hover:text-white/60 transition-all"
+                                                            title="Cancel"
+                                                        >
+                                                            <X className="w-3.5 h-3.5" />
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <button
+                                                            onClick={() => setEditingNote({ id: note.id, content: note.content })}
+                                                            className="p-1 text-white/20 hover:text-amber-400 opacity-0 group-hover:opacity-100 transition-all"
+                                                            title="Edit"
+                                                        >
+                                                            <Pencil className="w-3.5 h-3.5" />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDeleteNote(note.id)}
+                                                            className="p-1 text-white/20 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
+                                                            title="Delete"
+                                                        >
+                                                            <Trash2 className="w-3.5 h-3.5" />
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

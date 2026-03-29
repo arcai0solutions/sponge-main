@@ -153,7 +153,7 @@ export default function FeedbacksPage() {
                     <div className="h-full flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-white/10 rounded-[2rem] bg-white/[0.02] backdrop-blur-md">
                         <Star className="w-16 h-16 text-white/20 mb-4" />
                         <h3 className="text-lg font-bold text-white mb-2">No feedbacks yet</h3>
-                        <p className="text-white/40 max-w-sm mb-6">Click "Generate Link" to create a shareable URL you can send to your clients.</p>
+                        <p className="text-white/40 max-w-sm mb-6">Click &quot;Generate Link&quot; to create a shareable URL you can send to your clients.</p>
                     </div>
                 ) : (
                     <div className="space-y-4">

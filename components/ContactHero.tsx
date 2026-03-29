@@ -24,7 +24,7 @@ export default function ContactHero() {
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
                         className="text-3xl md:text-5xl lg:text-7xl font-semibold leading-[1.05] tracking-tighter"
                     >
-                        Let's build something <br />
+                        Let&apos;s build something <br />
                         <span className="text-white/40">extraordinary.</span>
                     </motion.h1>
                 </div>

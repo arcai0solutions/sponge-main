@@ -94,7 +94,7 @@ export default function AboutPage() {
                         <span className="text-[#E31E24] font-bold tracking-widest text-sm uppercase">Get In Touch</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white">
-                        LET'S CONNECT.
+                        LET&apos;S CONNECT.
                     </h2>
                 </div>
                 <ContactForm />

@@ -73,7 +73,7 @@ export default function Footer() {
                         {/* Navigation Links column */}
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-2">
-                                <span className="text-[#E31E24] text-sm font-bold">//</span>
+                                <span className="text-[#E31E24] text-sm font-bold">{"//"}</span>
                                 <span className="text-white font-semibold text-lg">Quick Links</span>
                             </div>
 

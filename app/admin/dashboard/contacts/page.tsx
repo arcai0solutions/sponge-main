@@ -135,7 +135,7 @@ export default function ContactsArchivePage() {
                                                 )}
                                                 {contact.message ? (
                                                     <div className="text-sm text-white/50 leading-relaxed line-clamp-3 bg-white/[0.03] p-4 rounded-2xl border border-white/5 italic shadow-[inset_0_1px_1px_rgba(255,255,255,0.02)]">
-                                                        "{contact.message}"
+                                                        &quot;{contact.message}&quot;
                                                     </div>
                                                 ) : (
                                                     <span className="text-white/20 text-sm italic">No message provided.</span>

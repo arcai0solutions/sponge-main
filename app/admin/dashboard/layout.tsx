@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     LayoutDashboard,
     KanbanSquare,
@@ -31,6 +32,7 @@ export default function AdminSidebarLayout({
 
     useEffect(() => {
         checkAuth();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const checkAuth = async () => {
@@ -74,9 +76,11 @@ export default function AdminSidebarLayout({
             <aside className="hidden md:flex flex-col w-72 bg-[#0a0a0a] border-r border-white/5 fixed inset-y-0 left-0 z-50">
                 {/* Logo Area */}
                 <div className="h-24 flex items-center gap-3 px-8 shrink-0 border-b border-white/5">
-                    <img 
+                    <Image 
                         src="/new-logo.jpeg" 
                         alt="Sponge Global Logo" 
+                        width={40}
+                        height={40}
                         className="h-10 w-auto rounded-xl object-contain"
                     />
                     <span className="font-bold text-lg tracking-tight text-white mb-0.5">
@@ -141,9 +145,11 @@ export default function AdminSidebarLayout({
             {/* Mobile Header */}
             <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50 flex items-center justify-between px-4">
                 <div className="flex items-center gap-3">
-                    <img 
+                    <Image 
                         src="/new-logo.jpeg" 
                         alt="Sponge Global Logo" 
+                        width={32}
+                        height={32}
                         className="h-8 w-auto rounded-lg object-contain"
                     />
                     <span className="font-bold text-sm tracking-tight text-white">

@@ -62,6 +62,7 @@ export default function KanbanBoard() {
 
     useEffect(() => {
         fetchBoardData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchBoardData = async () => {
@@ -426,7 +427,7 @@ export default function KanbanBoard() {
 
                                                 {lead.message && (
                                                     <div className="text-[13px] text-white/50 line-clamp-2 bg-black/20 p-3 rounded-lg flex gap-2">
-                                                        <span className="opacity-50 font-serif">"</span>
+                                                        <span className="opacity-50 font-serif">&quot;</span>
                                                         {lead.message}
                                                     </div>
                                                 )}

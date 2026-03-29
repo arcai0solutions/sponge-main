@@ -21,6 +21,7 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         fetchChatData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchChatData = async () => {

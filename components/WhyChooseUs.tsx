@@ -70,7 +70,7 @@ export default function WhyChooseUs() {
                     {/* Left Column - Headline Area */}
                     <div className="lg:col-span-4 flex flex-col gap-8">
                         <div className="flex items-center gap-2">
-                            <span className="text-[#E31E24] text-lg font-bold">//</span>
+                            <span className="text-[#E31E24] text-lg font-bold">{"//"}</span>
                             <span className="text-lg font-medium text-black tracking-widest">WHY CHOOSE US</span>
                         </div>
 

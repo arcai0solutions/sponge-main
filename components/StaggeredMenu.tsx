@@ -215,7 +215,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
         openTlRef.current = tl;
         return tl;
-    }, [position]);
+    }, []);
 
     const playOpen = useCallback(() => {
         if (busyRef.current) return;
@@ -481,7 +481,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                             className={`sm-lets-talk-btn ${open ? 'active' : ''}`}
                             aria-label="Let's Talk"
                         >
-                            Let's Talk
+                            Let&apos;s Talk
                         </Link>
 
                         <button

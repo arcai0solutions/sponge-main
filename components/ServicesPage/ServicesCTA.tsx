@@ -19,7 +19,7 @@ export default function ServicesCTA() {
                     transition={{ duration: 0.6 }}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight"
                 >
-                    Ready to Elevate Your Team's Capability?
+                    Ready to Elevate Your Team&apos;s Capability?
                 </motion.h2>
 
                 <motion.p

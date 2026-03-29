@@ -34,7 +34,7 @@ export default function SustainLearning() {
                     transition={{ duration: 0.6 }}
                     className="mb-16 text-center md:text-left"
                 >
-                    <span className="text-[#E31E24] font-bold text-sm tracking-widest uppercase mb-2 block">// Continuity</span>
+                    <span className="text-[#E31E24] font-bold text-sm tracking-widest uppercase mb-2 block">{"//"} Continuity</span>
                     <h2 className="text-4xl md:text-5xl font-bold max-w-2xl">
                         SUSTAIN LEARNING <br />
                         BEYOND THE SESSION.

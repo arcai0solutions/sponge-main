@@ -64,7 +64,7 @@ export default function Services() {
                 <div className="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-24 flex flex-col justify-center px-6 py-20 md:px-12 lg:px-20 border-r border-[#E5E5E5]">
                     <div className="flex flex-col gap-12 max-w-xl">
                         <div className="flex items-center gap-2">
-                            <span className="text-[#E31E24] text-xl font-bold">//</span>
+                            <span className="text-[#E31E24] text-xl font-bold">{"//"}</span>
                             <span className="text-black font-semibold tracking-wide">WHAT WE DELIVER</span>
                         </div>
 

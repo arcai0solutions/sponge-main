@@ -24,7 +24,7 @@ export default function ServicesOverview() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-lg md:text-xl text-gray-400 leading-relaxed"
                 >
-                    We don't just deliver training; we build ecosystems of learning that drive performance.
+                    We don&apos;t just deliver training; we build ecosystems of learning that drive performance.
                     From strategic thinking to operational excellence, our programmes are crafted to elevate
                     talent at every level of your organization.
                 </motion.p>

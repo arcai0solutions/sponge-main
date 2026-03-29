@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function FeedbackSubmissionPage() {
     const params = useParams();
@@ -56,16 +57,18 @@ export default function FeedbackSubmissionPage() {
             >
                 {/* Logo & Title */}
                 <div className="text-center mb-10">
-                    <img
+                    <Image
                         src="/new-logo.jpeg"
                         alt="Sponge Global"
-                        className="w-16 h-16 rounded-2xl mx-auto mb-6 shadow-lg"
+                        width={64}
+                        height={64}
+                        className="rounded-2xl mx-auto mb-6 shadow-lg"
                     />
                     <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
                         Share Your <span className="text-[#E31E24]">Feedback</span>
                     </h1>
                     <p className="text-white/50 text-base max-w-md mx-auto">
-                        We'd love to hear about your experience working with Sponge Global. Your feedback helps us grow.
+                        We&apos;d love to hear about your experience working with Sponge Global. Your feedback helps us grow.
                     </p>
                 </div>
 

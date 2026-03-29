@@ -48,13 +48,13 @@ export default function LearningLounge() {
 
                         <div className="space-y-6 text-lg text-zinc-400 leading-relaxed">
                             <p>
-                                This is a cozy meeting space for like-minded people to gather, brainstorm, and exchange ideas. You don't need to spend a lot of money booking hotels to connect, network, or enjoy good food and drinks together.
+                                This is a cozy meeting space for like-minded people to gather, brainstorm, and exchange ideas. You don&apos;t need to spend a lot of money booking hotels to connect, network, or enjoy good food and drinks together.
                             </p>
                             <p>
-                                Learning doesn't always have to be formal — sometimes the best insights come from informal conversations. This is a space designed exactly for that.
+                                Learning doesn&apos;t always have to be formal — sometimes the best insights come from informal conversations. This is a space designed exactly for that.
                             </p>
                             <p>
-                                We provide the location and food, and you're even welcome to bring your own beverages if you wish. We also have a few musical instruments and a karaoke setup if you'd like to relax and entertain yourself.
+                                We provide the location and food, and you&apos;re even welcome to bring your own beverages if you wish. We also have a few musical instruments and a karaoke setup if you&apos;d like to relax and entertain yourself.
                             </p>
                         </div>
                     </motion.div>

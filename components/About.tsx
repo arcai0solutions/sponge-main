@@ -18,7 +18,7 @@ export default function About() {
                         transition={{ duration: 0.6 }}
                         className="flex items-center gap-2"
                     >
-                        <span className="text-[#E31E24] text-xl font-bold">//</span>
+                        <span className="text-[#E31E24] text-xl font-bold">{"//"}</span>
                         <span className="text-white/80 text-lg uppercase tracking-widest font-medium">about us</span>
                     </motion.div>
 

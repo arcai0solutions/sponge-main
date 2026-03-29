@@ -139,7 +139,7 @@ export default function ProgrammesModules() {
         <section className="bg-black text-white py-20 px-6 md:px-12 lg:px-20">
             <div className="max-w-[1400px] mx-auto">
                 <div className="mb-16">
-                    <span className="text-[#E31E24] font-bold text-sm tracking-widest uppercase mb-2 block">// Deep Dive</span>
+                    <span className="text-[#E31E24] font-bold text-sm tracking-widest uppercase mb-2 block">{"//"} Deep Dive</span>
                     <h2 className="text-4xl md:text-5xl font-bold">Programmes and Modules</h2>
                 </div>
 

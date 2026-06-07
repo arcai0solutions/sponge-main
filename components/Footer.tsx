@@ -14,9 +14,8 @@ export default function Footer() {
                     src="/footer-bg.jpeg"
                     alt="Footer Background"
                     fill
-                    priority
                     className="object-cover opacity-90"
-                    quality={100}
+                    quality={80}
                 />
                 <div className="absolute inset-0 bg-black/80" /> {/* Dark overlay for text readability */}
             </div>

@@ -1,15 +1,18 @@
+import dynamic from 'next/dynamic';
 import HeroScroll from '@/components/HeroScroll';
 import About from '@/components/About';
-import Services from '@/components/Services';
-import ServicesList from '@/components/ServicesList';
-import TalentArchitecture from '@/components/TalentArchitecture';
-import WhyChooseUs from '@/components/WhyChooseUs';
 import Preloader from '@/components/Preloader';
-import LMSSection from '@/components/LMSSection';
-import LearningLounge from '@/components/LearningLounge';
-import ContactForm from '@/components/ContactForm';
 import type { Metadata } from "next";
 import JsonLd from '@/components/JsonLd';
+
+// Dynamically import below-the-fold sections
+const Services = dynamic(() => import('@/components/Services'));
+const ServicesList = dynamic(() => import('@/components/ServicesList'));
+const TalentArchitecture = dynamic(() => import('@/components/TalentArchitecture'));
+const WhyChooseUs = dynamic(() => import('@/components/WhyChooseUs'));
+const LMSSection = dynamic(() => import('@/components/LMSSection'));
+const LearningLounge = dynamic(() => import('@/components/LearningLounge'));
+const ContactForm = dynamic(() => import('@/components/ContactForm'));
 
 const organizationSchema = {
   "@context": "https://schema.org",

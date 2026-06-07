@@ -10,9 +10,9 @@ export default function Preloader() {
 
     useEffect(() => {
         // Hide preloader after animation completes + small delay
-        // Typing duration: ~1.5s (0.05 * 29 chars)
-        // Hold: 0.5s
-        const totalDuration = (characters.length * 0.05 * 1000) + 800;
+        // Typing duration: ~1.0s (0.035 * 29 chars)
+        // Hold: 0.4s
+        const totalDuration = (characters.length * 0.035 * 1000) + 400;
 
         const timer = setTimeout(() => {
             setIsVisible(false);
@@ -45,7 +45,7 @@ export default function Preloader() {
                             visible: {
                                 opacity: 1,
                                 transition: {
-                                    staggerChildren: 0.05
+                                    staggerChildren: 0.035
                                 }
                             }
                         }}

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import NextImage from "next/image";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function HeroScroll() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -62,6 +63,67 @@ export default function HeroScroll() {
                             >
                                 Explore Programmes
                             </a>
+                        </div>
+
+                        {/* Social Links under Hero Buttons */}
+                        <div className="mt-8 md:mt-10 flex flex-row items-center gap-4 text-white/70 justify-center md:justify-start w-full">
+                            <span className="text-xs tracking-wider uppercase font-semibold text-white/50">Follow Us</span>
+                            <div className="h-px w-8 bg-white/20 hidden sm:block" />
+                            <div className="flex items-center gap-3">
+                                {/* YouTube - Primary */}
+                                <motion.a
+                                    href="https://www.youtube.com/@sponge_global_training/shorts"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    animate={{ scale: [1, 1.06, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                    whileHover={{ scale: 1.15, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="w-11 h-11 rounded-full flex items-center justify-center bg-[#E31E24] text-white transition-all shadow-[0_0_15px_rgba(227,30,36,0.6)] border border-[#E31E24] hover:shadow-[0_0_20px_rgba(227,30,36,0.9)]"
+                                    aria-label="Follow us on YouTube"
+                                >
+                                    <Youtube className="w-5 h-5" />
+                                </motion.a>
+
+                                {/* LinkedIn */}
+                                <motion.a
+                                    href="https://www.linkedin.com/company/3069879/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.12, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 hover:border-white/30 transition-all"
+                                    aria-label="Follow us on LinkedIn"
+                                >
+                                    <Linkedin className="w-4 h-4" />
+                                </motion.a>
+
+                                {/* Instagram */}
+                                <motion.a
+                                    href="https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.12, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 hover:border-white/30 transition-all"
+                                    aria-label="Follow us on Instagram"
+                                >
+                                    <Instagram className="w-4 h-4" />
+                                </motion.a>
+
+                                {/* Facebook */}
+                                <motion.a
+                                    href="https://www.facebook.com/spongeglobal"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.12, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 hover:border-white/30 transition-all"
+                                    aria-label="Follow us on Facebook"
+                                >
+                                    <Facebook className="w-4 h-4" />
+                                </motion.a>
+                            </div>
                         </div>
                     </div>
                 </motion.div>

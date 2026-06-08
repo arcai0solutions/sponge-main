@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import NextImage from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Youtube, Instagram } from "lucide-react";
 
 interface Message {
     id: string;
@@ -17,7 +16,6 @@ interface Message {
 
 export function AiChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
-    const [showSocials, setShowSocials] = useState(false);
 
     useEffect(() => {
         // Auto-open on desktop devices after a short delay
@@ -25,20 +23,6 @@ export function AiChatWidget() {
             const timer = setTimeout(() => setIsOpen(true), 1500);
             return () => clearTimeout(timer);
         }
-    }, []);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (typeof window !== "undefined") {
-                // Show socials when user scrolls below the hero section (approx 90% of viewport height)
-                const threshold = window.innerHeight * 0.9;
-                setShowSocials(window.scrollY > threshold);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll(); // Check immediately on mount
-        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<Message[]>([
@@ -134,58 +118,6 @@ export function AiChatWidget() {
 
     return (
         <div className="fixed bottom-6 right-6 z-[100] font-sans flex flex-col items-center gap-3">
-            {/* Social Links visible above the AI Chat Agent when closed and scrolled below hero */}
-            <AnimatePresence>
-                {!isOpen && showSocials && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 15, scale: 0.8 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 15, scale: 0.8 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="flex flex-col gap-3 items-center pointer-events-auto"
-                    >
-                        {/* SVG Gradient Definition for Instagram */}
-                        <svg width="0" height="0" className="absolute pointer-events-none" aria-hidden="true">
-                            <defs>
-                                <linearGradient id="instagram-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#f09433" />
-                                    <stop offset="25%" stopColor="#e6683c" />
-                                    <stop offset="50%" stopColor="#dc2743" />
-                                    <stop offset="75%" stopColor="#cc2366" />
-                                    <stop offset="100%" stopColor="#bc1888" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-
-                        {/* Instagram Link */}
-                        <motion.a
-                            href="https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.1, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-black/80 hover:bg-black/90 border border-[#d6249f]/30 hover:border-[#d6249f] transition-all shadow-lg hover:shadow-[0_0_15px_rgba(214,36,159,0.5)]"
-                            aria-label="Follow us on Instagram"
-                        >
-                            <Instagram className="w-5 h-5 md:w-6 h-6" style={{ stroke: "url(#instagram-gradient)" }} />
-                        </motion.a>
-
-                        {/* YouTube Link */}
-                        <motion.a
-                            href="https://www.youtube.com/@sponge_global_training/shorts"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.1, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-black/80 hover:bg-black/90 text-[#FF0000] hover:text-[#FF0000] border border-[#FF0000]/30 hover:border-[#FF0000] transition-all shadow-lg hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]"
-                            aria-label="Follow us on YouTube"
-                        >
-                            <Youtube className="w-5 h-5 md:w-6 h-6" />
-                        </motion.a>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             <AnimatePresence>
                 {isOpen && (
                     <motion.div

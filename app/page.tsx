@@ -37,7 +37,7 @@ const organizationSchema = {
   },
   "sameAs": [
     "https://www.linkedin.com/company/3069879/",
-    "https://www.youtube.com/@sponge_global_training/shorts",
+    "https://www.youtube.com/@sponge_global_academy/shorts",
     "https://www.instagram.com/spongeglobal"
   ]
 };
@@ -79,7 +79,7 @@ const localBusinessSchema = {
   },
   "sameAs": [
     "https://www.linkedin.com/company/3069879/",
-    "https://www.youtube.com/@sponge_global_training/shorts",
+    "https://www.youtube.com/@sponge_global_academy/shorts",
     "https://www.instagram.com/spongeglobal"
   ]
 };

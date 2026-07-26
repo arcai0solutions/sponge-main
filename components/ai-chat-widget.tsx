@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import NextImage from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Instagram, Youtube } from "lucide-react";
 
 interface Message {
     id: string;
@@ -242,6 +243,52 @@ export function AiChatWidget() {
                                     Powered by <a href="https://www.arcai.agency" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors underline decoration-white/20 hover:decoration-white/60">ARC AI</a>
                                 </span>
                             </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            {/* Social Media Links Floating Above the Toggle Button */}
+            <AnimatePresence>
+                {!isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 15, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 15, scale: 0.8 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        className="flex flex-col gap-3 items-center mb-4 w-16 md:w-20"
+                    >
+                        {/* Instagram Link */}
+                        <div className="relative group">
+                            <motion.a
+                                whileHover={{ scale: 1.1, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                href="https://www.instagram.com/spongeglobal?igsh=Y3p3MGFnbHhtcTNo"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full flex items-center justify-center bg-black/60 backdrop-blur-md border border-white/10 hover:border-transparent text-white/70 hover:text-white transition-colors duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_20px_rgba(238,42,123,0.4)] hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7]"
+                            >
+                                <Instagram size={20} />
+                            </motion.a>
+                            <span className="absolute right-14 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-md text-[11px] font-semibold tracking-wider uppercase bg-black/80 backdrop-blur-sm border border-white/10 text-white/95 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap shadow-md">
+                                Instagram
+                            </span>
+                        </div>
+
+                        {/* YouTube Link */}
+                        <div className="relative group">
+                            <motion.a
+                                whileHover={{ scale: 1.1, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                href="https://www.youtube.com/@sponge_global_academy/shorts"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full flex items-center justify-center bg-black/60 backdrop-blur-md border border-white/10 hover:border-transparent text-white/70 hover:text-white transition-colors duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_20px_rgba(227,30,36,0.4)] hover:bg-[#E31E24]"
+                            >
+                                <Youtube size={20} />
+                            </motion.a>
+                            <span className="absolute right-14 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-md text-[11px] font-semibold tracking-wider uppercase bg-black/80 backdrop-blur-sm border border-white/10 text-white/95 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap shadow-md">
+                                YouTube
+                            </span>
                         </div>
                     </motion.div>
                 )}

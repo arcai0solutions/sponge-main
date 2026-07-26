@@ -124,6 +124,17 @@ const servicesSchema = {
             "@type": "ListItem", "position": 7,
             "item": {
                 "@type": "Service",
+                "name": "Service Culture Diagnostics",
+                "description": "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
+                "provider": { "@type": "Organization", "name": "Sponge Global", "url": "https://sponge-global.com" },
+                "serviceType": "Culture Assessment",
+                "url": "https://sponge-global.com/services"
+            }
+        },
+        {
+            "@type": "ListItem", "position": 8,
+            "item": {
+                "@type": "Service",
                 "name": "LMS — Learning Management Solutions",
                 "description": "Robust centralized platforms designed to streamline training delivery, track developmental milestones, and provide deep analytics on learning ROI.",
                 "provider": { "@type": "Organization", "name": "Sponge Global", "url": "https://sponge-global.com" },
@@ -132,7 +143,7 @@ const servicesSchema = {
             }
         },
         {
-            "@type": "ListItem", "position": 8,
+            "@type": "ListItem", "position": 9,
             "item": {
                 "@type": "Service",
                 "name": "Training Facilities & Locations",
@@ -154,7 +165,7 @@ const faqSchema = {
             "name": "What types of corporate training does Sponge Global offer?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Sponge Global offers a full range of learning and development solutions including leadership development, mindset shaping sessions, upskilling & reskilling workshops, succession planning, competency frameworks, team building, eLearning content creation, and Learning Management Systems (LMS)."
+                "text": "Sponge Global offers a full range of learning and development solutions including leadership development, mindset shaping sessions, upskilling & reskilling workshops, succession planning, competency frameworks, team building, eLearning content creation, service culture diagnostics, and Learning Management Systems (LMS)."
             }
         },
         {

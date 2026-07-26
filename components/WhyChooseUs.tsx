@@ -60,6 +60,11 @@ const images = [
     '/about4.png',
     '/about5.png',
     '/WhatsApp Image 2026-03-05 at 11.57.35 AM.jpeg',
+    '/WhatsApp Image 2026-06-10 at 4.21.38 PM.jpeg',
+    '/WhatsApp Image 2026-06-10 at 4.21.38 PM (1).jpeg',
+    '/WhatsApp Image 2026-06-10 at 4.21.38 PM (2).jpeg',
+    '/WhatsApp Image 2026-06-10 at 4.21.39 PM.jpeg',
+    '/WhatsApp Image 2026-06-10 at 4.21.39 PM (1).jpeg',
 ];
 
 export default function WhyChooseUs() {

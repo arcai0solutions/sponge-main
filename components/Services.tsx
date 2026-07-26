@@ -42,14 +42,20 @@ const services = [
         icon: "/services/content-creation.png"
     },
     {
-        title: "LMS - Learning Management Solutions",
+        title: "Service Culture Diagnostics",
         number: "07",
+        description: "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
+        icon: "/services/transformational.png"
+    },
+    {
+        title: "LMS - Learning Management Solutions",
+        number: "08",
         description: "Robust centralized platforms designed to streamline training delivery, track developmental milestones, and provide deep analytics on learning ROI.",
         icon: "/services/workshop.png"
     },
     {
         title: "Training Facilities & Locations",
-        number: "08",
+        number: "09",
         description: "Dedicated physical spaces and environments optimized to foster focus, encourage deep learning, and facilitate effective cohort collaboration.",
         icon: "/services/facilities.png"
     }

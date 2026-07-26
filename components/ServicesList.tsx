@@ -150,6 +150,19 @@ const programmes = [
         outcomes: "Develop coaching capabilities, unlock team potential, accelerate individual growth, and build a sustainable coaching culture."
     },
     {
+        title: "Service Culture Diagnostics",
+        description: "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
+        focusAreas: [
+            "Organizational service culture assessment",
+            "Customer-first behavior alignment and benchmarking",
+            "Leadership & frontline service mindset evaluation",
+            "Customer journey and experience gap analysis",
+            "Actionable culture transformation roadmap"
+        ],
+        tools: "Culture health diagnostics, service maturity index, VoC alignment matrix, behavior assessment rubrics, employee engagement surveys.",
+        outcomes: "Diagnose underlying culture barriers, align team behaviors with customer-first standards, and build a sustainable service-driven organizational culture."
+    },
+    {
         title: "Digital Transformation",
         description: "Equip leaders and teams to navigate and drive digital change, from mindset shifts to technology adoption.",
         focusAreas: [

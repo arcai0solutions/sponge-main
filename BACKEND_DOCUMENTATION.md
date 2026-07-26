@@ -420,15 +420,16 @@ The system prompt defines "Sponge AI" — an elite sales-closing AI for Sponge G
 
 **Company Facts**: Sponge Global is a learning/capability partner since 2011, 200+ global clients.
 
-**8 Services**:
+**9 Services**:
 1. Mindset Shaping Sessions
 2. Upskilling & Reskilling Workshops
 3. Succession Planning Solutions
 4. Competency Frameworks
 5. Inhouse & Outbound Team Building
 6. E-Learning Content Creation
-7. LMS - Learning Management Solutions
-8. Training Facilities & Locations
+7. Service Culture Diagnostics
+8. LMS - Learning Management Solutions
+9. Training Facilities & Locations
 
 **Hard Rules**:
 - ONLY discusses Sponge Global / corporate training topics.

@@ -19,8 +19,9 @@ SERVICES WE DELIVER
 04. Competency Frameworks: Customized structures defining core behaviors and skills.
 05. Inhouse & Outbound Team Building: Immersive experiences to build trust and collaboration.
 06. E-Learning Content Creation: Digital learning design and interactive multimedia modules.
-07. LMS - Learning Management Solutions: Robust platforms to track milestones and learning ROI.
-08. Training Facilities & Locations: Dedicated environments optimized for deep learning.
+07. Service Culture Diagnostics: Comprehensive assessment frameworks to evaluate, measure, and align organizational culture and service excellence.
+08. LMS - Learning Management Solutions: Robust platforms to track milestones and learning ROI.
+09. Training Facilities & Locations: Dedicated environments optimized for deep learning.
 
 TESTIMONIALS / PROOF
 - Mention our "proven track record and immaculate execution for over 200 global clients" as social proof.

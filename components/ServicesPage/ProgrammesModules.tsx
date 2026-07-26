@@ -125,6 +125,19 @@ const programmes = [
         ],
         tools: "Situational Leadership, DISC/MBTI (as appropriate), GROW coaching, STAR/SBA communication models.",
         outcomes: "Delegate with clarity, build trust and ownership, develop talent, and strengthen team execution."
+    },
+    {
+        title: "Service Culture Diagnostics",
+        description: "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
+        focusAreas: [
+            "Organizational service culture assessment",
+            "Customer-first behavior alignment and benchmarking",
+            "Leadership & frontline service mindset evaluation",
+            "Customer journey and experience gap analysis",
+            "Actionable culture transformation roadmap"
+        ],
+        tools: "Culture health diagnostics, service maturity index, VoC alignment matrix, behavior assessment rubrics.",
+        outcomes: "Diagnose underlying culture barriers, align team behaviors with customer-first standards, and build a sustainable service-driven organizational culture."
     }
 ];
 

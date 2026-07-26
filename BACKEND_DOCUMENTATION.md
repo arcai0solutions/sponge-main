@@ -427,7 +427,7 @@ The system prompt defines "Sponge AI" — an elite sales-closing AI for Sponge G
 4. Competency Frameworks
 5. Inhouse & Outbound Team Building
 6. E-Learning Content Creation
-7. Service Culture Diagnostics
+7. Culture Diagnostics
 8. LMS - Learning Management Solutions
 9. Training Facilities & Locations
 

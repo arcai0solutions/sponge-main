@@ -127,7 +127,7 @@ const programmes = [
         outcomes: "Delegate with clarity, build trust and ownership, develop talent, and strengthen team execution."
     },
     {
-        title: "Service Culture Diagnostics",
+        title: "Culture Diagnostics",
         description: "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
         focusAreas: [
             "Organizational service culture assessment",

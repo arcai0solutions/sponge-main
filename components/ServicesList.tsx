@@ -150,7 +150,7 @@ const programmes = [
         outcomes: "Develop coaching capabilities, unlock team potential, accelerate individual growth, and build a sustainable coaching culture."
     },
     {
-        title: "Service Culture Diagnostics",
+        title: "Culture Diagnostics",
         description: "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
         focusAreas: [
             "Organizational service culture assessment",

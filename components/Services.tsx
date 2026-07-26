@@ -42,7 +42,7 @@ const services = [
         icon: "/services/content-creation.png"
     },
     {
-        title: "Service Culture Diagnostics",
+        title: "Culture Diagnostics",
         number: "07",
         description: "In-depth organizational assessments engineered to evaluate, measure, and align workplace culture, employee behaviors, and service excellence standards.",
         icon: "/services/transformational.png"

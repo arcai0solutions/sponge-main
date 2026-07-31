@@ -62,6 +62,7 @@ export default function AdminSidebarLayout({
 
     const navItems = [
         { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
+        { name: 'Our Team', path: '/admin/dashboard/team', icon: Users },
         { name: 'CRM Pipeline', path: '/admin/dashboard/crm', icon: KanbanSquare },
         { name: 'Contacts Archive', path: '/admin/dashboard/contacts', icon: Users },
         { name: 'Email Newsletter', path: '/admin/dashboard/subscribers', icon: Mail },

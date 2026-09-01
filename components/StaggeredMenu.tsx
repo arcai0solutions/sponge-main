@@ -471,6 +471,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                     height={160}
                                     className="w-32 md:w-40 h-auto object-contain cursor-pointer"
                                     draggable={false}
+                                    priority
                                 />
                             </Link>
                         </div>

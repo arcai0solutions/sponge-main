@@ -24,7 +24,9 @@ export default function GlobalLayoutWrapper({
 
     return (
         <>
-            {/* Desktop: separate logo. Mobile: logo is inside StaggeredMenu bar */}
+            {/* Desktop (>=768px): standalone logo. Below that: logo lives inside the
+                StaggeredMenu bar. The two are mutually exclusive — see the matching
+                breakpoints in StaggeredMenu.css. */}
             <div className="hidden md:block">
                 <SiteLogo />
             </div>

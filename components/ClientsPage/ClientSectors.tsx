@@ -67,8 +67,6 @@ const sectors = [
     },
 ];
 
-const totalClients = sectors.reduce((sum, s) => sum + s.clients.length, 0);
-
 function ClientName({ name }: { name: string }) {
     return (
         <div className="shrink-0 flex items-center">
@@ -133,9 +131,8 @@ export default function ClientSectors() {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-px rounded-2xl overflow-hidden border border-white/10 bg-white/10 shrink-0 w-full sm:w-auto sm:self-start xl:self-auto">
+                        <div className="grid grid-cols-2 gap-px rounded-2xl overflow-hidden border border-white/10 bg-white/10 shrink-0 w-full sm:w-auto sm:self-start xl:self-auto">
                             {[
-                                { value: `${totalClients}+`, label: "Clients" },
                                 { value: `${sectors.length}`, label: "Sectors" },
                                 { value: "2", label: "Countries" },
                             ].map(stat => (
@@ -174,16 +171,11 @@ export default function ClientSectors() {
                                     <span className="text-white/20 font-black text-4xl md:text-5xl tracking-tighter tabular-nums group-hover/row:text-[#E31E24]/80 transition-colors duration-500">
                                         {String(index + 1).padStart(2, '0')}
                                     </span>
-                                    <div className="flex flex-col gap-1.5">
-                                        <div className="flex items-center gap-2.5">
-                                            <Icon className="w-4 h-4 md:w-5 md:h-5 text-[#E31E24]" strokeWidth={2.2} />
-                                            <h3 className="text-lg md:text-2xl font-bold tracking-tight text-white">
-                                                {sector.name}
-                                            </h3>
-                                        </div>
-                                        <span className="text-xs font-bold uppercase tracking-[0.15em] text-white/40">
-                                            {sector.clients.length} clients
-                                        </span>
+                                    <div className="flex items-center gap-2.5">
+                                        <Icon className="w-4 h-4 md:w-5 md:h-5 text-[#E31E24] shrink-0" strokeWidth={2.2} />
+                                        <h3 className="text-lg md:text-2xl font-bold tracking-tight text-white">
+                                            {sector.name}
+                                        </h3>
                                     </div>
                                 </div>
 

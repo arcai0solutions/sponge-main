@@ -2,7 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ClientsHero from '@/components/ClientsPage/ClientsHero';
 import JsonLd from '@/components/JsonLd';
-import FeedbackSection from '@/components/ClientsPage/FeedbackSection';
+// Testimonials hidden for now — re-enable FeedbackSection (and reviewsSchema below) to bring them back
+// import FeedbackSection from '@/components/ClientsPage/FeedbackSection';
+import ClientSectors from '@/components/ClientsPage/ClientSectors';
 
 const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -82,9 +84,10 @@ export default function ClientsPage() {
     return (
         <main className="bg-black min-h-screen text-white pt-24 md:pt-0">
             <JsonLd data={breadcrumbSchema} />
-            <JsonLd data={reviewsSchema} />
+            {/* <JsonLd data={reviewsSchema} /> */}
             <ClientsHero />
-            <FeedbackSection />
+            <ClientSectors />
+            {/* <FeedbackSection /> */}
         </main>
     );
 }

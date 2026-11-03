@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import NextImage from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Filter, ArrowUpRight, Search, ShieldCheck, Mail } from 'lucide-react';
+import { Users, Filter, ArrowUpRight, Search, ShieldCheck, Mail, ChevronDown } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
 interface TeamMember {
@@ -69,12 +69,52 @@ const FALLBACK_TEAM_MEMBERS: TeamMember[] = [
     }
 ];
 
+// Bio clamped to 5 lines (and always at least 5 lines tall) so every card starts the same size
+function TeamBio({ text, expanded, onToggle }: { text: string; expanded: boolean; onToggle: () => void }) {
+    const ref = useRef<HTMLParagraphElement>(null);
+    const [overflows, setOverflows] = useState(false);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const check = () => {
+            if (!expanded) setOverflows(el.scrollHeight > el.clientHeight + 1);
+        };
+        check();
+        const observer = new ResizeObserver(check);
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [text, expanded]);
+
+    return (
+        <div className="flex flex-col items-start gap-2">
+            <p
+                ref={ref}
+                className={`text-sm text-white/70 leading-relaxed font-normal break-words min-h-[8.125em] ${expanded ? '' : 'line-clamp-5'}`}
+            >
+                {text}
+            </p>
+            <button
+                type="button"
+                onClick={onToggle}
+                className={`inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-[#E31E24] hover:text-white transition-colors ${overflows || expanded ? '' : 'invisible'}`}
+                aria-expanded={expanded}
+                tabIndex={overflows || expanded ? 0 : -1}
+            >
+                {expanded ? 'Read less' : 'Read more'}
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
+            </button>
+        </div>
+    );
+}
+
 export default function OurTeamPage() {
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedTag, setSelectedTag] = useState<string>('All');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+    const [expandedId, setExpandedId] = useState<string | null>(null);
 
     useEffect(() => {
         fetchTeamMembers();
@@ -237,7 +277,8 @@ export default function OurTeamPage() {
                 ) : (
                     <motion.div 
                         layout
-                        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 lg:gap-8"
+                        // Equal-height rows while every bio is collapsed; an open bio lets its row grow
+                        className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 ${expandedId ? '' : 'auto-rows-fr'}`}
                     >
                         <AnimatePresence mode="popLayout">
                             {filteredMembers.map((member, index) => {
@@ -285,10 +326,11 @@ export default function OurTeamPage() {
                                             </div>
                                         </div>
 
-                                        {/* Description */}
-                                        <p className="text-sm text-white/70 leading-relaxed font-normal break-words">
-                                            {member.description}
-                                        </p>
+                                        <TeamBio
+                                            text={member.description}
+                                            expanded={expandedId === member.id}
+                                            onToggle={() => setExpandedId(id => (id === member.id ? null : member.id))}
+                                        />
 
                                         {/* Bottom accent border/action */}
                                         <div className="mt-auto pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs text-white/40">
